@@ -1,0 +1,41 @@
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 084564d..11cad01 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -1,10 +1,11 @@
+ 
+ runc_version = 1.0.0-rc92
+ containerd_version = 1.4.3
+-kubernetes_version = 1.19.4
++kubernetes_version = 1.18.9
+ kine_version = 0.5.1
+-etcd_version = 3.4.13
++etcd_version = 3.4.14
+ konnectivity_version = 0.0.13
++eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
+ 
+ bindir = staging/linux/bin
+ bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
+@@ -67,16 +68,16 @@ else
+ curl = curl --silent -L
+ 
+ runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
+-kubelet_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
+-kube-apiserver_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
+-kube-scheduler_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
+-kube-controller-manager_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
++kubelet_url	= $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
++kube-apiserver_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
++kube-scheduler_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
++kube-controller-manager_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
+ 
+ containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
+-etcd_url = https://github.com/etcd-io/etcd/releases/download/v$(etcd_version)/etcd-v$(etcd_version)-linux-$(arch).tar.gz
++etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v$(etcd_version).tar.gz
+ 
+ containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2
+-etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
++etcd_extract = linux-$(arch)/etcd
+ 
+ tmpdir ?= .tmp
+ arch = amd64
