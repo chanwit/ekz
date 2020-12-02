@@ -10,7 +10,7 @@ Kubernetes built on EKS Distro and K0s
 $ docker run --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
-   -p 6443:6443 chanwit/ekz:v1.18.9-eks-1-18-1
+   -p 6443:6443 docker.pkg.github.com/chanwit/ekz/ekz:v1.18.9-eks-1-18-1
 ```
 
 Then we can obtain KUBECONFIG by running:
