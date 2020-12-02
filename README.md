@@ -1,5 +1,5 @@
 # ekz
-Kubernetes built on EKS Distro and K0s
+A Kubernetes distribution built on EKS-D and k0s
 
 `ekz` is an opinionated Kubernetes distribution built on top of the [AWS EKS Distro](https://distro.eks.amazonaws.com/) (EKS-D) and the [k0s](https://k0sproject.io/) projects. 
 
