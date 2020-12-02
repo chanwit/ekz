@@ -12,7 +12,7 @@ What is EKS-D?
 `ekz` is intended to run inside its Docker container, on your laptop, with the following command:
 
 ```
-$ docker run --name ekz-controller \
+$ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
    -p 6443:6443 docker.pkg.github.com/chanwit/ekz/ekz:v1.18.9-eks-1-18-1
