@@ -1,10 +1,10 @@
 # ekz
 Kubernetes built on EKS Distro and K0s
 
-`ekz` is an opinionated Kubernetes distribution built on top of the AWS EKS Distro (EKS-D) project and K0s projects.
-It replaces Kubernetes components of K0s with binaries from EKS-D, resulting in an easy-to-use single-binary Kubernetes.
+`ekz` is an opinionated Kubernetes distribution built on top of the [AWS EKS Distro](https://distro.eks.amazonaws.com/) (EKS-D) project and [K0s](https://k0sproject.io/) projects.
+`ekz` replaces Kubernetes components of K0s with binaries from EKS-D, resulting in an easy-to-use single-binary EKS-compatible Kubernetes for desktop.
 
-`ekz` is intended to run inside its Docker container, using the following command:
+`ekz` is intended to run inside its Docker container with the following command:
 
 ```
 $ docker run --name ekz-controller \
