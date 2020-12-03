@@ -10,4 +10,7 @@ jobs:
       - name: check out
         uses: actions/checkout@v2
       - name: build
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: bash -x ./build.sh
