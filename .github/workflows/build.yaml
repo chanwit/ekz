@@ -27,7 +27,7 @@ jobs:
           git apply ../../patches/003_pkg_constant.patch
 
           make EMBEDDED_BINS_BUILDMODE=fetch
-          docker login quay.io -u $QUERY_USERNAME -p $QUERY_PASSWORD
+          docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
           docker build -t quay.io/chanwit/ekz:$TAG .
           docker push quay.io/chanwit/ekz:$TAG
-          docker logout
+          docker logout quay.io
