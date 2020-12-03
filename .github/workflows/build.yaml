@@ -1,0 +1,13 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    run-on: ubuntu-latest
+    steps:
+      - name: check out
+        uses: actions/checkout@v2
+      - name: build
+        run: bash -x ./build.sh
