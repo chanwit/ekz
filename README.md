@@ -15,7 +15,7 @@ What is EKS-D?
 $ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
-   -p 6443:6443 docker.pkg.github.com/chanwit/ekz/ekz:v1.18.9-eks-1-18-1
+   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.1
 ```
 
 Then we can obtain KUBECONFIG by running:
