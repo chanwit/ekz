@@ -1,8 +1,8 @@
 diff --git a/pkg/constant/constant.go b/pkg/constant/constant.go
-index 96c6f2e..e2b43ce 100644
+index eb83a43..5366c04 100644
 --- a/pkg/constant/constant.go
 +++ b/pkg/constant/constant.go
-@@ -41,7 +41,7 @@ type CfgVars struct {
+@@ -42,7 +42,7 @@ type CfgVars struct {
  
  const (
  	// DataDirDefault is the default data directory containing k0s state
@@ -11,7 +11,7 @@ index 96c6f2e..e2b43ce 100644
  	// DataDirMode is the expected directory permissions for DataDir
  	DataDirMode = 0755
  	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
-@@ -81,19 +81,21 @@ const (
+@@ -80,19 +80,21 @@ const (
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
@@ -41,12 +41,12 @@ index 96c6f2e..e2b43ce 100644
  	CalicoImage                = "calico/cni"
  	CalicoImageVersion         = "v3.16.2"
  	FlexVolumeImage            = "calico/pod2daemon-flexvol"
-@@ -125,7 +127,7 @@ func GetConfig(dataDir string) CfgVars {
- 		KonnectivitySocketDir:      fmt.Sprintf("%s/konnectivity-server", runDir),
- 		KubeletAuthConfigPath:      fmt.Sprintf("%s/kubelet.conf", dataDir),
- 		KubeletBootstrapConfigPath: fmt.Sprintf("%s/kubelet-bootstrap.conf", dataDir),
--		KubeletVolumePluginDir:     "/usr/libexec/k0s/kubelet-plugins/volume/exec",
-+		KubeletVolumePluginDir:     "/usr/libexec/ekz/kubelet-plugins/volume/exec",
- 		ManifestsDir:               fmt.Sprintf("%s/manifests", dataDir),
- 		RunDir:                     runDir,
- 
+@@ -124,7 +126,7 @@ func GetConfig(dataDir string) CfgVars {
+ 		KonnectivitySocketDir:            fmt.Sprintf("%s/konnectivity-server", runDir),
+ 		KubeletAuthConfigPath:            fmt.Sprintf("%s/kubelet.conf", dataDir),
+ 		KubeletBootstrapConfigPath:       fmt.Sprintf("%s/kubelet-bootstrap.conf", dataDir),
+-		KubeletVolumePluginDir:           "/usr/libexec/k0s/kubelet-plugins/volume/exec",
++		KubeletVolumePluginDir:           "/usr/libexec/ekz/kubelet-plugins/volume/exec",
+ 		ManifestsDir:                     fmt.Sprintf("%s/manifests", dataDir),
+ 		RunDir:                           runDir,
+ 		KonnectivityKubeconfigConfigPath: fmt.Sprintf("%s/konnectivity.conf", certDir),
