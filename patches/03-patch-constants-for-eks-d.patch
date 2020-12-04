@@ -1,3 +1,12 @@
+patch constants for EKS-D images and ekz paths
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/constant/constant.go |   22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+
 diff --git a/pkg/constant/constant.go b/pkg/constant/constant.go
 index eb83a43..5366c04 100644
 --- a/pkg/constant/constant.go

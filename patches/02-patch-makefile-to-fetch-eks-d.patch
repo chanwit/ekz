@@ -1,3 +1,12 @@
+patch Makefile to fetch EKS-D binaries
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile |   17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
 index 084564d..11cad01 100644
 --- a/embedded-bins/Makefile

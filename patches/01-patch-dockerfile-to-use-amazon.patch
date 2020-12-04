@@ -1,3 +1,12 @@
+patch Dockerfile to use Amazon Linux 2
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ Dockerfile |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
 diff --git a/Dockerfile b/Dockerfile
 index 9678fcc..f18e4b7 100644
 --- a/Dockerfile

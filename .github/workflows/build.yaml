@@ -9,22 +9,23 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v2
+      - name: install stgit
+        shell: bash
+        run: sudo apt-get install -y stgit
       - name: build
         shell: bash
         env:
           QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
-          TAG=v1.18.9-eks-1-18-1.1
+          TAG=$(cat VERSION)
           mkdir build/
           cd build/
           git clone https://github.com/k0sproject/k0s
           cd k0s
           git checkout -b build v0.8.1
-
-          git apply ../../patches/001_dockerfile.patch
-          git apply ../../patches/002_embedded-bins_Makefile.patch
-          git apply ../../patches/003_pkg_constant.patch
+          stg init
+          stg import -s ../../patches/series
 
           make EMBEDDED_BINS_BUILDMODE=fetch
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
