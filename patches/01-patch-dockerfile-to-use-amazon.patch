@@ -8,14 +8,14 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/Dockerfile b/Dockerfile
-index 9678fcc..f18e4b7 100644
+index bcbbf7e..f18e4b7 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -1,14 +1,14 @@
 -FROM alpine:3.12
 +FROM amazonlinux:2
  
--RUN apk add bash coreutils findutils iptables curl
+-RUN apk add --no-cache bash coreutils findutils iptables curl
 +RUN yum install -y bash util-linux coreutils findutils iptables curl
  
 -RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl \

@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/pkg/constant/constant.go b/pkg/constant/constant.go
-index eb83a43..5366c04 100644
+index 8ad7f38..93c9d27 100644
 --- a/pkg/constant/constant.go
 +++ b/pkg/constant/constant.go
 @@ -42,7 +42,7 @@ type CfgVars struct {
@@ -51,11 +51,11 @@ index eb83a43..5366c04 100644
  	CalicoImageVersion         = "v3.16.2"
  	FlexVolumeImage            = "calico/pod2daemon-flexvol"
 @@ -124,7 +126,7 @@ func GetConfig(dataDir string) CfgVars {
- 		KonnectivitySocketDir:            fmt.Sprintf("%s/konnectivity-server", runDir),
- 		KubeletAuthConfigPath:            fmt.Sprintf("%s/kubelet.conf", dataDir),
- 		KubeletBootstrapConfigPath:       fmt.Sprintf("%s/kubelet-bootstrap.conf", dataDir),
--		KubeletVolumePluginDir:           "/usr/libexec/k0s/kubelet-plugins/volume/exec",
-+		KubeletVolumePluginDir:           "/usr/libexec/ekz/kubelet-plugins/volume/exec",
- 		ManifestsDir:                     fmt.Sprintf("%s/manifests", dataDir),
- 		RunDir:                           runDir,
- 		KonnectivityKubeconfigConfigPath: fmt.Sprintf("%s/konnectivity.conf", certDir),
+ 		KonnectivitySocketDir:      fmt.Sprintf("%s/konnectivity-server", runDir),
+ 		KubeletAuthConfigPath:      fmt.Sprintf("%s/kubelet.conf", dataDir),
+ 		KubeletBootstrapConfigPath: fmt.Sprintf("%s/kubelet-bootstrap.conf", dataDir),
+-		KubeletVolumePluginDir:     "/usr/libexec/k0s/kubelet-plugins/volume/exec",
++		KubeletVolumePluginDir:     "/usr/libexec/ekz/kubelet-plugins/volume/exec",
+ 		ManifestsDir:               fmt.Sprintf("%s/manifests", dataDir),
+ 		RunDir:                     runDir,
+ 		KonnectivityKubeConfigPath: fmt.Sprintf("%s/konnectivity.conf", certDir),
