@@ -9,13 +9,23 @@ What is EKS-D?
 
 `ekz` replaces Kubernetes components of `k0s` with binaries from EKS-D, resulting in an easy-to-use single-binary EKS-compatible Kubernetes for development and testing purpose.
 
+## Getting Started
 `ekz` is intended to run inside its Docker container, on your laptop, with the following command:
 
-```
+```sh
 $ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
    -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.2
+```
+
+in case you'd like to try the dev version (from the main branch):
+
+```sh
+$ docker run -d --name ekz-controller \
+   --hostname controller \
+   --privileged -v /var/lib/ekz \
+   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
 ```
 
 Then we can obtain KUBECONFIG by running:
@@ -31,3 +41,9 @@ $ kubectl get nodes
 NAME         STATUS   ROLES    AGE   VERSION
 controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
 ```
+
+## Features
+
+  1. EKS-D binaries from v1.18.9-eks-1-18-1
+  2. Packaged with k0s v0.8.1
+  3. Amazon Linux 2 base image
