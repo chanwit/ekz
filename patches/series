@@ -3,3 +3,4 @@
 02-patch-makefile-to-fetch-eks-d.patch
 03-patch-constants-for-eks-d.patch
 04-fix-cves-for-amazon-linux.patch
+05-fix-cve-2020-1971-via-alas2.patch
