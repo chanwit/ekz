@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 21 insertions(+)
 
 diff --git a/Dockerfile b/Dockerfile
-index f18e4b7..ab42f23 100644
+index af53eee..b0127b5 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -1,6 +1,27 @@

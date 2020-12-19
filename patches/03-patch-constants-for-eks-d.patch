@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/pkg/constant/constant.go b/pkg/constant/constant.go
-index 8ad7f38..93c9d27 100644
+index 6a8ccec..93c9d27 100644
 --- a/pkg/constant/constant.go
 +++ b/pkg/constant/constant.go
 @@ -42,7 +42,7 @@ type CfgVars struct {
@@ -24,7 +24,7 @@ index 8ad7f38..93c9d27 100644
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
--	KubernetesMajorMinorVersion = "1.19"
+-	KubernetesMajorMinorVersion = "1.20"
 +	KubernetesMajorMinorVersion = "1.18"
  	// DefaultPSP defines the system level default PSP to apply
 -	DefaultPSP = "00-k0s-privileged"
@@ -38,7 +38,7 @@ index 8ad7f38..93c9d27 100644
 -	MetricsImage               = "gcr.io/k8s-staging-metrics-server/metrics-server"
 -	MetricsImageVersion        = "v0.3.7"
 -	KubeProxyImage             = "k8s.gcr.io/kube-proxy"
--	KubeProxyImageVersion      = "v1.19.4"
+-	KubeProxyImageVersion      = "v1.20.0"
 -	CoreDNSImage               = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion        = "1.7.0"
 +	MetricsImage               = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
