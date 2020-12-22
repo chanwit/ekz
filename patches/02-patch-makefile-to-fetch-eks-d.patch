@@ -8,23 +8,23 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 86e379a..fd356a8 100644
+index 30702eb..0a7f904 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
 @@ -1,10 +1,11 @@
  
  runc_version = 1.0.0-rc92
  containerd_version = 1.4.3
--kubernetes_version = 1.20.0
+-kubernetes_version = 1.20.1
 +kubernetes_version = 1.18.9
  kine_version = 0.6.0
  etcd_version = 3.4.14
  konnectivity_version = 0.0.14
 +eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
  
- bindir = staging/linux/bin
- bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
-@@ -67,17 +68,17 @@ else
+ GOOS ?= linux
+ export GOOS
+@@ -88,17 +89,17 @@ else
  curl = curl --silent -L
  
  runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)

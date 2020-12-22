@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/Dockerfile b/Dockerfile
-index a8b7043..af53eee 100644
+index 10a0891..af53eee 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -1,14 +1,14 @@
@@ -18,7 +18,7 @@ index a8b7043..af53eee 100644
 -RUN apk add --no-cache bash coreutils findutils iptables curl
 +RUN yum install -y bash util-linux coreutils findutils iptables curl
  
--RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.0/bin/linux/amd64/kubectl \
+-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.1/bin/linux/amd64/kubectl \
 +RUN curl -LO https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1/artifacts/kubernetes/v1.18.9/bin/linux/amd64/kubectl \
         && chmod +x ./kubectl \
         && mv ./kubectl /usr/local/bin/kubectl

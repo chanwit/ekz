@@ -4,23 +4,39 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- pkg/constant/constant.go |   22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+ pkg/constant/constant_posix.go   |    4 ++--
+ pkg/constant/constant_shared.go  |   20 +++++++++++---------
+ pkg/constant/constant_windows.go |   15 +++++++--------
+ 3 files changed, 20 insertions(+), 19 deletions(-)
 
-diff --git a/pkg/constant/constant.go b/pkg/constant/constant.go
-index 6a8ccec..93c9d27 100644
---- a/pkg/constant/constant.go
-+++ b/pkg/constant/constant.go
-@@ -42,7 +42,7 @@ type CfgVars struct {
+diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
+index cd3fa1a..9d6e2c8 100644
+--- a/pkg/constant/constant_posix.go
++++ b/pkg/constant/constant_posix.go
+@@ -22,8 +22,8 @@ import "fmt"
  
  const (
  	// DataDirDefault is the default data directory containing k0s state
--	DataDirDefault = "/var/lib/k0s"
-+	DataDirDefault = "/var/lib/ekz"
- 	// DataDirMode is the expected directory permissions for DataDir
+-	DataDirDefault         = "/var/lib/k0s"
+-	KubeletVolumePluginDir = "/usr/libexec/k0s/kubelet-plugins/volume/exec"
++	DataDirDefault         = "/var/lib/ekz"
++	KubeletVolumePluginDir = "/usr/libexec/ekz/kubelet-plugins/volume/exec"
+ 	KineSocket             = "kine/kine.sock:2379"
+ )
+ 
+diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
+index bfd811a..91093b8 100644
+--- a/pkg/constant/constant_shared.go
++++ b/pkg/constant/constant_shared.go
+@@ -10,7 +10,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
+ const WinDataDirDefault = "C:\\var\\lib\\k0s"
+ 
+ const (
+-
+ 	// DataDirMode is the expected directory permissions for DataDirDefault
  	DataDirMode = 0755
  	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
-@@ -80,19 +80,21 @@ const (
+@@ -48,18 +47,21 @@ const (
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
@@ -31,14 +47,14 @@ index 6a8ccec..93c9d27 100644
 +	DefaultPSP = "00-ekz-privileged"
 +	// Image suffix for EKS-D
 +	ImageSuffix = "-eks-1-18-1"
- 
++
  	// Image Constants
  	KonnectivityImage          = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
  	KonnectivityImageVersion   = "v0.0.13"
 -	MetricsImage               = "gcr.io/k8s-staging-metrics-server/metrics-server"
 -	MetricsImageVersion        = "v0.3.7"
 -	KubeProxyImage             = "k8s.gcr.io/kube-proxy"
--	KubeProxyImageVersion      = "v1.20.0"
+-	KubeProxyImageVersion      = "v1.20.1"
 -	CoreDNSImage               = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion        = "1.7.0"
 +	MetricsImage               = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
@@ -50,12 +66,38 @@ index 6a8ccec..93c9d27 100644
  	CalicoImage                = "calico/cni"
  	CalicoImageVersion         = "v3.16.2"
  	FlexVolumeImage            = "calico/pod2daemon-flexvol"
-@@ -124,7 +126,7 @@ func GetConfig(dataDir string) CfgVars {
- 		KonnectivitySocketDir:      fmt.Sprintf("%s/konnectivity-server", runDir),
- 		KubeletAuthConfigPath:      fmt.Sprintf("%s/kubelet.conf", dataDir),
- 		KubeletBootstrapConfigPath: fmt.Sprintf("%s/kubelet-bootstrap.conf", dataDir),
--		KubeletVolumePluginDir:     "/usr/libexec/k0s/kubelet-plugins/volume/exec",
-+		KubeletVolumePluginDir:     "/usr/libexec/ekz/kubelet-plugins/volume/exec",
- 		ManifestsDir:               fmt.Sprintf("%s/manifests", dataDir),
- 		RunDir:                     runDir,
- 		KonnectivityKubeConfigPath: fmt.Sprintf("%s/konnectivity.conf", certDir),
+diff --git a/pkg/constant/constant_windows.go b/pkg/constant/constant_windows.go
+index f0413e6..ee14848 100644
+--- a/pkg/constant/constant_windows.go
++++ b/pkg/constant/constant_windows.go
+@@ -20,22 +20,21 @@ import "fmt"
+ 
+ const (
+ 	// DataDirDefault folder contains all k0s state
+-	DataDirDefault = "C:\\var\\lib\\k0s"
++	DataDirDefault = "C:\\var\\lib\\ekz"
+ 	// CertRootDir defines the root location for all pki related artifacts
+-	CertRootDir = "C:\\var\\lib\\k0s\\pki"
++	CertRootDir = "C:\\var\\lib\\ekz\\pki"
+ 	// BinDir defines the location for all pki related binaries
+-	BinDir = "C:\\var\\lib\\k0s\\bin"
++	BinDir = "C:\\var\\lib\\ekz\\bin"
+ 	// RunDir run directory
+-	RunDir = "C:\\run\\k0s"
++	RunDir = "C:\\run\\ekz"
+ 	// ManifestsDir stack applier directory
+-	ManifestsDir = "C:\\var\\lib\\k0s\\manifests"
++	ManifestsDir = "C:\\var\\lib\\ekz\\manifests"
+ 	// KubeletVolumePluginDir defines the location for kubelet plugins volume executables
+-	KubeletVolumePluginDir = "C:\\usr\\libexec\\k0s\\kubelet-plugins\\volume\\exec"
++	KubeletVolumePluginDir = "C:\\usr\\libexec\\ekz\\kubelet-plugins\\volume\\exec"
+ 
+ 	KineSocket = "kine\\kine.sock:2379"
+-
+ )
+ 
+ func formatPath(dir string, file string) string {
+ 	return fmt.Sprintf("%s\\%s", dir, file)
+-}
+\ No newline at end of file
++}
