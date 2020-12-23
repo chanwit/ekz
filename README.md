@@ -12,13 +12,13 @@ What is EKS-D?
 ## Getting Started
 `ekz` is intended to run inside its Docker container, on your laptop, with the following command:
 
-<h3><u>Linux & macOS</u></h3>
+### Linux & macOS
 
 ```sh
 $ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
-   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.2
+   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.3
 ```
 
 in case you'd like to try the dev version (from the main branch):
@@ -29,8 +29,11 @@ $ docker run -d --name ekz-controller \
    --privileged -v /var/lib/ekz \
    -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
 ```
-<h3><u>Windows</u></h3>
-<h4>PowerShell</h4>
+### Windows
+
+`ekz` also runs on Windows if you've got Docker Desktop installed.
+
+#### PowerShell
 
 ```sh
 $ docker run -d --name ekz-controller `
@@ -38,7 +41,7 @@ $ docker run -d --name ekz-controller `
    --privileged -v /var/lib/ekz `
    -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
 ```
-<h4>Command Prompt</h4>
+#### Command Prompt
 
 ```sh
 $ docker run -d --name ekz-controller ^
