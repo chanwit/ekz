@@ -1,4 +1,4 @@
-name: Build
+name: build-ekz-image
 on:
   push:
     branches:
@@ -21,6 +21,8 @@ jobs:
           QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
+          cd images/ekz
+
           TAG=$(cat VERSION)
           K0S_VERSION=$(cat K0S_VERSION)
 
