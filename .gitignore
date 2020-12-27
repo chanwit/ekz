@@ -1,1 +1,5 @@
 build/
+.idea/
+kubeconfig
+cover.out
+bin/
