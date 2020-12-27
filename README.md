@@ -67,5 +67,5 @@ controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
 ## Features
 
   1. EKS-D binaries from v1.18.9-eks-1-18-1
-  2. Packaged with k0s v0.8.1
+  2. Packaged with k0s v0.9.0
   3. Amazon Linux 2 base image
