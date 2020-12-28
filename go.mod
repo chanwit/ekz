@@ -7,4 +7,5 @@ require (
 	github.com/fluxcd/flux2 v0.5.7
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.1.1
+	sigs.k8s.io/kind v0.9.0
 )

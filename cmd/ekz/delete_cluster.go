@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"sigs.k8s.io/kind/pkg/cluster"
 
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
@@ -17,7 +19,7 @@ var deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	deleteClusterCmd.Flags().StringVar(&provider, "provider", "ekz", "cluster provider (ekz, kind)")
+	deleteClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", "kubeconfig", "specify output file to write kubeconfig to")
 
 	deleteCmd.AddCommand(deleteClusterCmd)
 }
@@ -25,15 +27,15 @@ func init() {
 func deleteClusterCmdRun(cmd *cobra.Command, args []string) error {
 	switch provider {
 	case "ekz":
-		return deleteClusterEKZRun(cmd, args)
+		return deleteClusterEKZRun()
 	case "kind":
-		return deleteClusterKINDRun(cmd, args)
+		return deleteClusterKINDRun()
 	default:
 		return fmt.Errorf("NYI provider: %s", provider)
 	}
 }
 
-func deleteClusterEKZRun(cmd *cobra.Command, args []string) error {
+func deleteClusterEKZRun() error {
 	containerName := "ekz-controller-0"
 	containerId := script.Var()
 	var err error
@@ -56,6 +58,10 @@ func deleteClusterEKZRun(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func deleteClusterKINDRun(cmd *cobra.Command, args []string) error {
-	return nil
+func deleteClusterKINDRun() error {
+	provider := cluster.NewProvider()
+	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", "ekz-bridge")
+
+	name := "ekz"
+	return provider.Delete(name, kubeConfigFile)
 }

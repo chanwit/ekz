@@ -1,15 +1,11 @@
-## ekz create
+## ekz get
 
-Create clusters
 
-### Synopsis
-
-The create sub-commands create EKS-D clusters.
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for get
 ```
 
 ### Options inherited from parent commands
@@ -22,5 +18,5 @@ The create sub-commands create EKS-D clusters.
 ### SEE ALSO
 
 * [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
-* [ekz create cluster](ekz_create_cluster.md)	 - Create a cluster
+* [ekz get kubeconfig](ekz_get_kubeconfig.md)	 - 
 

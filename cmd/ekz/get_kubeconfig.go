@@ -1,0 +1,49 @@
+package main
+
+import (
+	"github.com/chanwit/script"
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
+	"sigs.k8s.io/kind/pkg/cluster"
+)
+
+var getKubeconfigCmd = &cobra.Command{
+	Use:  "kubeconfig",
+	RunE: getKubeconfigCmdRun,
+}
+
+func init() {
+	getKubeconfigCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", "kubeconfig", "specify output file to write kubeconfig to")
+
+	getCmd.AddCommand(getKubeconfigCmd)
+}
+
+func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
+	switch provider {
+	case "ekz":
+		return getKubeconfigEKZ("ekz-controller-0", kubeConfigFile)
+	case "kind":
+		return getKubeconfigKIND()
+	}
+
+	return nil
+}
+
+func getKubeconfigEKZ(containerName string, targetFile string) error {
+	// TODO append kubeconfig to ~/.kube/config
+	err := script.Exec("docker", "exec",
+		containerName,
+		"cat", "/var/lib/ekz/pki/admin.conf").
+		WriteFile(targetFile, 0644).
+		Run()
+	if err != nil {
+		return errors.Wrapf(err, "error obtaining kubeconfig from container: %s", containerName)
+	}
+	return nil
+}
+
+func getKubeconfigKIND() error {
+	clusterName := "ekz"
+	provider := cluster.NewProvider()
+	return provider.ExportKubeConfig(clusterName, kubeConfigFile)
+}

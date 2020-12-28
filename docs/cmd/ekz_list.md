@@ -1,15 +1,15 @@
-## ekz create
+## ekz list
 
-Create clusters
+List clusters
 
 ### Synopsis
 
-The create sub-commands create EKS-D clusters.
+The list sub-commands list EKS-D clusters.
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for list
 ```
 
 ### Options inherited from parent commands
@@ -22,5 +22,5 @@ The create sub-commands create EKS-D clusters.
 ### SEE ALSO
 
 * [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
-* [ekz create cluster](ekz_create_cluster.md)	 - Create a cluster
+* [ekz list cluster](ekz_list_cluster.md)	 - List cluster
 

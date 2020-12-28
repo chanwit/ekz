@@ -1,19 +1,15 @@
-## ekz delete cluster
+## ekz get kubeconfig
 
-Delete a cluster
 
-### Synopsis
-
-The create sub-commands create EKS-D clusters.
 
 ```
-ekz delete cluster [flags]
+ekz get kubeconfig [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help            help for cluster
+  -h, --help            help for kubeconfig
   -o, --output string   specify output file to write kubeconfig to (default "kubeconfig")
 ```
 
@@ -26,5 +22,5 @@ ekz delete cluster [flags]
 
 ### SEE ALSO
 
-* [ekz delete](ekz_delete.md)	 - Delete clusters
+* [ekz get](ekz_get.md)	 - 
 

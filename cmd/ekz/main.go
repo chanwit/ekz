@@ -29,11 +29,23 @@ var rootCmd = &cobra.Command{
 }
 
 var (
-	verbose bool
-	logger  fluxlog.Logger = stderrLogger{stderr: os.Stderr}
+	verbose  bool
+	provider string
+	logger   fluxlog.Logger = stderrLogger{stderr: os.Stderr}
 )
 
 func init() {
+	defaultProvider := os.Getenv("EKZ_PROVIDER")
+	if defaultProvider == "" {
+		defaultProvider = "ekz"
+	}
+	if defaultProvider != "ekz" &&
+		defaultProvider != "kind" {
+		logger.Failuref("EKZ_PROVIDER=%s is not supported. Possible values: 'ekz', 'kind'.", defaultProvider)
+		os.Exit(1)
+	}
+
+	rootCmd.PersistentFlags().StringVar(&provider, "provider", defaultProvider, "cluster provider possible values: \"ekz\", \"kind\". env: EKZ_PROVIDER")
 	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "run verbosely")
 }
 

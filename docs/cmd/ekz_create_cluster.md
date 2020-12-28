@@ -16,13 +16,13 @@ ekz create cluster [flags]
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
   -o, --output string         specify output file to write kubeconfig to (default "kubeconfig")
-      --provider string       cluster provider (ekz, kind) (default "ekz")
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --verbose   run verbosely
+      --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
+      --verbose           run verbosely
 ```
 
 ### SEE ALSO
