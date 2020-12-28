@@ -4,6 +4,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/build-ekz-image.yaml'
       - 'images/ekz/**'
 jobs:
   build:

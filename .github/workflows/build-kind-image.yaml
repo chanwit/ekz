@@ -4,6 +4,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/build-kind-image.yaml'
       - 'images/kind/**'
 jobs:
   build:
@@ -21,4 +22,5 @@ jobs:
           TAG=$(cat VERSION)
 
           docker build -t quay.io/ekz-io/kind:$TAG .
+          docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
           docker push quay.io/ekz-io/kind:$TAG
