@@ -2,7 +2,9 @@ name: build-ekz-image
 on:
   push:
     branches:
-      - main
+      - 'main'
+    paths:
+      - 'images/ekz/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,9 +19,6 @@ jobs:
           git config --global user.email "chanwit@gmail.com"
       - name: build
         shell: bash
-        env:
-          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
           cd images/ekz
           TAG=$(cat VERSION)
@@ -34,7 +33,7 @@ jobs:
           stg import -s ../../patches/series
 
           make EMBEDDED_BINS_BUILDMODE=fetch
-          docker build -t quay.io/chanwit/ekz:$TAG .
+          docker build -t quay.io/ekz-io/ekz:$TAG .
       - name: security scan
         shell: bash
         run: |
@@ -43,7 +42,7 @@ jobs:
 
           wget https://github.com/anchore/grype/releases/download/v0.6.1/grype_0.6.1_linux_amd64.deb
           sudo apt install -y ./grype_0.6.1_linux_amd64.deb
-          grype -f negligible quay.io/chanwit/ekz:$TAG
+          grype -f negligible quay.io/ekz-io/ekz:$TAG
       - name: push
         shell: bash
         env:
@@ -54,5 +53,5 @@ jobs:
           TAG=$(cat VERSION)
 
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
-          docker push quay.io/chanwit/ekz:$TAG
+          docker push quay.io/ekz-io/ekz:$TAG
           docker logout quay.io
