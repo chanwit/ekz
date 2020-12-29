@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
-	"os"
 	"sigs.k8s.io/kind/pkg/cluster"
-	"strings"
 )
 
 func createClusterKIND() error {
@@ -14,14 +15,13 @@ func createClusterKIND() error {
 	image := fmt.Sprintf("quay.io/ekz-io/kind:%s", eksdVersion)
 
 	logger.Actionf("pulling image %s ...", image)
-	err := script.Run("docker", "pull", image)
+	err := script.Exec("docker", "pull", image).Run()
 	if err != nil {
 		return err
 	}
-	name := "ekz"
 
 	provider := cluster.NewProvider()
-	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", "ekz-bridge")
+	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", fmt.Sprintf("%s-bridge", clusterName))
 
 	parts := strings.SplitN(eksdVersion, "-", 2)
 	suffix := parts[1]
@@ -45,26 +45,26 @@ kubeadmConfigPatches:
     imageTag: "v1.7.0-%s"
 `, eksdVersion, suffix, suffix)
 
-	logger.Actionf("creating cluster: %s ...", name)
+	logger.Actionf("creating cluster: %s ...", clusterName)
 
 	if err := provider.Create(
-		name,
+		clusterName,
 		cluster.CreateWithRawConfig([]byte(config)),
 		cluster.CreateWithNodeImage(image),
 		cluster.CreateWithRetain(false),
 		cluster.CreateWithDisplayUsage(true),
 		cluster.CreateWithDisplaySalutation(true),
 	); err != nil {
-		return errors.Wrapf(err, "failed to create cluster %v", name)
+		return errors.Wrapf(err, "failed to create cluster %v", clusterName)
 	}
 
-	if err := provider.ExportKubeConfig(name, kubeConfigFile); err != nil {
+	if err := provider.ExportKubeConfig(clusterName, kubeConfigFile); err != nil {
 		return err
 	}
 	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
 
 	logger.Waitingf("waiting for cluster to start ...")
-	waitForNodeStarted("ekz-control-plane")
+	waitForNodeStarted(fmt.Sprintf("%s-control-plane", clusterName))
 
 	logger.Waitingf("waiting for cluster to be ready ...")
 	waitForNodeReady()

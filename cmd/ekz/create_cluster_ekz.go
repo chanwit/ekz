@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/chanwit/script"
-	"github.com/pkg/errors"
 	"strings"
 	"time"
+
+	"github.com/chanwit/script"
+	"github.com/pkg/errors"
 )
 
 func createClusterEKZ() error {
-	// "3" is the latest stable provided by EKZ
-	ekzImageBuild := "3"
+	// "4" is the latest stable provided by EKZ
+	ekzImageBuild := "4"
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
-	containerName := "ekz-controller-0"
+	containerName := fmt.Sprintf("%s-controller-0", clusterName)
 
 	logger.Actionf("pulling image: %s ...", imageName)
 	var err error
@@ -29,7 +30,11 @@ func createClusterEKZ() error {
 
 	// container existed
 	if containerId.String() != "" {
-		return errors.Wrapf(err, "container %s existed. cluster creation aborted.", containerName)
+		if verbose {
+			fmt.Printf("[DEBUG] containerId.String()=%s\n", containerId.String())
+		}
+
+		return errors.Errorf("container %s existed - cluster creation aborted", containerName)
 	}
 
 	logger.Actionf("starting container: %s ...", containerName)
@@ -38,7 +43,7 @@ func createClusterEKZ() error {
 		"--name", containerName,
 		"--hostname", "controller",
 		"--privileged",
-		"--label", "io.x-k8s.ekz.cluster=ekz",
+		"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
 		"-v", "/var/lib/ekz",
 		"-p", "127.0.0.1:0:6443",
 		imageName).
