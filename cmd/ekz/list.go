@@ -1,6 +1,8 @@
 package main
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+)
 
 var listCmd = &cobra.Command{
 	Use:     "list",

@@ -29,29 +29,33 @@ func init() {
 
 // How to heuristically detect a ekz cluster
 // io.x-k8s.ekz.cluster=ekz
+const (
+	EKZClusterLabel  = "io.x-k8s.ekz.cluster"
+	KINDClusterLabel = "io.x-k8s.kind.cluster"
+)
 
 func listClusters(clusterLabelKey string) ([]string, error) {
 	output := script.Var()
-	err := script.Exec("docker",
-		"ps",
+	err := script.Exec("docker", "ps",
 		"-a", // show stopped nodes
 		// filter for nodes with the cluster label
 		"--filter", "label="+clusterLabelKey,
 		// format to include the cluster name
-		"--format", fmt.Sprintf(`{{.Label "%s"}}`, clusterLabelKey),
-	).To(output)
+		"--format", fmt.Sprintf(`{{.Label "%s"}}`, clusterLabelKey)).
+		To(output)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to list clusters")
 	}
+
 	return sets.NewString(output.Lines()...).List(), nil
 }
 
 func listClusterCmdRun(cmd *cobra.Command, args []string) error {
-	eksClusters, err := listClusters("io.x-k8s.ekz.cluster")
+	eksClusters, err := listClusters(EKZClusterLabel)
 	if err != nil {
 		return err
 	}
-	kindClusters, err := listClusters("io.x-k8s.kind.cluster")
+	kindClusters, err := listClusters(KINDClusterLabel)
 	if err != nil {
 		return err
 	}
