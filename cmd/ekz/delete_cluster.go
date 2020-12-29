@@ -14,8 +14,17 @@ var deleteClusterCmd = &cobra.Command{
 	Use:     "cluster",
 	Aliases: []string{"rm", "del"},
 	Short:   "Delete a cluster",
-	Long:    "The create sub-commands create EKS-D clusters.",
-	RunE:    deleteClusterCmdRun,
+	Long:    "The delete sub-commands delete EKS-D clusters.",
+	Example: `  # Delete the cluster
+  ekz delete cluster
+
+  # Delete the cluster created by the EKZ provider
+  ekz --provider=ekz delete cluster
+
+  # Delete the cluster created by the KIND provider
+  ekz --provider=kind delete cluster
+`,
+	RunE: deleteClusterCmdRun,
 }
 
 func init() {

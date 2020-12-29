@@ -6,7 +6,7 @@ import (
 
 var getCmd = &cobra.Command{
 	Use:   "get",
-	Short: "Get properties of an EKS-D cluster.",
+	Short: "Get properties of an EKS-D cluster",
 	Long:  "Get sub-commands get properties of an EKS-D cluster.",
 }
 

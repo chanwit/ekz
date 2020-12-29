@@ -4,10 +4,24 @@ Delete a cluster
 
 ### Synopsis
 
-The create sub-commands create EKS-D clusters.
+The delete sub-commands delete EKS-D clusters.
 
 ```
 ekz delete cluster [flags]
+```
+
+### Examples
+
+```
+  # Delete the cluster
+  ekz delete cluster
+
+  # Delete the cluster created by the EKZ provider
+  ekz --provider=ekz delete cluster
+
+  # Delete the cluster created by the KIND provider
+  ekz --provider=kind delete cluster
+
 ```
 
 ### Options

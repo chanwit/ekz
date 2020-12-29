@@ -4,10 +4,18 @@ List clusters
 
 ### Synopsis
 
-List all EKS-D clusters.
+List cluster command list all EKS-D clusters.
 
 ```
 ekz list cluster [flags]
+```
+
+### Examples
+
+```
+  # List all EKS-D clusters
+  ekz list clusters
+
 ```
 
 ### Options

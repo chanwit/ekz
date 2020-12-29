@@ -15,7 +15,7 @@ var getKubeconfigCmd = &cobra.Command{
   ekz get kubeconfig
 
   # Get the KubeConfig and writes to $HOME/.kube/config
-  # Please note that this example overwrites the content of $HOME/.kube/config file
+  # Please note that this example overwrites the content of $HOME/.kube/config file.
   ekz get kubeconfig -o $HOME/.kube/config
 `,
 	RunE: getKubeconfigCmdRun,

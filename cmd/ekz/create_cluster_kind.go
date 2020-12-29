@@ -61,7 +61,7 @@ kubeadmConfigPatches:
 	if err := provider.ExportKubeConfig(name, kubeConfigFile); err != nil {
 		return err
 	}
-	logger.Waitingf("an EKS-D cluster is now being provisioned ...")
+	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
 
 	logger.Waitingf("waiting for cluster to start ...")
 	waitForNodeStarted("ekz-control-plane")

@@ -13,8 +13,11 @@ var listClusterCmd = &cobra.Command{
 	Use:     "cluster",
 	Aliases: []string{"clusters"},
 	Short:   "List clusters",
-	Long:    "List all EKS-D clusters.",
-	RunE:    listClusterCmdRun,
+	Long:    "List cluster command list all EKS-D clusters.",
+	Example: `  # List all EKS-D clusters
+  ekz list clusters
+`,
+	RunE: listClusterCmdRun,
 }
 
 func init() {

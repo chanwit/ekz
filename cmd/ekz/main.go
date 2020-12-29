@@ -22,9 +22,23 @@ var rootCmd = &cobra.Command{
 		return nil
 	},
 	Short: "Command line utility for creating EKS-D clusters on desktop",
-	Long:  "Command line utility for creating EKS-D clusters on desktop",
-	Example: `  # Create cluster
+	Long: `This program is a command line utility for creating and managing EKS-D clusters on desktop.
+It currently supports clusters provided by EKZ (k0s-based) and KIND.
+All EKS-D cluster is single-node and run inside Docker.`,
+	Example: `  # Create an EKS-D cluster with the default provider
   ekz create cluster
+
+  # Delete the cluster
+  ekz delete cluster
+
+  # List all clusters
+  ekz list clusters
+  
+  # List all clusters (shorter syntax)
+  ekz ls
+
+  # Obtain KubeConfig of the cluster and write to $PWD/kubeconfig
+  ekz get kubeconfig
 `,
 }
 

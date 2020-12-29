@@ -17,7 +17,7 @@ ekz get kubeconfig [flags]
   ekz get kubeconfig
 
   # Get the KubeConfig and writes to $HOME/.kube/config
-  # Please note that this example overwrites the content of $HOME/.kube/config file
+  # Please note that this example overwrites the content of $HOME/.kube/config file.
   ekz get kubeconfig -o $HOME/.kube/config
 
 ```
@@ -38,5 +38,5 @@ ekz get kubeconfig [flags]
 
 ### SEE ALSO
 
-* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster.
+* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster
 

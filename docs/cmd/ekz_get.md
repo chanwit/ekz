@@ -1,6 +1,6 @@
 ## ekz get
 
-Get properties of an EKS-D cluster.
+Get properties of an EKS-D cluster
 
 ### Synopsis
 
