@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"sigs.k8s.io/kind/pkg/cluster"
 
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"sigs.k8s.io/kind/pkg/cluster"
 )
 
 var deleteClusterCmd = &cobra.Command{
@@ -29,6 +29,7 @@ var deleteClusterCmd = &cobra.Command{
 
 func init() {
 	deleteClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", "kubeconfig", "specify output file to write kubeconfig to")
+	deleteClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 
 	deleteCmd.AddCommand(deleteClusterCmd)
 }
@@ -45,7 +46,7 @@ func deleteClusterCmdRun(cmd *cobra.Command, args []string) error {
 }
 
 func deleteClusterEKZRun() error {
-	containerName := "ekz-controller-0"
+	containerName := fmt.Sprintf("%s-controller-0", clusterName)
 	containerId := script.Var()
 	var err error
 
@@ -56,7 +57,7 @@ func deleteClusterEKZRun() error {
 
 	// container does not exist, abort
 	if containerId.String() == "" {
-		return errors.Errorf("container %s does not exist. cluster deletion aborted.", containerName)
+		return errors.Errorf("container %s does not exist - cluster deletion aborted", containerName)
 	}
 
 	err = script.Exec("docker", "rm", "-f", containerName).Run()
@@ -69,8 +70,7 @@ func deleteClusterEKZRun() error {
 
 func deleteClusterKINDRun() error {
 	provider := cluster.NewProvider()
-	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", "ekz-bridge")
+	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", fmt.Sprintf("%s-bridge", clusterName))
 
-	name := "ekz"
-	return provider.Delete(name, kubeConfigFile)
+	return provider.Delete(clusterName, kubeConfigFile)
 }
