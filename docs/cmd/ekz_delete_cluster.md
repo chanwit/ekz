@@ -28,6 +28,7 @@ ekz delete cluster [flags]
 
 ```
   -h, --help            help for cluster
+      --name string     cluster name (default "ekz")
   -o, --output string   specify output file to write kubeconfig to (default "kubeconfig")
 ```
 

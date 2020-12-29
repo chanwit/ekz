@@ -38,7 +38,8 @@ ekz create cluster [flags]
 ```
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
-  -o, --output string         specify output file to write kubeconfig to (default "kubeconfig")
+      --name string           cluster name (default "ekz")
+  -o, --output string         specify output file to write kubeconfig to (default "/home/chanwit/.kube/config")
 ```
 
 ### Options inherited from parent commands
