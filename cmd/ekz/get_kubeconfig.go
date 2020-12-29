@@ -1,11 +1,15 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/chanwit/ekz/pkg/kubeconfig"
 	"github.com/chanwit/script"
+	"github.com/imdario/mergo"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"io/ioutil"
+	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/tools/clientcmd/api"
 	"sigs.k8s.io/kind/pkg/cluster"
 )
 
@@ -24,7 +28,8 @@ var getKubeconfigCmd = &cobra.Command{
 }
 
 func init() {
-	getKubeconfigCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", "kubeconfig", "specify output file to write kubeconfig to")
+	getKubeconfigCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", clientcmd.RecommendedHomeFile, "specify output file to write kubeconfig to")
+	getKubeconfigCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 
 	getCmd.AddCommand(getKubeconfigCmd)
 }
@@ -32,7 +37,8 @@ func init() {
 func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
 	switch provider {
 	case "ekz":
-		return getKubeconfigEKZ("ekz-controller-0", kubeConfigFile)
+		containerName := fmt.Sprintf("%s-controller-0", clusterName)
+		return getKubeconfigEKZ(containerName, kubeConfigFile)
 	case "kind":
 		return getKubeconfigKIND()
 	}
@@ -62,16 +68,36 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 		return errors.Wrapf(err, "cannot obtain port mapping from docker")
 	}
 
-	rewroteKubeconfig, err := kubeconfig.PortRewriteKubeConfig(kubeconfigContent.RawString(), port.String())
+	user := clusterName + "-user"
+	rewroteKubeconfig, err := kubeconfig.PortRewriteKubeConfig(user, clusterName, kubeconfigContent.RawString(), port.String())
 	if err != nil {
 		return errors.Wrapf(err, "cannot obtain port mapping from docker")
 	}
 
-	return ioutil.WriteFile(targetFile, []byte(rewroteKubeconfig), 0644)
+	// if cannot load from file
+	// create an empty config
+	config, err := clientcmd.LoadFromFile(targetFile)
+	if err != nil {
+		config = api.NewConfig()
+	}
+
+	newConfig, err := clientcmd.Load([]byte(rewroteKubeconfig))
+	if err != nil {
+		return err
+	}
+	err = mergo.Merge(config, newConfig, mergo.WithOverride)
+	if err != nil {
+		return err
+	}
+	err = clientcmd.WriteToFile(*config, targetFile)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func getKubeconfigKIND() error {
-	clusterName := "ekz"
 	provider := cluster.NewProvider()
 	return provider.ExportKubeConfig(clusterName, kubeConfigFile)
 }
