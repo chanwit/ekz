@@ -17,9 +17,8 @@ var rootCmd = &cobra.Command{
 	Version:       VERSION,
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		script.Debug = verbose
-		return nil
 	},
 	Short: "Command line utility for creating EKS-D clusters on desktop",
 	Long: `This program is a command line utility for creating and managing EKS-D clusters on desktop.
