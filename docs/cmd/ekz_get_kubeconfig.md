@@ -1,9 +1,25 @@
 ## ekz get kubeconfig
 
+Get kubeconfig
 
+### Synopsis
+
+This command obtains the KubeConfig of the EKS-D cluster and writes to the target file.
 
 ```
 ekz get kubeconfig [flags]
+```
+
+### Examples
+
+```
+  # Get the KubeConfig from the cluster and write to $PWD/kubeconfig
+  ekz get kubeconfig
+
+  # Get the KubeConfig and writes to $HOME/.kube/config
+  # Please note that this example overwrites the content of $HOME/.kube/config file
+  ekz get kubeconfig -o $HOME/.kube/config
+
 ```
 
 ### Options
@@ -22,5 +38,5 @@ ekz get kubeconfig [flags]
 
 ### SEE ALSO
 
-* [ekz get](ekz_get.md)	 - 
+* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster.
 

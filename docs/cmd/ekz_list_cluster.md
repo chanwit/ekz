@@ -1,6 +1,10 @@
 ## ekz list cluster
 
-List cluster
+List clusters
+
+### Synopsis
+
+List all EKS-D clusters.
 
 ```
 ekz list cluster [flags]

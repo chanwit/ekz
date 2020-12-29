@@ -4,7 +4,11 @@ List clusters
 
 ### Synopsis
 
-The list sub-commands list EKS-D clusters.
+The list sub-commands list EKS-D clusters. Currently it acts as a shortcut for the 'list clusters' command.
+
+```
+ekz list [flags]
+```
 
 ### Options
 
@@ -22,5 +26,5 @@ The list sub-commands list EKS-D clusters.
 ### SEE ALSO
 
 * [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
-* [ekz list cluster](ekz_list_cluster.md)	 - List cluster
+* [ekz list cluster](ekz_list_cluster.md)	 - List clusters
 

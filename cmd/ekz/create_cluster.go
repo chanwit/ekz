@@ -12,7 +12,24 @@ var createClusterCmd = &cobra.Command{
 	Use:   "cluster",
 	Short: "Create a cluster",
 	Long:  "The create sub-commands create EKS-D clusters.",
-	RunE:  createClusterCmdRun,
+	Example: `  # Create an EKS-D cluster with the default provider. The KubeConfig file will be written to $PWD/kubeconfig.
+  ekz create cluster
+
+  # Create an EKS-D cluster with the EKZ provider.
+  # This command creates an EKS-D-compatible K0s-based cluster.
+  ekz --provider=ekz create cluster
+
+  # Create an EKS-D cluster with the KIND provider.
+  # This command creates an EKS-D-compatible KIND cluster.
+  ekz --provider=kind create cluster
+
+  # Create an EKS-D cluster and write KubeConfig to $HOME/.kube/config
+  ekz create cluster -o $HOME/.kube/config
+
+  # Create EKS-D cluster with a specific version of EKS-D
+  ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster 
+`,
+	RunE: createClusterCmdRun,
 }
 
 var (

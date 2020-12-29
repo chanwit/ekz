@@ -26,6 +26,6 @@ Command line utility for creating EKS-D clusters on desktop
 
 * [ekz create](ekz_create.md)	 - Create clusters
 * [ekz delete](ekz_delete.md)	 - Delete clusters
-* [ekz get](ekz_get.md)	 - 
+* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster.
 * [ekz list](ekz_list.md)	 - List clusters
 

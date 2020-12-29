@@ -46,15 +46,16 @@ func createClusterEKZ() error {
 	if err != nil {
 		return errors.Wrapf(err, "failed to start %s container with image: %s. %s", containerName, imageName, strings.TrimSpace(string(stderr)))
 	}
+
+	// TODO use retry-backoff instead of fixing 2 seconds here
+	time.Sleep(2 * time.Second)
+
 	// TODO handle port clash
 	// TODO handle container name clash
 	err = getKubeconfigEKZ(containerName, kubeConfigFile)
 	if err != nil {
 		return err
 	}
-
-	// TODO use retry-backoff instead of fixing 2 seconds here
-	time.Sleep(2 * time.Second)
 
 	logger.Waitingf("an EKS-D cluster is now being provisioned ...")
 

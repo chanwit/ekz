@@ -8,7 +8,16 @@ import (
 )
 
 var getKubeconfigCmd = &cobra.Command{
-	Use:  "kubeconfig",
+	Use:   "kubeconfig",
+	Short: "Get kubeconfig",
+	Long:  "This command obtains the KubeConfig of the EKS-D cluster and writes to the target file.",
+	Example: `  # Get the KubeConfig from the cluster and write to $PWD/kubeconfig
+  ekz get kubeconfig
+
+  # Get the KubeConfig and writes to $HOME/.kube/config
+  # Please note that this example overwrites the content of $HOME/.kube/config file
+  ekz get kubeconfig -o $HOME/.kube/config
+`,
 	RunE: getKubeconfigCmdRun,
 }
 
