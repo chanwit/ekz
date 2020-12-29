@@ -7,6 +7,8 @@ require (
 	github.com/fluxcd/flux2 v0.5.7
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.1.1
+	github.com/stretchr/testify v1.5.1
 	k8s.io/apimachinery v0.19.4
 	sigs.k8s.io/kind v0.9.0
+	sigs.k8s.io/kustomize/kyaml v0.10.5
 )

@@ -1,9 +1,11 @@
 package main
 
 import (
+	"github.com/chanwit/ekz/pkg/kubeconfig"
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"io/ioutil"
 	"sigs.k8s.io/kind/pkg/cluster"
 )
 
@@ -40,15 +42,32 @@ func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
 
 func getKubeconfigEKZ(containerName string, targetFile string) error {
 	// TODO append kubeconfig to ~/.kube/config
+	kubeconfigContent := script.Var()
 	err := script.Exec("docker", "exec",
 		containerName,
 		"cat", "/var/lib/ekz/pki/admin.conf").
-		WriteFile(targetFile, 0644).
-		Run()
+		To(kubeconfigContent)
 	if err != nil {
 		return errors.Wrapf(err, "error obtaining kubeconfig from container: %s", containerName)
 	}
-	return nil
+
+	// Rewrite port of the API server inside the KubeConfig
+	port := script.Var()
+	err = script.Exec(
+		"docker", "inspect",
+		containerName,
+		"--format", `{{ (index (index .NetworkSettings.Ports "6443/tcp") 0).HostPort }}`).
+		To(port)
+	if err != nil {
+		return errors.Wrapf(err, "cannot obtain port mapping from docker")
+	}
+
+	rewroteKubeconfig, err := kubeconfig.PortRewriteKubeConfig(kubeconfigContent.RawString(), port.String())
+	if err != nil {
+		return errors.Wrapf(err, "cannot obtain port mapping from docker")
+	}
+
+	return ioutil.WriteFile(targetFile, []byte(rewroteKubeconfig), 0644)
 }
 
 func getKubeconfigKIND() error {

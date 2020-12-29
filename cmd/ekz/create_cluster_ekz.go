@@ -40,7 +40,7 @@ func createClusterEKZ() error {
 		"--privileged",
 		"--label", "io.x-k8s.ekz.cluster=ekz",
 		"-v", "/var/lib/ekz",
-		"-p", "6443:6443",
+		"-p", "127.0.0.1:0:6443",
 		imageName).
 		DividedOutput()
 	if err != nil {
