@@ -16,6 +16,9 @@ ekz list cluster [flags]
   # List all EKS-D clusters
   ekz list clusters
 
+  # List all EKS-D clusters (shorter syntax)
+  ekz ls
+
 ```
 
 ### Options

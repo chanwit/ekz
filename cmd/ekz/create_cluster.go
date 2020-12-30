@@ -12,10 +12,17 @@ import (
 var createClusterCmd = &cobra.Command{
 	Use:   "cluster",
 	Short: "Create a cluster",
+	Args:  cobra.MaximumNArgs(1),
 	Long:  "The create sub-commands create EKS-D clusters.",
 	Example: `  # Create an EKS-D cluster with the default provider
-  # The KubeConfig file will be written to $PWD/kubeconfig.
+  # The KubeConfig will be merged to $HOME/.kube/config.
   ekz create cluster
+
+  # Create cluster and name it 'dev'
+  ekz create cluster --name=dev
+
+  # Create the 'dev' cluster (alternative syntax)
+  ekz create cluster dev
 
   # Create an EKS-D cluster with the EKZ provider
   # This command creates an EKS-D-compatible K0s-based cluster.
@@ -25,8 +32,9 @@ var createClusterCmd = &cobra.Command{
   # This command creates an EKS-D-compatible KIND cluster.
   ekz --provider=kind create cluster
 
-  # Create an EKS-D cluster and write KubeConfig to $HOME/.kube/config
-  ekz create cluster -o $HOME/.kube/config
+  # Create an EKS-D cluster and write KubeConfig to $PWD/kubeconfig
+  # If the file already exists, the new KubeConfig will be merged into it.
+  ekz create cluster -o kubeconfig
 
   # Create EKS-D cluster with a specific version of EKS-D
   ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster 
@@ -49,6 +57,11 @@ func init() {
 }
 
 func createClusterCmdRun(cmd *cobra.Command, args []string) error {
+	// use args[0] as the clusterName
+	if len(args) == 1 {
+		clusterName = args[0]
+	}
+
 	switch provider {
 	case "ekz":
 		return createClusterEKZ()

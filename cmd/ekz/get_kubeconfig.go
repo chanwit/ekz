@@ -15,10 +15,17 @@ import (
 
 var getKubeconfigCmd = &cobra.Command{
 	Use:   "kubeconfig",
+	Args:  cobra.MaximumNArgs(1),
 	Short: "Get kubeconfig",
 	Long:  "This command obtains the KubeConfig of the EKS-D cluster and writes to the target file.",
 	Example: `  # Get the KubeConfig from the cluster and write to $PWD/kubeconfig
   ekz get kubeconfig
+
+  # Get the KubeConfig of the 'dev' cluster
+  ekz get kubeconfig --name=dev
+
+  # Get the KubeConfig of the 'dev' cluster (alternative syntax) 
+  ekz get kubeconfig dev
 
   # Get the KubeConfig and writes to $HOME/.kube/config
   # Please note that this example overwrites the content of $HOME/.kube/config file.
@@ -35,6 +42,11 @@ func init() {
 }
 
 func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
+	// use args[0] as the clusterName
+	if len(args) == 1 {
+		clusterName = args[0]
+	}
+
 	switch provider {
 	case "ekz":
 		containerName := fmt.Sprintf("%s-controller-0", clusterName)

@@ -13,8 +13,14 @@ ekz delete cluster [flags]
 ### Examples
 
 ```
-  # Delete the cluster
+  # Delete the cluster, the default name is 'ekz'
   ekz delete cluster
+
+  # Delete the 'dev' cluster
+  ekz delete cluster dev
+
+  # Delete the 'dev' cluster (alternative syntax)
+  ekz delete cluster --name=dev
 
   # Delete the cluster created by the EKZ provider
   ekz --provider=ekz delete cluster

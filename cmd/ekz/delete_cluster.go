@@ -13,10 +13,17 @@ import (
 var deleteClusterCmd = &cobra.Command{
 	Use:     "cluster",
 	Aliases: []string{"rm", "del"},
+	Args:    cobra.MaximumNArgs(1),
 	Short:   "Delete a cluster",
 	Long:    "The delete sub-commands delete EKS-D clusters.",
-	Example: `  # Delete the cluster
+	Example: `  # Delete the cluster, the default name is 'ekz'
   ekz delete cluster
+
+  # Delete the 'dev' cluster
+  ekz delete cluster dev
+
+  # Delete the 'dev' cluster (alternative syntax)
+  ekz delete cluster --name=dev
 
   # Delete the cluster created by the EKZ provider
   ekz --provider=ekz delete cluster
@@ -35,6 +42,11 @@ func init() {
 }
 
 func deleteClusterCmdRun(cmd *cobra.Command, args []string) error {
+	// use args[0] as the clusterName
+	if len(args) == 1 {
+		clusterName = args[0]
+	}
+
 	switch provider {
 	case "ekz":
 		return deleteClusterEKZRun()

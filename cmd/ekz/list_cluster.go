@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"k8s.io/client-go/tools/clientcmd"
 	"text/tabwriter"
 
 	"github.com/chanwit/script"
@@ -17,6 +18,9 @@ var listClusterCmd = &cobra.Command{
 	Long:    "List cluster command list all EKS-D clusters.",
 	Example: `  # List all EKS-D clusters
   ekz list clusters
+
+  # List all EKS-D clusters (shorter syntax)
+  ekz ls
 `,
 	RunE: listClusterCmdRun,
 }
@@ -52,6 +56,11 @@ func listClusters(clusterLabelKey string) ([]string, error) {
 }
 
 func listClusterCmdRun(cmd *cobra.Command, args []string) error {
+	config, err := clientcmd.LoadFromFile(clientcmd.RecommendedHomeFile)
+	if err != nil {
+		return err
+	}
+
 	eksClusters, err := listClusters(EKZClusterLabel)
 	if err != nil {
 		return err
@@ -61,12 +70,22 @@ func listClusterCmdRun(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	w := tabwriter.NewWriter(script.Stdout(), 0, 2, 3, ' ', 0)
-	fmt.Fprintf(w, "NAME\tPROVIDER\n")
+	fmt.Fprintf(w, "CLUSTER-NAME\tPROVIDER\tACTIVE\n")
 	for _, c := range eksClusters {
-		fmt.Fprintf(w, "%s\tekz\n", c)
+		fmt.Fprintf(w, "%s\tekz\t", c)
+		active := " "
+		if config.CurrentContext == "ekz-"+c {
+			active = "  *"
+		}
+		fmt.Fprintf(w, "%s\n", active)
 	}
 	for _, c := range kindClusters {
-		fmt.Fprintf(w, "%s\tkind\n", c)
+		fmt.Fprintf(w, "%s\tkind\t", c)
+		active := " "
+		if config.CurrentContext == "kind-"+c {
+			active = "  *"
+		}
+		fmt.Fprintf(w, "%s\n", active)
 	}
 	w.Flush()
 
