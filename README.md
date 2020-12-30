@@ -18,7 +18,7 @@ What is EKS-D?
 $ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
-   -p 6443:6443 quay.io/ekz-io/ekz:v1.18.9-eks-1-18-1.4
+   -p 6443:6443 quay.io/ekz-io/ekz:v1.18.9-eks-1-18-1.5
 ```
 
 in case you'd like to try the dev version (from the main branch):
