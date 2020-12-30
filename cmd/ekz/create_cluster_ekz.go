@@ -10,8 +10,8 @@ import (
 )
 
 func createClusterEKZ() error {
-	// "4" is the latest stable provided by EKZ
-	ekzImageBuild := "4"
+	// "5" is the latest stable provided by EKZ
+	ekzImageBuild := "5"
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
 	containerName := fmt.Sprintf("%s-controller-0", clusterName)
 
@@ -37,14 +37,39 @@ func createClusterEKZ() error {
 		return errors.Errorf("container %s existed - cluster creation aborted", containerName)
 	}
 
+	bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
+
+	// TODO check if the bridge already existed
+
+	logger.Actionf("creating bridge network: %s", bridgeName)
+	err = script.Exec("docker", "network", "create",
+		"-d", "bridge",
+		"-o", "com.docker.network.bridge.enable_ip_masquerade=true",
+		"-o", "com.docker.network.bridge.enable_icc=true",
+		"-o", "com.docker.network.bridge.host_binding_ipv4=0.0.0.0",
+		"-o", "com.docker.network.driver.mtu=1500",
+		bridgeName).Run()
+	if err != nil {
+		return errors.Wrapf(err, "failed to create bridge: %s", bridgeName)
+	}
+
 	logger.Actionf("starting container: %s ...", containerName)
 	_, stderr, err := script.Exec("docker", "run",
 		"--detach",
 		"--name", containerName,
 		"--hostname", "controller",
 		"--privileged",
+		"--security-opt", "seccomp=unconfined", // also ignore seccomp
+		"--security-opt", "apparmor=unconfined", // also ignore apparmor
+		// runtime temporary storage
+		"--tmpfs", "/tmp", // various things depend on working /tmp
+		"--tmpfs", "/run", // systemd wants a writable /run
+		// BUG failed: nameserver list is empty
+		"--network", bridgeName,
 		"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
-		"-v", "/var/lib/ekz",
+		"--volume", "/var/lib/ekz",
+		// some k8s things want to read /lib/modules
+		"--volume", "/lib/modules:/lib/modules:ro",
 		"-p", "127.0.0.1:0:6443",
 		imageName).
 		DividedOutput()

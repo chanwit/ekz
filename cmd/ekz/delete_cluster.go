@@ -50,7 +50,10 @@ func deleteClusterEKZRun() error {
 	containerId := script.Var()
 	var err error
 
-	err = script.Exec("docker", "ps", "-aq", "-f", "name="+containerName).To(containerId)
+	err = script.Exec("docker", "ps",
+		"-aq",                        // check all containers
+		"-f", "name="+containerName). // filter only #{containerName}
+		To(containerId)
 	if err != nil {
 		return errors.Wrapf(err, "failed to run docker ps to check container: %s.", containerName)
 	}
@@ -60,9 +63,20 @@ func deleteClusterEKZRun() error {
 		return errors.Errorf("container %s does not exist - cluster deletion aborted", containerName)
 	}
 
-	err = script.Exec("docker", "rm", "-f", containerName).Run()
+	err = script.Exec("docker", "rm",
+		"-f", // force delete
+		"-v", // remove volume
+		containerName).
+		Run()
 	if err != nil {
 		return errors.Wrapf(err, "failed to remove %s", containerName)
+	}
+
+	// remove bridge after deleting the cluster
+	bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
+	err = script.Exec("docker", "network", "rm", bridgeName).Run()
+	if err != nil {
+		return errors.Wrapf(err, "failed to remove bridge: %s", bridgeName)
 	}
 
 	return nil
