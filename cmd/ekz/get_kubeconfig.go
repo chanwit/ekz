@@ -68,8 +68,7 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 		return errors.Wrapf(err, "cannot obtain port mapping from docker")
 	}
 
-	user := clusterName + "-user"
-	rewroteKubeconfig, err := kubeconfig.PortRewriteKubeConfig(user, clusterName, kubeconfigContent.RawString(), port.String())
+	rewroteKubeconfig, err := kubeconfig.RewriteKubeConfigForEKZ(clusterName, kubeconfigContent.RawString(), port.String())
 	if err != nil {
 		return errors.Wrapf(err, "cannot obtain port mapping from docker")
 	}
