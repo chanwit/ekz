@@ -4,3 +4,4 @@
 03-patch-constants-for-eks-d.patch
 04-fix-cves-for-amazon-linux.patch
 05-fix-cve-2020-1971-via-alas2.patch
+06-add-ip-command.patch
