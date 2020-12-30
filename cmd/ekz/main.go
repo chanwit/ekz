@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/chanwit/script"
 	"log"
 	"os"
 
+	"github.com/chanwit/script"
 	fluxlog "github.com/fluxcd/flux2/pkg/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"

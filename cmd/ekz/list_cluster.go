@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"text/tabwriter"
+
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"k8s.io/apimachinery/pkg/util/sets"
-	"text/tabwriter"
 )
 
 var listClusterCmd = &cobra.Command{
