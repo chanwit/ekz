@@ -33,7 +33,7 @@ ekz get kubeconfig [flags]
 ```
   -h, --help            help for kubeconfig
       --name string     cluster name (default "ekz")
-  -o, --output string   specify output file to write kubeconfig to (default "/home/chanwit/.kube/config")
+  -o, --output string   specify output file to write kubeconfig to (default "~/.kube/config")
 ```
 
 ### Options inherited from parent commands

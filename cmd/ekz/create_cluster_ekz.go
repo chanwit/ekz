@@ -89,10 +89,10 @@ func createClusterEKZ() error {
 	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
 
 	logger.Waitingf("waiting for cluster to start ...")
-	waitForNodeStarted("controller")
+	waitForNodeStarted("controller", 30*time.Second)
 
 	logger.Waitingf("waiting for cluster to be ready ...")
-	waitForNodeReady()
+	waitForNodeReady(60 * time.Second)
 
 	logger.Successf("the EKS-D cluster is now ready.")
 	return nil

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
@@ -64,10 +65,10 @@ kubeadmConfigPatches:
 	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
 
 	logger.Waitingf("waiting for cluster to start ...")
-	waitForNodeStarted(fmt.Sprintf("%s-control-plane", clusterName))
+	waitForNodeStarted(fmt.Sprintf("%s-control-plane", clusterName), 30*time.Second)
 
 	logger.Waitingf("waiting for cluster to be ready ...")
-	waitForNodeReady()
+	waitForNodeReady(60 * time.Second)
 
 	logger.Successf("the EKS-D cluster is now ready.")
 	return nil

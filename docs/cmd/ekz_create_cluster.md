@@ -14,7 +14,7 @@ ekz create cluster [flags]
 
 ```
   # Create an EKS-D cluster with the default provider
-  # The KubeConfig will be merged to $HOME/.kube/config.
+  # The KubeConfig will be merged to $HOME/.kube/config. The default cluster name is 'ekz'.
   ekz create cluster
 
   # Create cluster and name it 'dev'
@@ -46,7 +46,7 @@ ekz create cluster [flags]
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
       --name string           cluster name (default "ekz")
-  -o, --output string         specify output file to write kubeconfig to (default "/home/chanwit/.kube/config")
+  -o, --output string         specify output file to write kubeconfig to (default "~/.kube/config")
 ```
 
 ### Options inherited from parent commands

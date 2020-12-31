@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/chanwit/ekz/pkg/constants"
 	"github.com/chanwit/script"
 	"github.com/spf13/cobra"
 	"k8s.io/client-go/tools/clientcmd"
@@ -15,7 +16,7 @@ var createClusterCmd = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Long:  "The create sub-commands create EKS-D clusters.",
 	Example: `  # Create an EKS-D cluster with the default provider
-  # The KubeConfig will be merged to $HOME/.kube/config.
+  # The KubeConfig will be merged to $HOME/.kube/config. The default cluster name is 'ekz'.
   ekz create cluster
 
   # Create cluster and name it 'dev'
@@ -50,7 +51,7 @@ var (
 
 func init() {
 	createClusterCmd.Flags().StringVar(&eksdVersion, "eksd-version", "v1.18.9-eks-1-18-1", "specify a version of EKS-D")
-	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", clientcmd.RecommendedHomeFile, "specify output file to write kubeconfig to")
+	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 
 	createCmd.AddCommand(createClusterCmd)
@@ -60,6 +61,10 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 	// use args[0] as the clusterName
 	if len(args) == 1 {
 		clusterName = args[0]
+	}
+
+	if kubeConfigFile == constants.BackTickHomeFile {
+		kubeConfigFile = clientcmd.RecommendedHomeFile
 	}
 
 	switch provider {
@@ -72,8 +77,8 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 	}
 }
 
-func waitForNodeStarted(nodeName string) {
-	for {
+func waitForNodeStarted(nodeName string, timeout time.Duration) {
+	for start := time.Now(); time.Since(start) < timeout; {
 		name := script.Var()
 		script.Exec("kubectl", "--kubeconfig="+kubeConfigFile, "get", "nodes", "-ojsonpath={.items[0].metadata.name}").To(name)
 		if name.String() == nodeName {
@@ -83,8 +88,8 @@ func waitForNodeStarted(nodeName string) {
 	}
 }
 
-func waitForNodeReady() {
-	for {
+func waitForNodeReady(timeout time.Duration) {
+	for start := time.Now(); time.Since(start) < timeout; {
 		status := script.Var()
 		script.Exec("kubectl", "--kubeconfig="+kubeConfigFile,
 			"get", "nodes",

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/chanwit/ekz/pkg/constants"
 
 	"github.com/chanwit/ekz/pkg/kubeconfig"
 	"github.com/chanwit/script"
@@ -35,7 +36,7 @@ var getKubeconfigCmd = &cobra.Command{
 }
 
 func init() {
-	getKubeconfigCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", clientcmd.RecommendedHomeFile, "specify output file to write kubeconfig to")
+	getKubeconfigCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	getKubeconfigCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 
 	getCmd.AddCommand(getKubeconfigCmd)
@@ -45,6 +46,10 @@ func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
 	// use args[0] as the clusterName
 	if len(args) == 1 {
 		clusterName = args[0]
+	}
+
+	if kubeConfigFile == constants.BackTickHomeFile {
+		kubeConfigFile = clientcmd.RecommendedHomeFile
 	}
 
 	switch provider {
