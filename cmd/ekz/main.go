@@ -32,7 +32,7 @@ All EKS-D cluster is single-node and run inside Docker.`,
 
   # List all clusters
   ekz list clusters
-  
+
   # List all clusters (shorter syntax)
   ekz ls
 
@@ -45,6 +45,10 @@ var (
 	verbose  bool
 	provider string
 	logger   fluxlog.Logger = stderrLogger{stderr: os.Stderr}
+)
+
+var (
+	enableExperimental string = os.Getenv("EKZ_EXPERIMENTAL")
 )
 
 func init() {

@@ -23,7 +23,7 @@ func createClusterEKZ() error {
 	}
 
 	containerId := script.Var()
-	err = script.Exec("docker", "ps", "-aq", "-f", "name="+containerName).To(containerId)
+	err = script.Exec("docker", "ps", "-aq", "-f", fmt.Sprintf("name=%s", containerName)).To(containerId)
 	if err != nil {
 		return errors.Wrapf(err, "failed to run docker ps to check container: %s.", containerName)
 	}
@@ -64,7 +64,6 @@ func createClusterEKZ() error {
 		// runtime temporary storage
 		"--tmpfs", "/tmp", // various things depend on working /tmp
 		"--tmpfs", "/run", // systemd wants a writable /run
-		// BUG failed: nameserver list is empty
 		"--network", bridgeName,
 		"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
 		"--volume", "/var/lib/ekz",

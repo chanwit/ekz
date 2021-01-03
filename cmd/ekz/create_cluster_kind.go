@@ -25,6 +25,10 @@ func createClusterKIND() error {
 	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", fmt.Sprintf("%s-bridge", clusterName))
 
 	parts := strings.SplitN(eksdVersion, "-", 2)
+	if len(parts) != 2 {
+		return errors.Errorf("eksdVersion: %s cannot be split into two", eksdVersion)
+	}
+
 	suffix := parts[1]
 	config := fmt.Sprintf(`
 kind: Cluster

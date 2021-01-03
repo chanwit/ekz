@@ -70,21 +70,25 @@ func listClusterCmdRun(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	w := tabwriter.NewWriter(script.Stdout(), 0, 2, 3, ' ', 0)
-	fmt.Fprintf(w, "CLUSTER-NAME\tPROVIDER\tACTIVE\n")
+	fmt.Fprintf(w, "NAME\tPROVIDER\tCONTEXT-NAME\tACTIVE\n")
 	for _, c := range eksClusters {
+		context := "ekz-" + c
 		fmt.Fprintf(w, "%s\tekz\t", c)
 		active := " "
-		if config.CurrentContext == "ekz-"+c {
+		if config.CurrentContext == context {
 			active = "  *"
 		}
+		fmt.Fprintf(w, "%s\t", context)
 		fmt.Fprintf(w, "%s\n", active)
 	}
 	for _, c := range kindClusters {
+		context := "kind-" + c
 		fmt.Fprintf(w, "%s\tkind\t", c)
 		active := " "
-		if config.CurrentContext == "kind-"+c {
+		if config.CurrentContext == context {
 			active = "  *"
 		}
+		fmt.Fprintf(w, "%s\t", context)
 		fmt.Fprintf(w, "%s\n", active)
 	}
 	w.Flush()

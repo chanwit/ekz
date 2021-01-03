@@ -1,0 +1,91 @@
+package main
+
+import (
+	"io/ioutil"
+	"path/filepath"
+	"strings"
+	"time"
+
+	"github.com/chanwit/script"
+	"github.com/gogs/go-gogs-client"
+	"github.com/spf13/cobra"
+	"github.com/txn2/txeh"
+	"k8s.io/client-go/util/homedir"
+)
+
+var setupGitOpsCmd = &cobra.Command{
+	Use:   "setup-gitops",
+	Short: "Setup gitops, enabled by env EKZ_EXPERIMENTAL",
+	RunE:  setupGitOpsCmdRun,
+}
+
+func init() {
+	if enableExperimental == "1" || enableExperimental == "true" {
+		rootCmd.AddCommand(setupGitOpsCmd)
+	}
+}
+
+func setupGitOpsCmdRun(cmd *cobra.Command, args []string) error {
+	return SetupGitOps()
+}
+
+func SetupGitOps() error {
+	gogsToken := "074b07ede59febc791009ad0de9db3c72bb636ef"
+
+	hosts, err := txeh.NewHostsDefault()
+	if err != nil {
+		panic(err)
+	}
+
+	hosts.AddHost("127.0.0.1", "gitops.local")
+	/*
+		if err := hosts.Save(); err != nil {
+			return err
+		}*/
+
+	// start a GitHub server
+	script.Exec("docker", "run", "--detach",
+		"--name", "gitops.local",
+		"--hostname=gitops.local",
+		"-p", "10080:3000",
+		"-p", "10022:22",
+		"ekz-io/gitops-server").Run()
+
+	time.Sleep(2 * time.Second)
+
+	client := gogs.NewClient("http://127.0.0.1:10080", gogsToken)
+	_, err = client.CreateRepo(gogs.CreateRepoOption{
+		Name:        "default-repo",
+		Description: "The Default GitOps local repository",
+		Private:     true,
+		AutoInit:    true,
+		Readme:      "Default",
+	})
+	if err != nil {
+		return err
+	}
+
+	files, err := ioutil.ReadDir(filepath.Join(homedir.HomeDir(), ".ssh"))
+	if err != nil {
+		return err
+	}
+
+	// scan .pub files and add them as the deploy keys of the repo
+	for _, file := range files {
+		if strings.HasSuffix(file.Name(), ".pub") {
+			publicKey, err := ioutil.ReadFile(filepath.Join(homedir.HomeDir(), ".ssh", file.Name()))
+			if err != nil {
+				return err
+			}
+			_, err = client.CreateDeployKey("gitops", "default-repo", gogs.CreateKeyOption{
+				Title: file.Name(),
+				Key:   string(publicKey),
+			})
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
