@@ -42,5 +42,4 @@ All EKS-D cluster is single-node and run inside Docker.
 * [ekz delete](ekz_delete.md)	 - Delete clusters
 * [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster
 * [ekz list](ekz_list.md)	 - List clusters
-* [ekz setup_gitops](ekz_setup_gitops.md)	 - setup gitops, enabled by env EKZ_EXPERIMENTAL
 
