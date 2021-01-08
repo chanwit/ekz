@@ -25,10 +25,10 @@ index cd3fa1a..9d6e2c8 100644
  )
  
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index bfd811a..91093b8 100644
+index 1675dca..02d5c9e 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
-@@ -10,7 +10,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
+@@ -11,7 +11,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
  const WinDataDirDefault = "C:\\var\\lib\\k0s"
  
  const (
@@ -36,7 +36,7 @@ index bfd811a..91093b8 100644
  	// DataDirMode is the expected directory permissions for DataDirDefault
  	DataDirMode = 0755
  	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
-@@ -48,18 +47,21 @@ const (
+@@ -49,18 +48,21 @@ const (
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
