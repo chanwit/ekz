@@ -1,0 +1,54 @@
+project_name: ekz
+
+release:
+  prerelease: auto
+  draft: false
+  name_template: "ekz cli {{ .Version }}"
+
+builds:
+  - <<: &build_defaults
+      binary: ekz
+      main: ./cmd/ekz
+      ldflags:
+        - -s -w -X main.VERSION={{ .Version }}
+      env:
+        - CGO_ENABLED=0
+    id: linux
+    goos:
+      - linux
+    goarch:
+      - amd64
+  - <<: *build_defaults
+    id: darwin
+    goos:
+      - darwin
+  - <<: *build_defaults
+    id: windows
+    goos:
+      - windows
+
+archives:
+  - name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    id: nix
+    builds: [linux, darwin]
+    format: tar.gz
+    files:
+      - none*
+  - name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    id: windows
+    builds: [windows]
+    format: zip
+    files:
+      - none*
+
+nfpms:
+  - license: Apache 2.0
+    maintainer: Chanwit Kaewkasi
+    homepage: https://github.com/chanwit/ekz
+    bindir: /usr/local/bin
+    dependencies:
+      - git
+    description: The command line for EKZ, an EKS-D Kubernetes distro.
+    formats:
+      - deb
+      - rpm
