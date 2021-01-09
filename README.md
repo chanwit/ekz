@@ -13,7 +13,7 @@ The EKZ architecture supports EKS-D in multiple implementations, called provider
 
 ## Getting Started
 
-`ekz` is intended to run a cluster for you a Docker container on your laptop. You can start a cluster with or without using the CLI.
+`ekz` creates a cluster for you inside a Docker container on your laptop. You can start a cluster with or without using the CLI.
 
 ### With CLI
 
