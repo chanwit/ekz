@@ -26,7 +26,7 @@ brew install ekz-io/tap/ekz
 
 #### One-line Shell Script
 ```sh
-curl -sSL https://bit.ly/install-ekz | sudo bash
+curl -sSL https://bit.ly/install-ekz | bash
 ```
 
 Then you can start your first EKS-D cluster using the following command:
