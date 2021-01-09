@@ -52,3 +52,18 @@ nfpms:
     formats:
       - deb
       - rpm
+
+brews:
+  - name: ekz
+    tap:
+      owner: ekz-io
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    folder: Formula
+    homepage: "https://github.com/chanwit/ekz/"
+    description: "The command line for EKZ"
+    dependencies:
+      - name: kubectl
+        type: optional
+    test: |
+      system "#{bin}/ekz --version"
