@@ -19,14 +19,14 @@ The EKZ architecture supports EKS-D in multiple implementations, called provider
 
 You could install the CLI with one the following options.
 
-#### One-line Shell Script
-```sh
-curl -sSL https://bit.ly/install-ekz | sudo bash
-```
-
 #### Homebrew
 ```sh
 brew install ekz-io/tap/ekz
+```
+
+#### One-line Shell Script
+```sh
+curl -sSL https://bit.ly/install-ekz | sudo bash
 ```
 
 Then you can start your first EKS-D cluster using the following command:
