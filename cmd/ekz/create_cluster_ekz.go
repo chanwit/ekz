@@ -9,6 +9,21 @@ import (
 	"github.com/pkg/errors"
 )
 
+func getNetworkName(containerId string) (string, error) {
+	// docker inspect ekz-controller-0 --format="{{index .Config.Labels \"io.x-k8s.ekz.cluster\"}}"
+	networkLabelKey := "io.x-k8s.ekz.network"
+	output := script.Var()
+	err := script.Exec("docker", "inspect",
+		containerId,
+		"--format", fmt.Sprintf(`{{index .Config.Labels "%s"}}`, networkLabelKey)).
+		To(output)
+	if err != nil {
+		return "", errors.Wrap(err, "failed to list clusters")
+	}
+
+	return output.String(), nil
+}
+
 func createClusterEKZ() error {
 	// "5" is the latest stable provided by EKZ
 	ekzImageBuild := "5"
@@ -37,43 +52,74 @@ func createClusterEKZ() error {
 		return errors.Errorf("container %s existed - cluster creation aborted", containerName)
 	}
 
-	bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
+	if hostMode == false {
 
-	// TODO check if the bridge already existed
+		bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
 
-	logger.Actionf("creating bridge network: %s", bridgeName)
-	err = script.Exec("docker", "network", "create",
-		"-d", "bridge",
-		"-o", "com.docker.network.bridge.enable_ip_masquerade=true",
-		"-o", "com.docker.network.bridge.enable_icc=true",
-		"-o", "com.docker.network.bridge.host_binding_ipv4=0.0.0.0",
-		"-o", "com.docker.network.driver.mtu=1500",
-		bridgeName).Run()
-	if err != nil {
-		return errors.Wrapf(err, "failed to create bridge: %s", bridgeName)
-	}
+		// TODO check if the bridge already existed
 
-	logger.Actionf("starting container: %s ...", containerName)
-	_, stderr, err := script.Exec("docker", "run",
-		"--detach",
-		"--name", containerName,
-		"--hostname", "controller",
-		"--privileged",
-		"--security-opt", "seccomp=unconfined", // also ignore seccomp
-		"--security-opt", "apparmor=unconfined", // also ignore apparmor
-		// runtime temporary storage
-		"--tmpfs", "/tmp", // various things depend on working /tmp
-		"--tmpfs", "/run", // systemd wants a writable /run
-		"--network", bridgeName,
-		"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
-		"--volume", "/var/lib/ekz",
-		// some k8s things want to read /lib/modules
-		"--volume", "/lib/modules:/lib/modules:ro",
-		"-p", "127.0.0.1:0:6443",
-		imageName).
-		DividedOutput()
-	if err != nil {
-		return errors.Wrapf(err, "failed to start %s container with image: %s. %s", containerName, imageName, strings.TrimSpace(string(stderr)))
+		logger.Actionf("creating bridge network: %s", bridgeName)
+		err = script.Exec("docker", "network", "create",
+			"-d", "bridge",
+			"-o", "com.docker.network.bridge.enable_ip_masquerade=true",
+			"-o", "com.docker.network.bridge.enable_icc=true",
+			"-o", "com.docker.network.bridge.host_binding_ipv4=0.0.0.0",
+			"-o", "com.docker.network.driver.mtu=1500",
+			bridgeName).Run()
+		if err != nil {
+			return errors.Wrapf(err, "failed to create bridge: %s", bridgeName)
+		}
+
+		logger.Actionf("starting container: %s ...", containerName)
+		_, stderr, err := script.Exec("docker", "run",
+			"--detach",
+			"--name", containerName,
+			"--hostname", "controller",
+			"--privileged",
+			"--security-opt", "seccomp=unconfined", // also ignore seccomp
+			"--security-opt", "apparmor=unconfined", // also ignore apparmor
+			// runtime temporary storage
+			"--tmpfs", "/tmp", // various things depend on working /tmp
+			"--tmpfs", "/run", // systemd wants a writable /run
+			"--network", bridgeName,
+			"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
+			"--label", fmt.Sprintf("io.x-k8s.ekz.network=%s", bridgeName),
+			"--volume", "/var/lib/ekz",
+			// some k8s things want to read /lib/modules
+			"--volume", "/lib/modules:/lib/modules:ro",
+			"-p", "127.0.0.1:0:6443",
+			imageName).
+			DividedOutput()
+		if err != nil {
+			return errors.Wrapf(err, "failed to start %s container with image: %s. %s", containerName, imageName, strings.TrimSpace(string(stderr)))
+		}
+	} else if hostMode == true { // MicroK8s-like behavior
+
+		logger.Actionf("starting container: %s ...", containerName)
+		_, stderr, err := script.Exec("docker", "run",
+			"--detach",
+			"--name", containerName,
+			"--privileged",
+			"--security-opt", "seccomp=unconfined", // also ignore seccomp
+			"--security-opt", "apparmor=unconfined", // also ignore apparmor
+			// runtime temporary storage
+			"--tmpfs", "/tmp", // various things depend on working /tmp
+			"--tmpfs", "/run", // systemd wants a writable /run
+			"--network=host",
+			"--ipc=host",
+			"--uts=host",
+			"--pid=host",
+			"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
+			"--label", fmt.Sprintf("io.x-k8s.ekz.network=%s", "host"),
+			"--volume", "/var/lib/ekz",
+			// some k8s things want to read /lib/modules
+			"--volume", "/lib/modules:/lib/modules:ro",
+			imageName).
+			DividedOutput()
+		if err != nil {
+			return errors.Wrapf(err, "failed to start %s container with image: %s. %s", containerName, imageName, strings.TrimSpace(string(stderr)))
+		}
+
 	}
 
 	// TODO use retry-backoff instead of fixing 2 seconds here

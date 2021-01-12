@@ -75,6 +75,12 @@ func deleteClusterEKZRun() error {
 		return errors.Errorf("container %s does not exist - cluster deletion aborted", containerName)
 	}
 
+	// TODO check if it's the host mode
+	networkName, err := getNetworkName(containerName)
+	if err != nil {
+		return err
+	}
+
 	err = script.Exec("docker", "rm",
 		"-f", // force delete
 		"-v", // remove volume
@@ -84,13 +90,14 @@ func deleteClusterEKZRun() error {
 		return errors.Wrapf(err, "failed to remove %s", containerName)
 	}
 
-	// remove bridge after deleting the cluster
-	bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
-	err = script.Exec("docker", "network", "rm", bridgeName).Run()
-	if err != nil {
-		return errors.Wrapf(err, "failed to remove bridge: %s", bridgeName)
+	if networkName != "host" {
+		// remove bridge after deleting the cluster
+		bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
+		err = script.Exec("docker", "network", "rm", bridgeName).Run()
+		if err != nil {
+			return errors.Wrapf(err, "failed to remove bridge: %s", bridgeName)
+		}
 	}
-
 	return nil
 }
 

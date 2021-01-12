@@ -74,18 +74,29 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 		return errors.Wrapf(err, "error obtaining kubeconfig from container: %s", containerName)
 	}
 
-	// Rewrite port of the API server inside the KubeConfig
-	port := script.Var()
-	err = script.Exec(
-		"docker", "inspect",
-		containerName,
-		"--format", `{{ (index (index .NetworkSettings.Ports "6443/tcp") 0).HostPort }}`).
-		To(port)
+	networkName, err := getNetworkName(containerName)
 	if err != nil {
-		return errors.Wrapf(err, "cannot obtain port mapping from docker")
+		return err
 	}
 
-	rewroteKubeconfig, err := kubeconfig.RewriteKubeConfigForEKZ(clusterName, kubeconfigContent.RawString(), port.String())
+	// host mode port locked to 6443 for EKZ/k0s
+	port := "6443"
+	if networkName != "host" {
+		// Rewrite port of the API server inside the KubeConfig
+		portVar := script.Var()
+		err = script.Exec(
+			"docker", "inspect",
+			containerName,
+			"--format", `{{ (index (index .NetworkSettings.Ports "6443/tcp") 0).HostPort }}`).
+			To(portVar)
+		if err != nil {
+			return errors.Wrapf(err, "cannot obtain port mapping from docker")
+		}
+
+		port = portVar.String()
+	}
+
+	rewroteKubeconfig, err := kubeconfig.RewriteKubeConfigForEKZ(clusterName, kubeconfigContent.RawString(), port)
 	if err != nil {
 		return errors.Wrapf(err, "cannot obtain port mapping from docker")
 	}

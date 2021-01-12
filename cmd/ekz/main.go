@@ -27,7 +27,7 @@ All EKS-D cluster is single-node and run inside Docker.`,
 	Example: `  # Create an EKS-D cluster with the default provider
   ekz create cluster
 
-  # Delete the cluster
+  # Delete the default cluster
   ekz delete cluster
 
   # List all clusters
