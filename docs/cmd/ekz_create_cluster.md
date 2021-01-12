@@ -23,6 +23,11 @@ ekz create cluster [flags]
   # Create the 'dev' cluster (alternative syntax)
   ekz create cluster dev
 
+  # Create the default cluster in the host mode
+  # This command runs the cluster using all (net,ipc,pid,uts) host namespaces, 
+  # similar to run it directly on the local machine. 
+  ekz create cluster --host
+
   # Create an EKS-D cluster with the EKZ provider
   # This command creates an EKS-D-compatible K0s-based cluster.
   ekz --provider=ekz create cluster
@@ -36,7 +41,7 @@ ekz create cluster [flags]
   ekz create cluster -o kubeconfig
 
   # Create EKS-D cluster with a specific version of EKS-D
-  ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster 
+  ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster
 
 ```
 
@@ -45,6 +50,7 @@ ekz create cluster [flags]
 ```
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
+      --host                  run in the host mode
       --name string           cluster name (default "ekz")
   -o, --output string         specify output file to write kubeconfig to (default "~/.kube/config")
 ```
