@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/chanwit/ekz/pkg/constants"
 	"strings"
 	"time"
 
@@ -9,16 +10,14 @@ import (
 	"github.com/pkg/errors"
 )
 
-func getNetworkName(containerId string) (string, error) {
-	// docker inspect ekz-controller-0 --format="{{index .Config.Labels \"io.x-k8s.ekz.cluster\"}}"
-	networkLabelKey := "io.x-k8s.ekz.network"
+func getEKZNetworkName(containerId string) (string, error) {
 	output := script.Var()
 	err := script.Exec("docker", "inspect",
 		containerId,
-		"--format", fmt.Sprintf(`{{index .Config.Labels "%s"}}`, networkLabelKey)).
+		"--format", fmt.Sprintf(`{{index .Config.Labels "%s"}}`, constants.EKZNetworkLabel)).
 		To(output)
 	if err != nil {
-		return "", errors.Wrap(err, "failed to list clusters")
+		return "", errors.Wrap(err, "failed to get network name")
 	}
 
 	return output.String(), nil
@@ -82,8 +81,8 @@ func createClusterEKZ() error {
 			"--tmpfs", "/tmp", // various things depend on working /tmp
 			"--tmpfs", "/run", // systemd wants a writable /run
 			"--network", bridgeName,
-			"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
-			"--label", fmt.Sprintf("io.x-k8s.ekz.network=%s", bridgeName),
+			"--label", fmt.Sprintf("%s=%s", constants.EKZClusterLabel, clusterName),
+			"--label", fmt.Sprintf("%s=%s", constants.EKZNetworkLabel, bridgeName),
 			"--volume", "/var/lib/ekz",
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
@@ -109,8 +108,8 @@ func createClusterEKZ() error {
 			"--ipc=host",
 			"--uts=host",
 			"--pid=host",
-			"--label", fmt.Sprintf("io.x-k8s.ekz.cluster=%s", clusterName),
-			"--label", fmt.Sprintf("io.x-k8s.ekz.network=%s", "host"),
+			"--label", fmt.Sprintf("%s=%s", constants.EKZClusterLabel, clusterName),
+			"--label", fmt.Sprintf("%s=%s", constants.EKZNetworkLabel, "host"),
 			"--volume", "/var/lib/ekz",
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
