@@ -76,7 +76,7 @@ func deleteClusterEKZRun() error {
 	}
 
 	// TODO check if it's the host mode
-	networkName, err := getNetworkName(containerName)
+	networkName, err := getEKZNetworkName(containerName)
 	if err != nil {
 		return err
 	}

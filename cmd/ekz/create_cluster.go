@@ -6,6 +6,7 @@ import (
 
 	"github.com/chanwit/ekz/pkg/constants"
 	"github.com/chanwit/script"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"k8s.io/client-go/tools/clientcmd"
 )
@@ -78,6 +79,9 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 	case "ekz":
 		return createClusterEKZ()
 	case "kind":
+		if hostMode == true {
+			return errors.New("the host mode is not supported by the KIND provider")
+		}
 		return createClusterKIND()
 	default:
 		return fmt.Errorf("NYI provider: %s", provider)

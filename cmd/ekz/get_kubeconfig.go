@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/chanwit/ekz/pkg/constants"
 
+	"github.com/chanwit/ekz/pkg/constants"
 	"github.com/chanwit/ekz/pkg/kubeconfig"
 	"github.com/chanwit/script"
 	"github.com/imdario/mergo"
@@ -74,7 +74,7 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 		return errors.Wrapf(err, "error obtaining kubeconfig from container: %s", containerName)
 	}
 
-	networkName, err := getNetworkName(containerName)
+	networkName, err := getEKZNetworkName(containerName)
 	if err != nil {
 		return err
 	}

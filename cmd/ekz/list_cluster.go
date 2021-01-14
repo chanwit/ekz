@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/chanwit/ekz/pkg/constants"
 	"k8s.io/client-go/tools/clientcmd"
 	"text/tabwriter"
 
@@ -29,16 +30,6 @@ func init() {
 	listCmd.AddCommand(listClusterCmd)
 }
 
-// How to heuristically detect a kind / ekz cluster
-// "io.x-k8s.kind.cluster": "ekz"
-
-// How to heuristically detect a ekz cluster
-// io.x-k8s.ekz.cluster=ekz
-const (
-	EKZClusterLabel  = "io.x-k8s.ekz.cluster"
-	KINDClusterLabel = "io.x-k8s.kind.cluster"
-)
-
 func listClusters(clusterLabelKey string) ([]string, error) {
 	output := script.Var()
 	err := script.Exec("docker", "ps",
@@ -61,11 +52,11 @@ func listClusterCmdRun(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	eksClusters, err := listClusters(EKZClusterLabel)
+	eksClusters, err := listClusters(constants.EKZClusterLabel)
 	if err != nil {
 		return err
 	}
-	kindClusters, err := listClusters(KINDClusterLabel)
+	kindClusters, err := listClusters(constants.KINDClusterLabel)
 	if err != nil {
 		return err
 	}
