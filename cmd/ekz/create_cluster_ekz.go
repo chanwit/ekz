@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/chanwit/ekz/pkg/constants"
 	"strings"
 	"time"
 
+	"github.com/chanwit/ekz/pkg/constants"
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 )
@@ -94,6 +94,13 @@ func createClusterEKZ() error {
 		}
 	} else if hostMode == true { // MicroK8s-like behavior
 
+		// os.MkdirAll("/var/lib/ekz", 0755)
+		volumeMapping := "/var/lib/ekz"
+		if hostModeVolumeMapping {
+			// persist /var/lib/ekz to host
+			volumeMapping = "/var/lib/ekz:/var/lib/ekz"
+		}
+
 		logger.Actionf("starting container: %s ...", containerName)
 		_, stderr, err := script.Exec("docker", "run",
 			"--detach",
@@ -110,7 +117,7 @@ func createClusterEKZ() error {
 			"--pid=host",
 			"--label", fmt.Sprintf("%s=%s", constants.EKZClusterLabel, clusterName),
 			"--label", fmt.Sprintf("%s=%s", constants.EKZNetworkLabel, "host"),
-			"--volume", "/var/lib/ekz",
+			"--volume", volumeMapping,
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
 			imageName).

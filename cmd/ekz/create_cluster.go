@@ -50,10 +50,11 @@ var createClusterCmd = &cobra.Command{
 }
 
 var (
-	eksdVersion    string
-	kubeConfigFile string
-	clusterName    string
-	hostMode       bool
+	eksdVersion           string
+	kubeConfigFile        string
+	clusterName           string
+	hostMode              bool
+	hostModeVolumeMapping bool
 )
 
 func init() {
@@ -61,6 +62,7 @@ func init() {
 	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 	createClusterCmd.Flags().BoolVar(&hostMode, "host", false, "run in the host mode")
+	createClusterCmd.Flags().BoolVar(&hostModeVolumeMapping, "map-to-host-volume", false, "map /var/lib/ekz to the host directory")
 
 	createCmd.AddCommand(createClusterCmd)
 }
