@@ -54,7 +54,7 @@ If you don't want to install the CLI, you could also start a cluster using one o
 $ docker run -d --name ekz-controller \
    --hostname controller \
    --privileged -v /var/lib/ekz \
-   -p 6443:6443 quay.io/ekz-io/ekz:v1.18.9-eks-1-18-1.5
+   -p 6443:6443 quay.io/ekz-io/ekz:v1.18.9-eks-1-18-1.6
 ```
 
 in case you'd like to try the dev version (from the main branch):
