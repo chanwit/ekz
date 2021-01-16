@@ -4,8 +4,9 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- embedded-bins/Makefile |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ embedded-bins/Makefile             |    4 ++--
+ pkg/component/worker/containerd.go |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
 index 0a7f904..6fe623f 100644
@@ -29,3 +30,16 @@ index 0a7f904..6fe623f 100644
  etcd_extract = linux-$(arch)/etcd
  
  tmpdir ?= .tmp
+diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
+index 6918126..264bf15 100644
+--- a/pkg/component/worker/containerd.go
++++ b/pkg/component/worker/containerd.go
+@@ -37,7 +37,7 @@ type ContainerD struct {
+ // Init extracts the needed binaries
+ func (c *ContainerD) Init() error {
+ 	g := new(errgroup.Group)
+-	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "runc"} {
++	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "ctr", "runc"} {
+ 		b := bin
+ 		g.Go(func() error {
+ 			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)
