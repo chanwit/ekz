@@ -1,7 +1,8 @@
-# This series applies on GIT commit 4a03f378f12c12372251b0bff625b9e3a90beceb
+# This series applies on GIT commit 6ba18667e44db7f9c2ed2f837ae38665287d0dfe
 01-patch-dockerfile-to-use-amazon.patch
 02-patch-makefile-to-fetch-eks-d.patch
 03-patch-constants-for-eks-d.patch
 04-fix-cves-for-amazon-linux.patch
 05-fix-cve-2020-1971-via-alas2.patch
 06-add-ip-command.patch
+07-add-ctr-binary-to-the-build.patch

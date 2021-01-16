@@ -1,0 +1,31 @@
+add ctr binary to the build process
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 0a7f904..6fe623f 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -14,7 +14,7 @@ TARGET_OS ?= linux
+ export TARGET_OS
+ 
+ bindir = staging/${TARGET_OS}/bin
+-posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
++posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
+ windows_bins = kubelet.exe kube-proxy.exe
+ buildmode = docker
+ 
+@@ -98,7 +98,7 @@ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kin
+ containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
+ etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v$(etcd_version).tar.gz
+ 
+-containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2
++containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
+ etcd_extract = linux-$(arch)/etcd
+ 
+ tmpdir ?= .tmp
