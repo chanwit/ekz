@@ -51,6 +51,7 @@ ekz create cluster [flags]
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
       --host                  run in the host mode
+      --map-to-host-volume    map /var/lib/ekz to the host directory
       --name string           cluster name (default "ekz")
   -o, --output string         specify output file to write kubeconfig to (default "~/.kube/config")
 ```
