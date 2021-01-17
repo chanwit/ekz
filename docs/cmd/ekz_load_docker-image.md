@@ -7,23 +7,28 @@ Load a Docker image
 Load docker-image command loads a Docker image into the EKS cluster.
 
 ```
-ekz load docker-image [flags]
+ekz load docker-image <IMAGE> [flags]
 ```
 
 ### Examples
 
 ```
-  # Load the busybox:latest into the cluster
+  # Load the busybox:latest into the default EKZ cluster
   ekz load docker-image busybox:latest
+
+  # Load the busybox:latest into the default KIND cluster
+  ekz --provider=kind load docker-image busybox:latest
+
+  # Load the busybox:latest into the staging KIND cluster
+  ekz --provider=kind load docker-image busybox:latest --cluster=staging
 
 ```
 
 ### Options
 
 ```
-  -h, --help           help for docker-image
-      --image string   a Docker image name to load
-      --name string    cluster name (default "ekz")
+      --cluster string   cluster name (default "ekz")
+  -h, --help             help for docker-image
 ```
 
 ### Options inherited from parent commands
