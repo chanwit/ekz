@@ -4,7 +4,7 @@ Load a Docker image
 
 ### Synopsis
 
-Load docker-image command loads a Docker image into the EKS cluster.
+Load docker-image command loads a Docker image into the EKS-D cluster.
 
 ```
 ekz load docker-image <IMAGE> [flags]
