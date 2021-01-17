@@ -23,7 +23,7 @@ All EKS-D cluster is single-node and run inside Docker.
   # List all clusters (shorter syntax)
   ekz ls
 
-  # Obtain KubeConfig of the cluster and write to $PWD/kubeconfig
+  # Obtain KubeConfig of the cluster and write to $HOME/.kube/config
   ekz get kubeconfig
 
 ```

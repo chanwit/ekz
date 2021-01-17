@@ -13,7 +13,7 @@ ekz get kubeconfig [flags]
 ### Examples
 
 ```
-  # Get the KubeConfig from the cluster and write to $PWD/kubeconfig
+  # Get the KubeConfig from the cluster and write to $HOME/.kube/config
   ekz get kubeconfig
 
   # Get the KubeConfig of the 'dev' cluster
@@ -22,9 +22,8 @@ ekz get kubeconfig [flags]
   # Get the KubeConfig of the 'dev' cluster (alternative syntax) 
   ekz get kubeconfig dev
 
-  # Get the KubeConfig and writes to $HOME/.kube/config
-  # Please note that this example overwrites the content of $HOME/.kube/config file.
-  ekz get kubeconfig -o $HOME/.kube/config
+  # Get the KubeConfig and save to $PWD/kubeconfig
+  ekz get kubeconfig -o $PWD/kubeconfig
 
 ```
 
