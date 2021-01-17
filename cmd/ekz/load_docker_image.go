@@ -16,7 +16,7 @@ var loadDockerImageCmd = &cobra.Command{
 		return nil
 	},
 	Short: "Load a Docker image",
-	Long:  "Load docker-image command loads a Docker image into the EKS cluster.",
+	Long:  "Load docker-image command loads a Docker image into the EKS-D cluster.",
 	Example: `  # Load the busybox:latest into the default EKZ cluster
   ekz load docker-image busybox:latest
 
