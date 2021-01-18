@@ -48,7 +48,7 @@ nfpms:
     bindir: /usr/local/bin
     dependencies:
       - git
-    description: The command line for EKZ, an EKS-D Kubernetes distro.
+    description: "The command line for EKZ, an EKS-D Kubernetes distro."
     formats:
       - deb
       - rpm
@@ -61,9 +61,22 @@ brews:
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     folder: Formula
     homepage: "https://github.com/chanwit/ekz/"
-    description: "The command line for EKZ"
+    description: "The command line for EKZ, an EKS-D Kubernetes distro."
     dependencies:
       - name: kubectl
         type: optional
     test: |
       system "#{bin}/ekz --version"
+
+scoop:
+  bucket:
+    owner: ekz-io
+    name: scoop-ekz
+    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+  commit_author:
+    name: goreleaserbot
+    email: goreleaser@carlosbecker.com
+  commit_msg_template: "Scoop update for {{ .ProjectName }} version {{ .Tag }}"
+  homepage: "https://github.com/chanwit/ekz/"
+  description: "The command line for EKZ, an EKS-D Kubernetes distro."
+  license: Apache 2.0
