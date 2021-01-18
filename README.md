@@ -34,6 +34,12 @@ curl -sSL https://bit.ly/install-ekz | bash
 wget -qO- https://bit.ly/install-ekz | bash
 ```
 
+#### Scoop (Windows)
+```
+scoop bucket add ekz-io https://github.com/ekz-io/scoop-ekz.git
+scoop install ekz-io/ekz
+```
+
 #### Chocolatey (Windows)
 ```
 choco install -y ekz
