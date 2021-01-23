@@ -54,7 +54,7 @@ ekz create cluster
 
 If you don't want to install the CLI, you could also start a cluster using one of `ekz` containers.
 
-#### Linux & macOS
+#### macOS & Linux
 
 ```sh
 $ docker run -d --name ekz-controller \
@@ -111,10 +111,11 @@ controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
 The EKZ provider
 
   1. EKS-D binaries from v1.18.9-eks-1-18-1
-  1. Packaged with k0s v0.9.1
+  1. Packaged with k0s v0.10
   1. Amazon Linux 2 base image
 
 The KIND provider
 
-  1. Using KIND 0.9
-  1. Packaged using KIND 1.18.9 image
+  1. EKS-D binaries from v1.18.9-eks-1-18-1
+  1. Using KIND v0.10
+  1. Packaged using KIND v1.18.15 node image
