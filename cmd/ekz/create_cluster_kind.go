@@ -12,8 +12,9 @@ import (
 )
 
 func createClusterKIND() error {
+	buildNo := "1" // KIND v0.10.0 with 1.18.15 node image
 
-	image := fmt.Sprintf("quay.io/ekz-io/kind:%s", eksdVersion)
+	image := fmt.Sprintf("quay.io/ekz-io/kind:%s.%s", eksdVersion, buildNo)
 
 	logger.Actionf("pulling image %s ...", image)
 	err := script.Exec("docker", "pull", image).Run()
