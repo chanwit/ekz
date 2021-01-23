@@ -70,5 +70,7 @@ func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "error importing image")
 	}
 
+	fmt.Println(imageName)
+
 	return nil
 }
