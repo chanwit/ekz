@@ -113,9 +113,11 @@ The EKZ provider
   1. EKS-D binaries from v1.18.9-eks-1-18-1
   1. Packaged with k0s v0.10
   1. Amazon Linux 2 base image
+  1. Enable network policy by default via the Calico CNI
 
 The KIND provider
 
   1. EKS-D binaries from v1.18.9-eks-1-18-1
   1. Using KIND v0.10
   1. Packaged using KIND v1.18.15 node image
+  1. Enable network policy by default via the Calico CNI
