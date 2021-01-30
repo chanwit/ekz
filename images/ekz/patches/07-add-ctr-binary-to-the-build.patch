@@ -31,7 +31,7 @@ index 0a7f904..6fe623f 100644
  
  tmpdir ?= .tmp
 diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
-index 6918126..264bf15 100644
+index e0d6732..95ad038 100644
 --- a/pkg/component/worker/containerd.go
 +++ b/pkg/component/worker/containerd.go
 @@ -37,7 +37,7 @@ type ContainerD struct {
