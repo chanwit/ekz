@@ -9,7 +9,6 @@ import (
 	"github.com/chanwit/script"
 	"github.com/gogs/go-gogs-client"
 	"github.com/spf13/cobra"
-	"github.com/txn2/txeh"
 	"k8s.io/client-go/util/homedir"
 )
 
@@ -31,17 +30,6 @@ func setupGitOpsCmdRun(cmd *cobra.Command, args []string) error {
 
 func SetupGitOps() error {
 	gogsToken := "074b07ede59febc791009ad0de9db3c72bb636ef"
-
-	hosts, err := txeh.NewHostsDefault()
-	if err != nil {
-		panic(err)
-	}
-
-	hosts.AddHost("127.0.0.1", "gitops.local")
-	/*
-		if err := hosts.Save(); err != nil {
-			return err
-		}*/
 
 	// start a GitHub server
 	script.Exec("docker", "run", "--detach",

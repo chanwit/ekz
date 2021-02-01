@@ -52,6 +52,10 @@ kubeadmConfigPatches:
   dns:
     imageRepository: "public.ecr.aws/eks-distro/coredns"
     imageTag: "v1.7.0-%s"
+  apiServer:
+    extraArgs:
+      service-account-issuer: "kubernetes.default.svc"
+      service-account-signing-key-file: "/etc/kubernetes/pki/sa.key"
 `, eksdVersion, suffix, suffix)
 
 	logger.Actionf("creating cluster: %s ...", clusterName)
