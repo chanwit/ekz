@@ -38,6 +38,11 @@ All EKS-D cluster is single-node and run inside Docker.`,
 
   # Obtain KubeConfig of the cluster and write to $HOME/.kube/config
   ekz get kubeconfig
+
+  # Create, delete, get the kube config for the default KIND-based cluster
+  ekz create cluster --provider=kind
+  ekz get kubeconfig --provider=kind
+  ekz delete cluster --provider=kind
 `,
 }
 
