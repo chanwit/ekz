@@ -30,6 +30,12 @@ var getKubeconfigCmd = &cobra.Command{
 
   # Get the KubeConfig and save to $PWD/kubeconfig
   ekz get kubeconfig -o $PWD/kubeconfig
+
+  # Get the KubeConfig from the default KIND-based cluster
+  ekz get kubeconfig --provider=kind
+
+  # Get the KubeConfig from the 'dev' KIND-based cluster
+  ekz get kubeconfig --provider=kind --name=dev
 `,
 	RunE: getKubeconfigCmdRun,
 }
