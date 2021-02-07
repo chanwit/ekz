@@ -36,6 +36,8 @@ func init() {
 }
 
 func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
+	logger.Successf("the default provider is: %s", provider)
+
 	// How to load image, for example:
 	// docker save chanwit/spring-boot-on-kubernetes-with-jib-example:2.0.0-alpha-1 |
 	// docker exec -i ekz-controller-0 /var/lib/ekz/bin/ctr --address=/var/lib/ekz/run/containerd.sock -n k8s.io image import -
@@ -66,11 +68,10 @@ func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
 			"image", "import", "-").
 		CombinedOutput()
 	if err != nil {
-		fmt.Print(string(out))
+		logger.Failuref(string(out))
 		return errors.Wrap(err, "error importing image")
 	}
 
-	fmt.Println(imageName)
-
+	logger.Successf("imaged %s loaded", imageName)
 	return nil
 }
