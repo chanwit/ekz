@@ -62,7 +62,7 @@ In case you'd like to use KIND as the default provider, it's better to set the E
 ```
 export EKZ_PROVIDER=kind
 ekz create cluster
-``
+```
 
 ### Without CLI
 
