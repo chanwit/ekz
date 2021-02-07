@@ -1,7 +1,7 @@
 # ekz
 A Kubernetes distribution built on EKS-D
 
-`ekz` is an opinionated Kubernetes distribution built using binaries from the [AWS EKS Distro](https://distro.eks.amazonaws.com/) (EKS-D).
+`ekz` is an opinionated Kubernetes distribution built using binaries from [the AWS EKS Distro](https://distro.eks.amazonaws.com/) (EKS-D).
 
 What is EKS-D?
 
@@ -9,7 +9,8 @@ What is EKS-D?
 
 ## Architecture
 
-The EKZ architecture supports EKS-D in multiple implementations, called providers. Currently, we ship the k0s-based, and KIND-based implementations. The provider can be specified when creating a cluster.
+The EKZ architecture supports EKS-D in multiple implementations, called providers. Currently, we ship the k0s-based (EKZ provider), 
+and KIND-based (KIND provider) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
 
 ## Getting Started
 
@@ -64,54 +65,6 @@ export EKZ_PROVIDER=kind
 ekz create cluster
 ```
 
-### Without CLI
-
-If you don't want to install the CLI, you could also start a cluster using one of `ekz` containers.
-
-#### macOS & Linux
-
-```sh
-$ docker run -d --name ekz-controller \
-   --hostname controller \
-   --privileged -v /var/lib/ekz \
-   -p 6443:6443 quay.io/ekz-io/ekz:v1.18.9-eks-1-18-1.6
-```
-
-in case you'd like to try the dev version (from the main branch):
-
-```sh
-$ docker run -d --name ekz-controller \
-   --hostname controller \
-   --privileged -v /var/lib/ekz \
-   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
-```
-#### Windows
-
-`ekz` also runs on Windows if you've got Docker Desktop installed.
-
-##### PowerShell
-
-```sh
-$ docker run -d --name ekz-controller `
-   --hostname controller `
-   --privileged -v /var/lib/ekz `
-   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
-```
-##### Command Prompt
-
-```sh
-$ docker run -d --name ekz-controller ^
-   --hostname controller ^
-   --privileged -v /var/lib/ekz ^
-   -p 6443:6443 quay.io/chanwit/ekz:v1.18.9-eks-1-18-1.dev
-```
-
-Then we can obtain KUBECONFIG by running:
-
-```sh
-$ docker exec ekz-controller cat /var/lib/ekz/pki/admin.conf > ~/.kube/config
-```
-
 Please wait for a couple of minutes and an EKS-D cluster will be ready on your laptop.
 
 ```sh
@@ -119,6 +72,10 @@ $ kubectl get nodes
 NAME         STATUS   ROLES    AGE   VERSION
 controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
 ```
+
+### Without CLI
+To use EKZ without using the CLI, please refer to this [document](WITHOUT_CLI.md).
+
 
 ## Features
 
