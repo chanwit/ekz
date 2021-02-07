@@ -48,6 +48,8 @@ func init() {
 }
 
 func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
+	logger.Successf("the default provider is: %s", provider)
+
 	// use args[0] as the clusterName
 	if len(args) == 1 {
 		clusterName = args[0]

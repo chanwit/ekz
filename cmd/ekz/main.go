@@ -61,8 +61,7 @@ func init() {
 	if defaultProvider == "" {
 		defaultProvider = "ekz"
 	}
-	if defaultProvider != "ekz" &&
-		defaultProvider != "kind" {
+	if defaultProvider != "ekz" && defaultProvider != "kind" {
 		logger.Failuref("EKZ_PROVIDER=%s is not supported. Possible values: 'ekz', 'kind'.", defaultProvider)
 		os.Exit(1)
 	}
