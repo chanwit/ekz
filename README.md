@@ -50,6 +50,20 @@ Then you can start your first EKS-D cluster using the following command:
 ekz create cluster
 ```
 
+You can also use the KIND provider, so that your EKS-D clusters will be KIND-compatible.
+To use the KIND provider, you can use either flag `--provider=kind` or `export EKZ_PROVIDER=kind`. 
+
+Here' the example of using the `--provider=kind` flag:
+```
+ekz create cluster --provider=kind
+```
+
+In case you'd like to use KIND as the default provider, it's better to set the EKZ_PROVIDER environment variable:
+```
+export EKZ_PROVIDER=kind
+ekz create cluster
+``
+
 ### Without CLI
 
 If you don't want to install the CLI, you could also start a cluster using one of `ekz` containers.
