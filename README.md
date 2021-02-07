@@ -1,94 +1,106 @@
-# ekz
-A Kubernetes distribution built on EKS-D
+---
+description: An easy way to run EKS clusters on your desktop
+---
 
-`ekz` is an opinionated Kubernetes distribution built using binaries from [the AWS EKS Distro](https://distro.eks.amazonaws.com/) (EKS-D).
+# The EKZ Project
+
+`ekz` is an opinionated Kubernetes distribution built using binaries from [the AWS EKS Distro](https://distro.eks.amazonaws.com/) \(EKS-D\). It aims to be the easiest way to run EKS clusters on desktop.
 
 What is EKS-D?
 
-  > *EKS-D provides the same software that has enabled tens of thousands of Kubernetes clusters on Amazon EKS.*
+> _EKS-D provides the same software that has enabled tens of thousands of Kubernetes clusters on Amazon EKS._
+
+`ekz` aims at solving the EKS compatibility problem for developers as much as possible by implanting EKS-D binaries to KIND and the k0s project, so that we can easily spin EKS-compatible clusters up to test our Kubernetes applications.
 
 ## Architecture
 
-The EKZ architecture supports EKS-D in multiple implementations, called providers. Currently, we ship the k0s-based (EKZ provider), 
-and KIND-based (KIND provider) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
+The architecture of EKZ has been designed to support EKS-D in multiple implementations, called providers. Currently, we ship the [k0s](https://github.com/k0sproject/k0s)-based \(EKZ provider\), and [KIND](https://github.com/kubernetes-sigs/kind/)-based \(KIND provider\) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
 
 ## Getting Started
 
 `ekz` creates a cluster for you inside a Docker container on your laptop. You can start a cluster with or without using the CLI.
 
-### With CLI
+### CLI Installation
 
 You could install the CLI with one the following options.
 
-#### Homebrew (macOS & Linux)
-```sh
+#### Homebrew \(macOS & Linux\)
+
+```bash
 brew install ekz-io/tap/ekz
 ```
 
-#### CURL One-liner (macOS & Linux)
-```sh
+#### CURL One-liner \(macOS & Linux\)
+
+```bash
 curl -sSL https://bit.ly/install-ekz | bash
 ```
 
-#### Wget One-liner (macOS & Linux)
-```sh
+#### Wget One-liner \(macOS & Linux\)
+
+```bash
 wget -qO- https://bit.ly/install-ekz | bash
 ```
 
-#### Scoop (Windows)
-```
+#### Scoop \(Windows\)
+
+```text
 scoop bucket add ekz-io https://github.com/ekz-io/scoop-ekz.git
 scoop install ekz-io/ekz
 ```
 
-#### Chocolatey (Windows)
-```
+#### Chocolatey \(Windows\)
+
+```text
 choco install -y ekz
 ```
 
 Then you can start your first EKS-D cluster using the following command:
-```
+
+```text
 ekz create cluster
 ```
 
-You can also use the KIND provider, so that your EKS-D clusters will be KIND-compatible.
-To use the KIND provider, you can use either flag `--provider=kind` or `export EKZ_PROVIDER=kind`. 
+You can also use the KIND provider, so that your EKS-D clusters will be KIND-compatible. To use the KIND provider, you can use either flag `--provider=kind` or `export EKZ_PROVIDER=kind`.
 
 Here' the example of using the `--provider=kind` flag:
-```
+
+```text
 ekz create cluster --provider=kind
 ```
 
-In case you'd like to use KIND as the default provider, it's better to set the EKZ_PROVIDER environment variable:
-```
+In case you'd like to use KIND as the default provider, it's better to set the EKZ\_PROVIDER environment variable:
+
+```text
 export EKZ_PROVIDER=kind
 ekz create cluster
 ```
 
 Please wait for a couple of minutes and an EKS-D cluster will be ready on your laptop.
 
-```sh
+```bash
 $ kubectl get nodes
 NAME         STATUS   ROLES    AGE   VERSION
 controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
 ```
 
 ### Without CLI
-To use EKZ without using the CLI, please refer to this [document](WITHOUT_CLI.md).
 
+To use EKZ without using the CLI, please refer to this [document](without_cli.md).
 
 ## Features
 
-The EKZ provider
+### The EKZ provider
 
-  1. EKS-D binaries from v1.18.9-eks-1-18-1
-  1. Packaged with k0s v0.10
-  1. Amazon Linux 2 base image
-  1. Enable network policy by default via the Calico CNI
+1. EKS-D binaries from v1.18.9-eks-1-18-1
+2. Packaged with k0s v0.10
+3. Amazon Linux 2 base image
+4. Enable network policy by default via the Calico CNI
 
-The KIND provider
+### The KIND provider
 
-  1. EKS-D binaries from v1.18.9-eks-1-18-1
-  1. Using KIND v0.10
-  1. Packaged using KIND v1.18.15 node image
-  1. Enable network policy by default via the Calico CNI
+1. EKS-D binaries from v1.18.9-eks-1-18-1
+2. Using KIND v0.10
+3. Packaged using KIND v1.18.15 node image
+4. Enable network policy by default via the Calico CNI
+

@@ -1,18 +1,18 @@
-## ekz delete cluster
+# ekz delete cluster
 
 Delete a cluster
 
-### Synopsis
+## Synopsis
 
 The delete sub-commands delete EKS-D clusters.
 
-```
+```text
 ekz delete cluster [flags]
 ```
 
-### Examples
+## Examples
 
-```
+```text
   # Delete the cluster, the default name is 'ekz'
   ekz delete cluster
 
@@ -27,25 +27,24 @@ ekz delete cluster [flags]
 
   # Delete the cluster created by the KIND provider
   ekz --provider=kind delete cluster
-
 ```
 
-### Options
+## Options
 
-```
+```text
   -h, --help            help for cluster
       --name string     cluster name (default "ekz")
   -o, --output string   specify output file to write kubeconfig to (default "kubeconfig")
 ```
 
-### Options inherited from parent commands
+## Options inherited from parent commands
 
-```
+```text
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-### SEE ALSO
+## SEE ALSO
 
-* [ekz delete](ekz_delete.md)	 - Delete clusters
+* [ekz delete](ekz_delete.md)     - Delete clusters
 

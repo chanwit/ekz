@@ -1,18 +1,18 @@
-## ekz get kubeconfig
+# ekz get kubeconfig
 
 Get kubeconfig
 
-### Synopsis
+## Synopsis
 
 This command obtains the KubeConfig of the EKS-D cluster and writes to the target file.
 
-```
+```text
 ekz get kubeconfig [flags]
 ```
 
-### Examples
+## Examples
 
-```
+```text
   # Get the KubeConfig from the cluster and write to $HOME/.kube/config
   ekz get kubeconfig
 
@@ -30,25 +30,24 @@ ekz get kubeconfig [flags]
 
   # Get the KubeConfig from the 'dev' KIND-based cluster
   ekz get kubeconfig --provider=kind --name=dev
-
 ```
 
-### Options
+## Options
 
-```
+```text
   -h, --help            help for kubeconfig
       --name string     cluster name (default "ekz")
   -o, --output string   specify output file to write kubeconfig to (default "~/.kube/config")
 ```
 
-### Options inherited from parent commands
+## Options inherited from parent commands
 
-```
+```text
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-### SEE ALSO
+## SEE ALSO
 
-* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster
+* [ekz get](ekz_get.md)     - Get properties of an EKS-D cluster
 

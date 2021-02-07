@@ -1,26 +1,26 @@
-## ekz delete
+# ekz delete
 
 Delete clusters
 
-### Synopsis
+## Synopsis
 
 The delete sub-commands delete EKS-D clusters.
 
-### Options
+## Options
 
-```
+```text
   -h, --help   help for delete
 ```
 
-### Options inherited from parent commands
+## Options inherited from parent commands
 
-```
+```text
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-### SEE ALSO
+## SEE ALSO
 
-* [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
-* [ekz delete cluster](ekz_delete_cluster.md)	 - Delete a cluster
+* [ekz](ekz.md)     - Command line utility for creating EKS-D clusters on desktop
+* [ekz delete cluster](ekz_delete_cluster.md)     - Delete a cluster
 

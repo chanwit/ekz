@@ -1,16 +1,14 @@
-## ekz
+# ekz
 
 Command line utility for creating EKS-D clusters on desktop
 
-### Synopsis
+## Synopsis
 
-This program is a command line utility for creating and managing EKS-D clusters on desktop.
-It currently supports clusters provided by EKZ (k0s-based) and KIND.
-All EKS-D cluster is single-node and run inside Docker.
+This program is a command line utility for creating and managing EKS-D clusters on desktop. It currently supports clusters provided by EKZ \(k0s-based\) and KIND. All EKS-D cluster is single-node and run inside Docker.
 
-### Examples
+## Examples
 
-```
+```text
   # Create an EKS-D cluster with the default provider
   ekz create cluster
 
@@ -30,22 +28,21 @@ All EKS-D cluster is single-node and run inside Docker.
   ekz create cluster --provider=kind
   ekz get kubeconfig --provider=kind
   ekz delete cluster --provider=kind
-
 ```
 
-### Options
+## Options
 
-```
+```text
   -h, --help              help for ekz
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-### SEE ALSO
+## SEE ALSO
 
-* [ekz create](ekz_create.md)	 - Create clusters
-* [ekz delete](ekz_delete.md)	 - Delete clusters
-* [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster
-* [ekz list](ekz_list.md)	 - List clusters
-* [ekz load](ekz_load.md)	 - Load artifacts into the cluster
+* [ekz create](ekz_create.md)     - Create clusters
+* [ekz delete](ekz_delete.md)     - Delete clusters
+* [ekz get](ekz_get.md)     - Get properties of an EKS-D cluster
+* [ekz list](ekz_list.md)     - List clusters
+* [ekz load](ekz_load.md)     - Load artifacts into the cluster
 

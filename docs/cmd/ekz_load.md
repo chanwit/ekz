@@ -1,26 +1,26 @@
-## ekz load
+# ekz load
 
 Load artifacts into the cluster
 
-### Synopsis
+## Synopsis
 
 The load sub-commands load artifacts into the EKS-D clusters.
 
-### Options
+## Options
 
-```
+```text
   -h, --help   help for load
 ```
 
-### Options inherited from parent commands
+## Options inherited from parent commands
 
-```
+```text
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-### SEE ALSO
+## SEE ALSO
 
-* [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
-* [ekz load docker-image](ekz_load_docker-image.md)	 - Load a Docker image
+* [ekz](ekz.md)     - Command line utility for creating EKS-D clusters on desktop
+* [ekz load docker-image](ekz_load_docker-image.md)     - Load a Docker image
 
