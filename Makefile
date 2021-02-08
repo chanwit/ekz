@@ -22,7 +22,7 @@ install:
 
 .PHONY: docs
 docs:
-	rm docs/cmd/* || echo "failure!"
+	rm docs/cmd/ekz* || echo "failure!"
 	mkdir -p ./docs/cmd && go run ./cmd/ekz/ docgen
 
 install-dev: build
