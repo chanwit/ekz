@@ -1,18 +1,18 @@
-# ekz create cluster
+## ekz create cluster
 
 Create a cluster
 
-## Synopsis
+### Synopsis
 
 The create sub-commands create EKS-D clusters.
 
-```text
+```
 ekz create cluster [flags]
 ```
 
-## Examples
+### Examples
 
-```text
+```
   # Create an EKS-D cluster with the default provider
   # The KubeConfig will be merged to $HOME/.kube/config. The default cluster name is 'ekz'.
   ekz create cluster
@@ -42,11 +42,12 @@ ekz create cluster [flags]
 
   # Create EKS-D cluster with a specific version of EKS-D
   ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster
+
 ```
 
-## Options
+### Options
 
-```text
+```
       --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
   -h, --help                  help for cluster
       --host                  run in the host mode
@@ -55,14 +56,14 @@ ekz create cluster [flags]
   -o, --output string         specify output file to write kubeconfig to (default "~/.kube/config")
 ```
 
-## Options inherited from parent commands
+### Options inherited from parent commands
 
-```text
+```
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-## SEE ALSO
+### SEE ALSO
 
-* [ekz create](ekz_create.md)     - Create clusters
+* [ekz create](ekz_create.md)	 - Create clusters
 

@@ -1,26 +1,26 @@
-# ekz create
+## ekz create
 
 Create clusters
 
-## Synopsis
+### Synopsis
 
 The create sub-commands create EKS-D clusters.
 
-## Options
+### Options
 
-```text
+```
   -h, --help   help for create
 ```
 
-## Options inherited from parent commands
+### Options inherited from parent commands
 
-```text
+```
       --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
-## SEE ALSO
+### SEE ALSO
 
-* [ekz](ekz.md)     - Command line utility for creating EKS-D clusters on desktop
-* [ekz create cluster](ekz_create_cluster.md)     - Create a cluster
+* [ekz](ekz.md)	 - Command line utility for creating EKS-D clusters on desktop
+* [ekz create cluster](ekz_create_cluster.md)	 - Create a cluster
 
