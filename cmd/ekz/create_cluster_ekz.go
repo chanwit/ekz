@@ -110,7 +110,7 @@ func createClusterEKZ() error {
 			"--security-opt", "apparmor=unconfined", // also ignore apparmor
 			// runtime temporary storage
 			"--tmpfs", "/tmp", // various things depend on working /tmp
-			"--tmpfs", "/run", // systemd wants a writable /run
+			"--volume", "/run:/run", // if host mode we map /run from host
 			"--network=host",
 			"--ipc=host",
 			"--uts=host",
