@@ -86,6 +86,7 @@ func createClusterEKZ() error {
 			"--volume", "/var/lib/ekz",
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
+			"--volume", "/var/run/docker.sock:/var/run/docker.sock",
 			"-p", "127.0.0.1:0:6443",
 			imageName).
 			DividedOutput()
@@ -120,6 +121,7 @@ func createClusterEKZ() error {
 			"--volume", volumeMapping,
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
+			"--volume", "/var/run/docker.sock:/var/run/docker.sock",
 			imageName).
 			DividedOutput()
 		if err != nil {

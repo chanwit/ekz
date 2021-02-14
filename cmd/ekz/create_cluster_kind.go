@@ -29,11 +29,16 @@ func createClusterKIND() error {
 	if len(parts) != 2 {
 		return errors.Errorf("eksdVersion: %s cannot be split into two", eksdVersion)
 	}
-
 	suffix := parts[1]
+
 	config := fmt.Sprintf(`
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  extraMounts:
+    - hostPath: /var/run/docker.sock
+      containerPath: /var/run/docker.sock
 networking:
   disableDefaultCNI: true   # disable kindnet
   podSubnet: 192.168.0.0/16 # set to Calico's default subnet
