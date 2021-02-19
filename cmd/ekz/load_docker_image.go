@@ -20,17 +20,20 @@ var loadDockerImageCmd = &cobra.Command{
 	Example: `  # Load the busybox:latest into the default EKZ cluster
   ekz load docker-image busybox:latest
 
+  # Load the busybox:latest into the default EKZ cluster
+  ekz load docker-image busybox:latest --name=ekz
+
   # Load the busybox:latest into the default KIND cluster
   ekz --provider=kind load docker-image busybox:latest
 
   # Load the busybox:latest into the staging KIND cluster
-  ekz --provider=kind load docker-image busybox:latest --cluster=staging
+  ekz --provider=kind load docker-image busybox:latest --name=staging
 `,
 	RunE: loadDockerImageCmdRun,
 }
 
 func init() {
-	loadDockerImageCmd.Flags().StringVar(&clusterName, "cluster", "ekz", "cluster name")
+	loadDockerImageCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 
 	loadCmd.AddCommand(loadDockerImageCmd)
 }
