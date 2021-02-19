@@ -53,7 +53,7 @@ func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
 	if provider == "ekz" {
 		ctr = "/var/lib/ekz/bin/ctr"
 		containerName = fmt.Sprintf("%s-controller-0", clusterName)
-		containerdAddress = "/var/lib/k0s/run/containerd.sock"
+		containerdAddress = "/var/run/k0s/containerd.sock"
 	} else if provider == "kind" {
 		ctr = "ctr"
 		containerName = fmt.Sprintf("%s-control-plane", clusterName)
