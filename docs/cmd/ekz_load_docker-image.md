@@ -16,19 +16,22 @@ ekz load docker-image <IMAGE> [flags]
   # Load the busybox:latest into the default EKZ cluster
   ekz load docker-image busybox:latest
 
+  # Load the busybox:latest into the default EKZ cluster
+  ekz load docker-image busybox:latest --name=ekz
+
   # Load the busybox:latest into the default KIND cluster
   ekz --provider=kind load docker-image busybox:latest
 
   # Load the busybox:latest into the staging KIND cluster
-  ekz --provider=kind load docker-image busybox:latest --cluster=staging
+  ekz --provider=kind load docker-image busybox:latest --name=staging
 
 ```
 
 ### Options
 
 ```
-      --cluster string   cluster name (default "ekz")
-  -h, --help             help for docker-image
+  -h, --help          help for docker-image
+      --name string   cluster name (default "ekz")
 ```
 
 ### Options inherited from parent commands
