@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/chanwit/ekz/pkg/constants"
+	"github.com/chanwit/ekz/pkg/manifests"
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 )
@@ -144,9 +145,19 @@ func createClusterEKZ() error {
 	logger.Waitingf("waiting for cluster to start ...")
 	waitForNodeStarted("controller", 30*time.Second)
 
+	logger.Actionf("installing the default storageclass ...")
+	err = installDefaultStorageClass()
+	if err != nil {
+		return err
+	}
+
 	logger.Waitingf("waiting for cluster to be ready ...")
 	waitForNodeReady(60 * time.Second)
 
 	logger.Successf("the EKS-D cluster is now ready.")
 	return nil
+}
+
+func installDefaultStorageClass() error {
+	return script.Echo(manifests.StorageClass).Exec("kubectl", "--kubeconfig="+kubeConfigFile, "apply", "-f", "-").Run()
 }
