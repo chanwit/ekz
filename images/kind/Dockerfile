@@ -1,7 +1,7 @@
-FROM kindest/node:v1.18.15@sha256:5c1b980c4d0e0e8e7eb9f36f7df525d079a96169c8a8f20d8bd108c0d0889cc4
+FROM kindest/node:v1.19.7@sha256:a70639454e97a4b733f9d9b67e12c01f6b0297449d5b9cbbef87473458e26dca
 
-ARG K8S_VERSION=v1.18.9-eks-1-18-1
-ARG BASE_URL=https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1/artifacts/kubernetes/v1.18.9/bin/linux/amd64
+ARG K8S_VERSION=v1.19.6-eks-1-19-1
+ARG BASE_URL=https://distro.eks.amazonaws.com/kubernetes-1-19/releases/1/artifacts/kubernetes/v1.19.6/bin/linux/amd64
 
 ADD $BASE_URL/kubectl /usr/bin/kubectl
 ADD $BASE_URL/kubeadm /usr/bin/kubeadm
