@@ -27,6 +27,12 @@ All EKS-D cluster is single-node and run inside Docker.`,
 	Example: `  # Create an EKS-D cluster with the default provider
   ekz create cluster
 
+  # Create a 1.18 EKS-D cluster with the default provider
+  ekz create cluster --eksd-version=v1.18.9-eks-1-18-1
+
+  # Create a 1.19 EKS-D cluster with the default provider
+  ekz create cluster --eksd-version=v1.19.6-eks-1-19-1
+
   # Delete the default cluster
   ekz delete cluster
 
