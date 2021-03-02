@@ -84,9 +84,9 @@ ekz create cluster
 Please wait for a couple of minutes and an EKS-D cluster will be ready on your laptop.
 
 ```bash
-$ kubectl get nodes
+❯ kubectl get nodes
 NAME         STATUS   ROLES    AGE   VERSION
-controller   Ready    <none>   42s   v1.18.9-eks-1-18-1
+controller   Ready    <none>   30m   v1.19.6-eks-1-19-1
 ```
 
 ### Without CLI
