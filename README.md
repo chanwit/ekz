@@ -16,6 +16,11 @@ What is EKS-D?
 
 The architecture of EKZ has been designed to support EKS-D in multiple implementations, called providers. Currently, we ship the [k0s](https://github.com/k0sproject/k0s)-based \(EKZ provider\), and [KIND](https://github.com/kubernetes-sigs/kind/)-based \(KIND provider\) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
 
+| EKS-D version       | EKZ provider  | KIND provider|
+| ------------------- | ------------- | -----------  |
+| v1.18.9-eks-1-18-1  | <ul><li>[x]</li></ul>  | <ul><li>[x]</li></ul> |
+| v1.19.6-eks-1-19-1  | <ul><li>[x]</li></ul>  | <ul><li>[x]</li></ul> |
+
 ## Getting Started
 
 `ekz` creates a cluster for you inside a Docker container on your laptop. You can start a cluster with or without using the CLI.
@@ -92,15 +97,16 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 
 ### The EKZ provider
 
-1. EKS-D binaries from v1.18.9-eks-1-18-1
+1. EKS-D binaries from v1.18.9-eks-1-18-1, and v1.19.6-eks-1-19-1
 2. Packaged with k0s v0.10
 3. Amazon Linux 2 base image
 4. Enable network policy by default via the Calico CNI
+5. Bundled with a local storage class
 
 ### The KIND provider
 
-1. EKS-D binaries from v1.18.9-eks-1-18-1
+1. EKS-D binaries from v1.18.9-eks-1-18-1, and v1.19.6-eks-1-19-1 
 2. Using KIND v0.10
-3. Packaged using KIND v1.18.15 node image
+3. Packaged using KIND v1.18.x and v1.19.x node images
 4. Enable network policy by default via the Calico CNI
 
