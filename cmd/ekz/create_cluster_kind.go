@@ -12,7 +12,14 @@ import (
 )
 
 func createClusterKIND() error {
-	buildNo := "1" // KIND v0.10.0 with 1.18.15 node image
+
+	buildNo := "1"
+	switch eksdVersion {
+	case "v1.18.9-eks-1-18-1":
+		buildNo = "1"
+	case "v1.19.6-eks-1-19-1":
+		buildNo = "0"
+	}
 
 	image := fmt.Sprintf("quay.io/ekz-io/kind:%s.%s", eksdVersion, buildNo)
 
@@ -31,45 +38,20 @@ func createClusterKIND() error {
 	}
 	suffix := parts[1]
 
-	config := fmt.Sprintf(`
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-  extraMounts:
-    - hostPath: /var/run/docker.sock
-      containerPath: /var/run/docker.sock
-networking:
-  disableDefaultCNI: true   # disable kindnet
-  podSubnet: 192.168.0.0/16 # set to Calico's default subnet
-kubeadmConfigPatches:
-- |
-  apiVersion: kubeadm.k8s.io/v1beta2
-  kind: ClusterConfiguration
-  metadata:
-    name: config
-  imageRepository: "public.ecr.aws/eks-distro/kubernetes"
-  kubernetesVersion: "%s"
-  etcd:
-    local:
-      imageRepository: "public.ecr.aws/eks-distro/etcd-io"
-      imageTag: "v3.4.14-%s"
-  dns:
-    imageRepository: "public.ecr.aws/eks-distro/coredns"
-    imageTag: "v1.7.0-%s"
-  apiServer:
-    extraArgs:
-      service-account-issuer: "kubernetes.default.svc"
-      service-account-signing-key-file: "/etc/kubernetes/pki/sa.key"
-`, eksdVersion, suffix, suffix)
+	config := getKindConfig(eksdVersion, suffix)
 
 	logger.Actionf("creating cluster: %s ...", clusterName)
+
+	retain := false
+	if os.Getenv("EKZ_DEBUG") == "1" {
+		retain = true
+	}
 
 	if err := provider.Create(
 		clusterName,
 		cluster.CreateWithRawConfig([]byte(config)),
 		cluster.CreateWithNodeImage(image),
-		cluster.CreateWithRetain(false),
+		cluster.CreateWithRetain(retain),
 		cluster.CreateWithDisplayUsage(true),
 		cluster.CreateWithDisplaySalutation(true),
 	); err != nil {

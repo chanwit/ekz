@@ -48,7 +48,7 @@ ekz create cluster [flags]
 ### Options
 
 ```
-      --eksd-version string   specify a version of EKS-D (default "v1.18.9-eks-1-18-1")
+      --eksd-version string   specify a version of EKS-D (default "v1.19.6-eks-1-19-1")
   -h, --help                  help for cluster
       --host                  run in the host mode
       --map-to-host-volume    map /var/lib/ekz to the host directory
