@@ -16,6 +16,8 @@ What is EKS-D?
 
 The architecture of EKZ has been designed to support EKS-D in multiple implementations, called providers. Currently, we ship the [k0s](https://github.com/k0sproject/k0s)-based \(EKZ provider\), and [KIND](https://github.com/kubernetes-sigs/kind/)-based \(KIND provider\) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
 
+Here's EKS-D versions supported by EKZ.
+
 | EKS-D version       | EKZ provider  | KIND provider|
 | ------------------- | :-----------: | :----------: |
 | v1.18.9-eks-1-18-1  | ✓             | ✓            |
