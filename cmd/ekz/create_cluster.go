@@ -58,7 +58,7 @@ var (
 )
 
 func init() {
-	createClusterCmd.Flags().StringVar(&eksdVersion, "eksd-version", "v1.18.9-eks-1-18-1", "specify a version of EKS-D")
+	createClusterCmd.Flags().StringVar(&eksdVersion, "eksd-version", "v1.19.6-eks-1-19-1", "specify a version of EKS-D")
 	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 	createClusterCmd.Flags().BoolVar(&hostMode, "host", false, "run in the host mode")
@@ -78,6 +78,10 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 	if kubeConfigFile == constants.BackTickHomeFile {
 		kubeConfigFile = clientcmd.RecommendedHomeFile
 	}
+
+	// TODO validate eksdVersion
+	// v1.18.9-eks-1-18-1
+	// v1.19.6-eks-1-19-1
 
 	switch provider {
 	case "ekz":
