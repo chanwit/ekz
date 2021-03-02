@@ -1,0 +1,58 @@
+upgrade eks-d version and url to 1.19
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile          |    4 ++--
+ pkg/constant/constant_shared.go |    8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 6fe623f..4f964d1 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -1,11 +1,11 @@
+ 
+ runc_version = 1.0.0-rc92
+ containerd_version = 1.4.3
+-kubernetes_version = 1.18.9
++kubernetes_version = 1.19.6
+ kine_version = 0.6.0
+ etcd_version = 3.4.14
+ konnectivity_version = 0.0.14
+-eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
++eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-19/releases/1
+ 
+ GOOS ?= linux
+ export GOOS
+diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
+index 02d5c9e..d97a3a0 100644
+--- a/pkg/constant/constant_shared.go
++++ b/pkg/constant/constant_shared.go
+@@ -48,11 +48,11 @@ const (
+ 	// KonnectivityServerUser deinfes the user to use for konnectivity-server
+ 	KonnectivityServerUser = "konnectivity-server"
+ 	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
+-	KubernetesMajorMinorVersion = "1.18"
++	KubernetesMajorMinorVersion = "1.19"
+ 	// DefaultPSP defines the system level default PSP to apply
+ 	DefaultPSP = "00-ekz-privileged"
+ 	// Image suffix for EKS-D
+-	ImageSuffix = "-eks-1-18-1"
++	ImageSuffix = "-eks-1-19-1"
+ 
+ 	// Image Constants
+ 	KonnectivityImage          = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
+@@ -60,9 +60,9 @@ const (
+ 	MetricsImage               = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
+ 	MetricsImageVersion        = "v0.4.0" + ImageSuffix
+ 	KubeProxyImage             = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
+-	KubeProxyImageVersion      = "v1.18.9" + ImageSuffix
++	KubeProxyImageVersion      = "v1.19.6" + ImageSuffix
+ 	CoreDNSImage               = "public.ecr.aws/eks-distro/coredns/coredns"
+-	CoreDNSImageVersion        = "v1.7.0" + ImageSuffix
++	CoreDNSImageVersion        = "v1.8.0" + ImageSuffix
+ 	CalicoImage                = "calico/cni"
+ 	CalicoImageVersion         = "v3.16.2"
+ 	FlexVolumeImage            = "calico/pod2daemon-flexvol"
