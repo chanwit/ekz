@@ -75,7 +75,7 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 	kubeconfigContent := script.Var()
 	err := script.Exec("docker", "exec",
 		containerName,
-		"cat", "/var/lib/ekz/pki/admin.conf").
+		"cat", "/var/lib/k0s/pki/admin.conf").
 		To(kubeconfigContent)
 	if err != nil {
 		return errors.Wrapf(err, "error obtaining kubeconfig from container: %s", containerName)

@@ -43,7 +43,7 @@ func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
 
 	// How to load image, for example:
 	// docker save chanwit/spring-boot-on-kubernetes-with-jib-example:2.0.0-alpha-1 |
-	// docker exec -i ekz-controller-0 /var/lib/ekz/bin/ctr --address=/var/lib/ekz/run/containerd.sock -n k8s.io image import -
+	// docker exec -i ekz-controller-0 /var/lib/k0s/bin/ctr --address=/var/lib/k0s/run/containerd.sock -n k8s.io image import -
 	var (
 		ctr               string
 		containerName     string
@@ -51,7 +51,7 @@ func loadDockerImageCmdRun(cmd *cobra.Command, args []string) error {
 	)
 
 	if provider == "ekz" {
-		ctr = "/var/lib/ekz/bin/ctr"
+		ctr = "/var/lib/k0s/bin/ctr"
 		containerName = fmt.Sprintf("%s-controller-0", clusterName)
 		containerdAddress = "/var/run/k0s/containerd.sock"
 	} else if provider == "kind" {

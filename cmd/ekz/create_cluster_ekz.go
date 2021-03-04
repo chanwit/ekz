@@ -31,7 +31,7 @@ func createClusterEKZ() error {
 	case "v1.18.9-eks-1-18-1":
 		ekzImageBuild = "7"
 	case "v1.19.6-eks-1-19-1":
-		ekzImageBuild = "0"
+		ekzImageBuild = "1"
 	}
 
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
@@ -91,7 +91,7 @@ func createClusterEKZ() error {
 			"--network", bridgeName,
 			"--label", fmt.Sprintf("%s=%s", constants.EKZClusterLabel, clusterName),
 			"--label", fmt.Sprintf("%s=%s", constants.EKZNetworkLabel, bridgeName),
-			"--volume", "/var/lib/ekz",
+			"--volume", "/var/lib/k0s",
 			// some k8s things want to read /lib/modules
 			"--volume", "/lib/modules:/lib/modules:ro",
 			"--volume", "/var/run/docker.sock:/var/run/docker.sock",
@@ -103,11 +103,11 @@ func createClusterEKZ() error {
 		}
 	} else if hostMode == true { // MicroK8s-like behavior
 
-		// os.MkdirAll("/var/lib/ekz", 0755)
-		volumeMapping := "/var/lib/ekz"
+		// os.MkdirAll("/var/lib/k0s", 0755)
+		volumeMapping := "/var/lib/k0s"
 		if hostModeVolumeMapping {
 			// persist /var/lib/ekz to host
-			volumeMapping = "/var/lib/ekz:/var/lib/ekz"
+			volumeMapping = "/var/lib/k0s:/var/lib/k0s"
 		}
 
 		logger.Actionf("starting container: %s ...", containerName)
@@ -159,7 +159,7 @@ func createClusterEKZ() error {
 	}
 
 	logger.Waitingf("waiting for cluster to be ready ...")
-	waitForNodeReady(60 * time.Second)
+	waitForNodeReady(120 * time.Second)
 
 	logger.Successf("the EKS-D cluster is now ready.")
 	return nil
