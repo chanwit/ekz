@@ -8,13 +8,13 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 21 insertions(+)
 
 diff --git a/Dockerfile b/Dockerfile
-index af53eee..b0127b5 100644
+index 8a758cb..846eadc 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -1,6 +1,27 @@
  FROM amazonlinux:2
  
- RUN yum install -y bash util-linux coreutils findutils iptables curl
+ RUN yum install -y bash util-linux coreutils findutils iptables curl tini
 +RUN yum install -y glibc-2.26-36.amzn2	\
 +	cpio-2.11-28.amzn2 \
 +	expat-2.1.0-12.amzn2 \
