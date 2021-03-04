@@ -62,7 +62,7 @@ func init() {
 	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 	createClusterCmd.Flags().BoolVar(&hostMode, "host", false, "run in the host mode")
-	createClusterCmd.Flags().BoolVar(&hostModeVolumeMapping, "map-to-host-volume", false, "map /var/lib/ekz to the host directory")
+	createClusterCmd.Flags().BoolVar(&hostModeVolumeMapping, "map-to-host-volume", false, "map /var/lib/k0s to the host directory")
 
 	createCmd.AddCommand(createClusterCmd)
 }
@@ -103,7 +103,7 @@ func waitForNodeStarted(nodeName string, timeout time.Duration) {
 		if name.String() == nodeName {
 			break
 		}
-		time.Sleep(2 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }
 
@@ -116,6 +116,6 @@ func waitForNodeReady(timeout time.Duration) {
 		if status.String() == "Ready=True" {
 			break
 		}
-		time.Sleep(2 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }
