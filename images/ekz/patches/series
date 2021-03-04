@@ -8,3 +8,4 @@
 07-add-ctr-binary-to-the-build.patch
 08-upgrade-eks-d-version-and-url.patch
 09-add-extract-script-for-crictl.patch
+10-manually-add-tini.patch
