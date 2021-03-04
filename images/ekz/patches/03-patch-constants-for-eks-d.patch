@@ -6,11 +6,11 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 ---
  pkg/constant/constant_posix.go   |    4 ++--
  pkg/constant/constant_shared.go  |   20 +++++++++++---------
- pkg/constant/constant_windows.go |   15 +++++++--------
- 3 files changed, 20 insertions(+), 19 deletions(-)
+ pkg/constant/constant_windows.go |   12 ++++++------
+ 3 files changed, 19 insertions(+), 17 deletions(-)
 
 diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index cd3fa1a..9d6e2c8 100644
+index 07a7247..3ca0732 100644
 --- a/pkg/constant/constant_posix.go
 +++ b/pkg/constant/constant_posix.go
 @@ -22,8 +22,8 @@ import "fmt"
@@ -25,7 +25,7 @@ index cd3fa1a..9d6e2c8 100644
  )
  
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index d2c0d1c..02d5c9e 100644
+index 1cf690f..02d5c9e 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -11,7 +11,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
@@ -54,7 +54,7 @@ index d2c0d1c..02d5c9e 100644
 -	MetricsImage               = "gcr.io/k8s-staging-metrics-server/metrics-server"
 -	MetricsImageVersion        = "v0.3.7"
 -	KubeProxyImage             = "k8s.gcr.io/kube-proxy"
--	KubeProxyImageVersion      = "v1.20.2"
+-	KubeProxyImageVersion      = "v1.20.4"
 -	CoreDNSImage               = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion        = "1.7.0"
 +	MetricsImage               = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
@@ -67,10 +67,10 @@ index d2c0d1c..02d5c9e 100644
  	CalicoImageVersion         = "v3.16.2"
  	FlexVolumeImage            = "calico/pod2daemon-flexvol"
 diff --git a/pkg/constant/constant_windows.go b/pkg/constant/constant_windows.go
-index f0413e6..ee14848 100644
+index 59ab3ab..e1a18a6 100644
 --- a/pkg/constant/constant_windows.go
 +++ b/pkg/constant/constant_windows.go
-@@ -20,22 +20,21 @@ import "fmt"
+@@ -22,17 +22,17 @@ import "fmt"
  
  const (
  	// DataDirDefault folder contains all k0s state
@@ -93,11 +93,4 @@ index f0413e6..ee14848 100644
 +	KubeletVolumePluginDir = "C:\\usr\\libexec\\ekz\\kubelet-plugins\\volume\\exec"
  
  	KineSocket = "kine\\kine.sock:2379"
--
  )
- 
- func formatPath(dir string, file string) string {
- 	return fmt.Sprintf("%s\\%s", dir, file)
--}
-\ No newline at end of file
-+}

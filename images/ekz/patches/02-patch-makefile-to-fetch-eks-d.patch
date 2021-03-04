@@ -8,23 +8,24 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index c91f4d1..0a7f904 100644
+index 02be821..fe696f2 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
-@@ -1,10 +1,11 @@
+@@ -1,11 +1,12 @@
  
- runc_version = 1.0.0-rc92
+ runc_version = 1.0.0-rc93
  containerd_version = 1.4.3
--kubernetes_version = 1.20.2
+-kubernetes_version = 1.20.4
 +kubernetes_version = 1.18.9
  kine_version = 0.6.0
- etcd_version = 3.4.14
+ etcd_version = 3.4.15
  konnectivity_version = 0.0.14
+ crictl_version = 1.20.0
 +eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
  
  GOOS ?= linux
  export GOOS
-@@ -88,17 +89,17 @@ else
+@@ -90,17 +91,17 @@ else
  curl = curl --silent -L
  
  runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
@@ -46,5 +47,5 @@ index c91f4d1..0a7f904 100644
 -etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
 +etcd_extract = linux-$(arch)/etcd
  
- tmpdir ?= .tmp
- arch = amd64
+ crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
+ 

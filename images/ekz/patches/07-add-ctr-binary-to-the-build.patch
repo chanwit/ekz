@@ -9,19 +9,19 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 0a7f904..6fe623f 100644
+index fe696f2..5436c11 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
-@@ -14,7 +14,7 @@ TARGET_OS ?= linux
+@@ -15,7 +15,7 @@ TARGET_OS ?= linux
  export TARGET_OS
  
  bindir = staging/${TARGET_OS}/bin
--posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
-+posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
+-posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server crictl
++posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server crictl
  windows_bins = kubelet.exe kube-proxy.exe
  buildmode = docker
  
-@@ -98,7 +98,7 @@ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kin
+@@ -100,7 +100,7 @@ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kin
  containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
  etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v$(etcd_version).tar.gz
  
@@ -29,17 +29,17 @@ index 0a7f904..6fe623f 100644
 +containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
  etcd_extract = linux-$(arch)/etcd
  
- tmpdir ?= .tmp
+ crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
 diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
-index e0d6732..95ad038 100644
+index 271dee5..ce27c53 100644
 --- a/pkg/component/worker/containerd.go
 +++ b/pkg/component/worker/containerd.go
 @@ -37,7 +37,7 @@ type ContainerD struct {
  // Init extracts the needed binaries
  func (c *ContainerD) Init() error {
  	g := new(errgroup.Group)
--	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "runc"} {
-+	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "ctr", "runc"} {
+-	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "runc", "crictl"} {
++	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "ctr", "runc", "crictl"} {
  		b := bin
  		g.Go(func() error {
  			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)

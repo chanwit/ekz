@@ -4,24 +4,27 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- embedded-bins/Makefile          |    4 ++--
+ embedded-bins/Makefile          |    8 ++++----
  pkg/constant/constant_shared.go |    8 ++++----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 6fe623f..4f964d1 100644
+index 5436c11..54c3a2a 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
-@@ -1,11 +1,11 @@
+@@ -1,12 +1,12 @@
  
- runc_version = 1.0.0-rc92
+ runc_version = 1.0.0-rc93
  containerd_version = 1.4.3
 -kubernetes_version = 1.18.9
 +kubernetes_version = 1.19.6
  kine_version = 0.6.0
- etcd_version = 3.4.14
+-etcd_version = 3.4.15
++etcd_version = 3.4.14
  konnectivity_version = 0.0.14
+-crictl_version = 1.20.0
 -eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
++crictl_version = 1.19.0
 +eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-19/releases/1
  
  GOOS ?= linux

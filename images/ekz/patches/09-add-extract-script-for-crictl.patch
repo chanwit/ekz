@@ -1,0 +1,31 @@
+add extract script for crictl
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 54c3a2a..3213d15 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -104,6 +104,7 @@ containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc
+ etcd_extract = linux-$(arch)/etcd
+ 
+ crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
++crictl_extract = crictl
+ 
+ tmpdir ?= .tmp
+ arch = amd64
+@@ -115,6 +116,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
+ $(addprefix $(bindir)/, containerd etcd): | $(bindir)
+ 	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv --strip-components=1 $($(notdir $@)_extract)
+ 
++$(addprefix $(bindir)/, crictl): | $(bindir)
++	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv $($(notdir $@)_extract)
++
+ # konnectivity does not ship precompiled binaries so lets build it from source
+ $(bindir)/konnectivity-server: | $(bindir)
+ 	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
