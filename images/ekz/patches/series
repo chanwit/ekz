@@ -10,3 +10,4 @@
 09-add-extract-script-for-crictl.patch
 10-manually-add-tini.patch
 11-revert-constants-back-to-k0s.patch
+12-update-kubectl-to-1.19.6.patch
