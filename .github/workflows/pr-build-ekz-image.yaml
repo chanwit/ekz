@@ -1,8 +1,7 @@
 name: pr-build-ekz-image
 on:
-  push:
-    pull_request:
-      - 'main'
+  pull_request:
+    branches: [ main ]
     paths:
       - '.github/workflows/build-ekz-image.yaml'
       - 'images/ekz/**'
