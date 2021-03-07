@@ -100,7 +100,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 ### The EKZ provider
 
 1. EKS-D binaries from v1.18.9-eks-1-18-1, and v1.19.6-eks-1-19-1
-2. Packaged with k0s v0.10
+2. Packaged with k0s v0.11.0
 3. Amazon Linux 2 base image
 4. Enable network policy by default via the Calico CNI
 5. Bundled with a local storage class
