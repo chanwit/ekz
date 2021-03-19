@@ -9,7 +9,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index fe696f2..5436c11 100644
+index 340e745..787f386 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
 @@ -15,7 +15,7 @@ TARGET_OS ?= linux
