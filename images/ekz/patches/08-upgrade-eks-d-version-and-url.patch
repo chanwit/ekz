@@ -9,13 +9,13 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 5436c11..54c3a2a 100644
+index 787f386..2f24935 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
 @@ -1,12 +1,12 @@
  
  runc_version = 1.0.0-rc93
- containerd_version = 1.4.3
+ containerd_version = 1.4.4
 -kubernetes_version = 1.18.9
 +kubernetes_version = 1.19.6
  kine_version = 0.6.0
