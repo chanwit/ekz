@@ -14,3 +14,4 @@
 13-use-pause-image-from-eks-d.patch
 14-fix-cve-alas-2021-1615.patch
 15-configure-kubelet-to-use-eks-d.patch
+16-configure-containerd-to-use.patch

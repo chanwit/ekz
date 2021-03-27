@@ -1,0 +1,42 @@
+configure containerd to use eks-d image via the config file
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/worker/containerd.go |   15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
+index 02637dc..f8dc57a 100644
+--- a/pkg/component/worker/containerd.go
++++ b/pkg/component/worker/containerd.go
+@@ -17,6 +17,8 @@ package worker
+ 
+ import (
+ 	"fmt"
++	"io/ioutil"
++	"os"
+ 	"path/filepath"
+ 
+ 	"github.com/sirupsen/logrus"
+@@ -51,6 +53,19 @@ func (c *ContainerD) Init() error {
+ 
+ // Run runs containerD
+ func (c *ContainerD) Run() error {
++	logrus.Info("Write containerD config to /etc/k0s/containerd.toml")
++
++	_ = os.MkdirAll("/etc/k0s", 0755)
++	data := fmt.Sprintf(`
++[plugins]
++  [plugins."io.containerd.grpc.v1.cri"]
++    sandbox_image = "%s:%s"
++`, constant.KubePauseContainerImage, constant.KubePauseContainerImageVersion)
++	err := ioutil.WriteFile("/etc/k0s/containerd.toml", []byte(data), 0644)
++	if err != nil {
++		return err
++	}
++
+ 	logrus.Info("Starting containerD")
+ 	c.supervisor = supervisor.Supervisor{
+ 		Name:    "containerd",
