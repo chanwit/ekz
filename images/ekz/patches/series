@@ -12,3 +12,4 @@
 11-revert-constants-back-to-k0s.patch
 12-update-kubectl-to-1.19.6.patch
 13-use-pause-image-from-eks-d.patch
+14-fix-cve-alas-2021-1615.patch
