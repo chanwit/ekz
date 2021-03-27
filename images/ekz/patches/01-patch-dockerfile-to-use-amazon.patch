@@ -8,11 +8,11 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/Dockerfile b/Dockerfile
-index fde0431..8a758cb 100644
+index df7dad5..8a758cb 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -1,15 +1,14 @@
--FROM alpine:3.12
+-FROM alpine:3.13
 +FROM amazonlinux:2
  
 -RUN apk add --no-cache bash coreutils findutils iptables curl tini

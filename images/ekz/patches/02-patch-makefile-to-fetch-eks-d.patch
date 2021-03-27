@@ -4,28 +4,28 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- embedded-bins/Makefile |   15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ embedded-bins/Makefile |   16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 3b1e8f9..340e745 100644
+index 60c2cc8..6c5a161 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
-@@ -1,11 +1,12 @@
+@@ -1,10 +1,12 @@
  
  runc_version = 1.0.0-rc93
  containerd_version = 1.4.4
--kubernetes_version = 1.20.4
+-kubernetes_version = 1.20.5
 +kubernetes_version = 1.18.9
  kine_version = 0.6.0
  etcd_version = 3.4.15
  konnectivity_version = 0.0.14
- crictl_version = 1.20.0
++crictl_version = 1.20.0
 +eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/1
  
  GOOS ?= linux
  export GOOS
-@@ -90,17 +91,17 @@ else
+@@ -88,17 +90,17 @@ else
  curl = curl --silent -L
  
  runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
@@ -47,5 +47,5 @@ index 3b1e8f9..340e745 100644
 -etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
 +etcd_extract = linux-$(arch)/etcd
  
- crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
- 
+ tmpdir ?= .tmp
+ arch = amd64

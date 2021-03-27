@@ -1,4 +1,4 @@
-# This series applies on GIT commit 0b639fcf42b3e76c77ff9418d146a8a15eebe34f
+# This series applies on GIT commit 4224326666aa312e8cf4265e3287891fd4831caf
 01-patch-dockerfile-to-use-amazon.patch
 02-patch-makefile-to-fetch-eks-d.patch
 03-patch-constants-for-eks-d.patch
@@ -11,3 +11,4 @@
 10-manually-add-tini.patch
 11-revert-constants-back-to-k0s.patch
 12-update-kubectl-to-1.19.6.patch
+13-use-pause-image-from-eks-d.patch
