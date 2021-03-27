@@ -1,0 +1,23 @@
+configure kubelet to use eks-d pause image
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/worker/kubelet.go |    3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/pkg/component/worker/kubelet.go b/pkg/component/worker/kubelet.go
+index 21b34fe..562a87d 100644
+--- a/pkg/component/worker/kubelet.go
++++ b/pkg/component/worker/kubelet.go
+@@ -98,6 +98,9 @@ func (k *Kubelet) Run() error {
+ 		"--cert-dir":             filepath.Join(k.dataDir, "pki"),
+ 	}
+ 
++	// Use EKS-D pause container image instead of the defualt one
++	args["--pod-infra-container-image"] = constant.KubePauseContainerImage + ":" + constant.KubePauseContainerImageVersion
++
+ 	if len(k.Labels) > 0 {
+ 		args["--node-labels"] = strings.Join(k.Labels, ",")
+ 	}
