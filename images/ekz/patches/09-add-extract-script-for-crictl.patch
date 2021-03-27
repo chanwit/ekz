@@ -4,22 +4,24 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- embedded-bins/Makefile |    4 ++++
- 1 file changed, 4 insertions(+)
+ embedded-bins/Makefile |    6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 2f24935..a90dc3c 100644
+index e8a89b2..b4fd4b5 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
-@@ -104,6 +104,7 @@ containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc
+@@ -102,6 +102,9 @@ etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v
+ containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
  etcd_extract = linux-$(arch)/etcd
  
- crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
++crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
 +crictl_extract = crictl
- 
++
  tmpdir ?= .tmp
  arch = amd64
-@@ -115,6 +116,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
+ 
+@@ -112,6 +115,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
  $(addprefix $(bindir)/, containerd etcd): | $(bindir)
  	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv --strip-components=1 $($(notdir $@)_extract)
  

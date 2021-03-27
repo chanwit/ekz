@@ -5,10 +5,9 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 ---
  Dockerfile                       |    2 +-
- pkg/constant/constant_posix.go   |    4 ++--
  pkg/constant/constant_shared.go  |    2 +-
  pkg/constant/constant_windows.go |   12 ++++++------
- 4 files changed, 10 insertions(+), 10 deletions(-)
+ 3 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/Dockerfile b/Dockerfile
 index 1e257ad..6882e2a 100644
@@ -23,23 +22,8 @@ index 1e257ad..6882e2a 100644
  
  ADD docker-entrypoint.sh /entrypoint.sh
  ADD ./k0s /usr/local/bin/k0s
-diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index 3ca0732..07a7247 100644
---- a/pkg/constant/constant_posix.go
-+++ b/pkg/constant/constant_posix.go
-@@ -22,8 +22,8 @@ import "fmt"
- 
- const (
- 	// DataDirDefault is the default data directory containing k0s state
--	DataDirDefault         = "/var/lib/ekz"
--	KubeletVolumePluginDir = "/usr/libexec/ekz/kubelet-plugins/volume/exec"
-+	DataDirDefault         = "/var/lib/k0s"
-+	KubeletVolumePluginDir = "/usr/libexec/k0s/kubelet-plugins/volume/exec"
- 	KineSocket             = "kine/kine.sock:2379"
- )
- 
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index d97a3a0..98fb120 100644
+index 4a2aab3..b02ec8e 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -50,7 +50,7 @@ const (
@@ -52,7 +36,7 @@ index d97a3a0..98fb120 100644
  	ImageSuffix = "-eks-1-19-1"
  
 diff --git a/pkg/constant/constant_windows.go b/pkg/constant/constant_windows.go
-index e1a18a6..59ab3ab 100644
+index 0ec2e1f..028a55f 100644
 --- a/pkg/constant/constant_windows.go
 +++ b/pkg/constant/constant_windows.go
 @@ -22,17 +22,17 @@ import "fmt"
@@ -77,5 +61,5 @@ index e1a18a6..59ab3ab 100644
 -	KubeletVolumePluginDir = "C:\\usr\\libexec\\ekz\\kubelet-plugins\\volume\\exec"
 +	KubeletVolumePluginDir = "C:\\usr\\libexec\\k0s\\kubelet-plugins\\volume\\exec"
  
- 	KineSocket = "kine\\kine.sock:2379"
- )
+ 	KineSocket                     = "kine\\kine.sock:2379"
+ 	KubePauseContainerImage        = "mcr.microsoft.com/oss/kubernetes/pause"

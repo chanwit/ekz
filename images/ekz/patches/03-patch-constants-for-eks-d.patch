@@ -4,28 +4,12 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- pkg/constant/constant_posix.go   |    4 ++--
  pkg/constant/constant_shared.go  |   20 +++++++++++---------
  pkg/constant/constant_windows.go |   12 ++++++------
- 3 files changed, 19 insertions(+), 17 deletions(-)
+ 2 files changed, 17 insertions(+), 15 deletions(-)
 
-diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index 07a7247..3ca0732 100644
---- a/pkg/constant/constant_posix.go
-+++ b/pkg/constant/constant_posix.go
-@@ -22,8 +22,8 @@ import "fmt"
- 
- const (
- 	// DataDirDefault is the default data directory containing k0s state
--	DataDirDefault         = "/var/lib/k0s"
--	KubeletVolumePluginDir = "/usr/libexec/k0s/kubelet-plugins/volume/exec"
-+	DataDirDefault         = "/var/lib/ekz"
-+	KubeletVolumePluginDir = "/usr/libexec/ekz/kubelet-plugins/volume/exec"
- 	KineSocket             = "kine/kine.sock:2379"
- )
- 
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index 1cf690f..02d5c9e 100644
+index 005355e..6d75def 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -11,7 +11,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
@@ -63,11 +47,11 @@ index 1cf690f..02d5c9e 100644
 +	KubeProxyImageVersion      = "v1.18.9" + ImageSuffix
 +	CoreDNSImage               = "public.ecr.aws/eks-distro/coredns/coredns"
 +	CoreDNSImageVersion        = "v1.7.0" + ImageSuffix
- 	CalicoImage                = "calico/cni"
+ 	CalicoImage                = "docker.io/calico/cni"
  	CalicoImageVersion         = "v3.16.2"
- 	FlexVolumeImage            = "calico/pod2daemon-flexvol"
+ 	CalicoNodeImage            = "docker.io/calico/node"
 diff --git a/pkg/constant/constant_windows.go b/pkg/constant/constant_windows.go
-index 59ab3ab..e1a18a6 100644
+index 028a55f..0ec2e1f 100644
 --- a/pkg/constant/constant_windows.go
 +++ b/pkg/constant/constant_windows.go
 @@ -22,17 +22,17 @@ import "fmt"
@@ -92,5 +76,5 @@ index 59ab3ab..e1a18a6 100644
 -	KubeletVolumePluginDir = "C:\\usr\\libexec\\k0s\\kubelet-plugins\\volume\\exec"
 +	KubeletVolumePluginDir = "C:\\usr\\libexec\\ekz\\kubelet-plugins\\volume\\exec"
  
- 	KineSocket = "kine\\kine.sock:2379"
- )
+ 	KineSocket                     = "kine\\kine.sock:2379"
+ 	KubePauseContainerImage        = "mcr.microsoft.com/oss/kubernetes/pause"
