@@ -1,0 +1,46 @@
+name: pr-build-ekz-image
+on:
+  pull_request:
+    branches:
+      - 'release-1.18'
+    paths:
+      - '.github/workflows/build-ekz-image.yaml'
+      - 'images/ekz/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out
+        uses: actions/checkout@v2
+      - name: install stgit
+        shell: bash
+        run: |
+          sudo apt-get install -y stgit
+          git config --global user.name "Chanwit Kaewkasi"
+          git config --global user.email "chanwit@gmail.com"
+      - name: build
+        shell: bash
+        run: |
+          cd images/ekz
+          TAG=$(cat VERSION)
+          K0S_VERSION=$(cat K0S_VERSION)
+
+          mkdir build/
+          cd build/
+          git clone https://github.com/k0sproject/k0s
+          cd k0s
+          git checkout -b build $K0S_VERSION
+          stg init
+          stg import -s ../../patches/series
+
+          make EMBEDDED_BINS_BUILDMODE=fetch
+          docker build -t quay.io/ekz-io/ekz:$TAG .
+      - name: security scan
+        shell: bash
+        run: |
+          cd images/ekz
+          TAG=$(cat VERSION)
+
+          wget https://github.com/anchore/grype/releases/download/v0.6.1/grype_0.6.1_linux_amd64.deb
+          sudo apt install -y ./grype_0.6.1_linux_amd64.deb
+          grype -f negligible quay.io/ekz-io/ekz:$TAG

@@ -6,3 +6,4 @@
 05-fix-cve-2020-1971-via-alas2.patch
 06-add-ip-command.patch
 07-add-ctr-binary-to-the-build.patch
+08-fix-cve-alas-2021-1615.patch
