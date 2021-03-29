@@ -2,7 +2,7 @@ name: build-ekz-image
 on:
   push:
     branches:
-      - 'main'
+      - 'release-1.18'
     paths:
       - '.github/workflows/build-ekz-image.yaml'
       - 'images/ekz/**'

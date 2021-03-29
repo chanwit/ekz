@@ -2,7 +2,7 @@ name: build-kind-image
 on:
   push:
     branches:
-      - 'main'
+      - 'release-1.18'
     paths:
       - '.github/workflows/build-kind-image.yaml'
       - 'images/kind/**'
