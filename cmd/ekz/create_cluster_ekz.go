@@ -25,8 +25,8 @@ func getEKZNetworkName(containerId string) (string, error) {
 }
 
 func createClusterEKZ() error {
-	// "7" is the latest stable provided by EKZ
-	ekzImageBuild := "7"
+	// "8" is the latest stable provided by EKZ
+	ekzImageBuild := "8"
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
 	containerName := fmt.Sprintf("%s-controller-0", clusterName)
 
