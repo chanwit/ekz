@@ -25,8 +25,9 @@ func getEKZNetworkName(containerId string) (string, error) {
 }
 
 func createClusterEKZ() error {
-	// "7" is the latest stable provided by EKZ
-	ekzImageBuild := "7"
+	// build "8" is the latest stable provided by EKZ 1.18
+	// build "4" is the latest stable provided by EKZ 1.19
+	ekzImageBuild := "8"
 	switch eksdVersion {
 	case "v1.18.9-eks-1-18-1":
 		ekzImageBuild = "7"
