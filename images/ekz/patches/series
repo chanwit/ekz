@@ -1,4 +1,4 @@
-# This series applies on GIT commit 4224326666aa312e8cf4265e3287891fd4831caf
+# This series applies on GIT commit 5b0295c7d248fb102d80b6ddd50be82939d165ac
 01-patch-dockerfile-to-use-amazon.patch
 02-patch-makefile-to-fetch-eks-d.patch
 03-patch-constants-for-eks-d.patch
