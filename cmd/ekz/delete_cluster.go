@@ -107,5 +107,5 @@ func deleteClusterKINDRun() error {
 	provider := cluster.NewProvider()
 	os.Setenv("KIND_EXPERIMENTAL_DOCKER_NETWORK", fmt.Sprintf("%s-bridge", clusterName))
 
-	return provider.Delete(clusterName, kubeConfigFile)
+	return provider.Delete(clusterName, expandKubeConfigFile())
 }

@@ -8,7 +8,6 @@ import (
 	"github.com/chanwit/script"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"k8s.io/client-go/tools/clientcmd"
 )
 
 var createClusterCmd = &cobra.Command{
@@ -75,10 +74,6 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 		clusterName = args[0]
 	}
 
-	if kubeConfigFile == constants.BackTickHomeFile {
-		kubeConfigFile = clientcmd.RecommendedHomeFile
-	}
-
 	// TODO validate eksdVersion
 	// v1.18.9-eks-1-18-1
 	// v1.19.6-eks-1-19-1
@@ -99,7 +94,7 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 func waitForNodeStarted(nodeName string, timeout time.Duration) {
 	for start := time.Now(); time.Since(start) < timeout; {
 		name := script.Var()
-		script.Exec("kubectl", "--kubeconfig="+kubeConfigFile, "get", "nodes", "-ojsonpath={.items[0].metadata.name}").To(name)
+		script.Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(), "get", "nodes", "-ojsonpath={.items[0].metadata.name}").To(name)
 		if name.String() == nodeName {
 			break
 		}
@@ -110,7 +105,7 @@ func waitForNodeStarted(nodeName string, timeout time.Duration) {
 func waitForNodeReady(timeout time.Duration) {
 	for start := time.Now(); time.Since(start) < timeout; {
 		status := script.Var()
-		script.Exec("kubectl", "--kubeconfig="+kubeConfigFile,
+		script.Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(),
 			"get", "nodes",
 			"-ojsonpath={.items[0].status.conditions[-1].type}={.items[0].status.conditions[-1].status}").To(status)
 		if status.String() == "Ready=True" {

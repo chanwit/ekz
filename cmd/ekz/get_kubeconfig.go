@@ -55,14 +55,10 @@ func getKubeconfigCmdRun(cmd *cobra.Command, args []string) error {
 		clusterName = args[0]
 	}
 
-	if kubeConfigFile == constants.BackTickHomeFile {
-		kubeConfigFile = clientcmd.RecommendedHomeFile
-	}
-
 	switch provider {
 	case "ekz":
 		containerName := fmt.Sprintf("%s-controller-0", clusterName)
-		return getKubeconfigEKZ(containerName, kubeConfigFile)
+		return getKubeconfigEKZ(containerName, expandKubeConfigFile())
 	case "kind":
 		return getKubeconfigKIND()
 	}
@@ -133,5 +129,5 @@ func getKubeconfigEKZ(containerName string, targetFile string) error {
 
 func getKubeconfigKIND() error {
 	provider := cluster.NewProvider()
-	return provider.ExportKubeConfig(clusterName, kubeConfigFile)
+	return provider.ExportKubeConfig(clusterName, expandKubeConfigFile())
 }
