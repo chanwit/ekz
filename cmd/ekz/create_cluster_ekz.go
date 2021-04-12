@@ -32,7 +32,7 @@ func createClusterEKZ() error {
 	case "v1.18.9-eks-1-18-1":
 		ekzImageBuild = "8"
 	case "v1.19.6-eks-1-19-1":
-		ekzImageBuild = "5"
+		ekzImageBuild = "6"
 	}
 
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
