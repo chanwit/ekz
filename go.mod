@@ -1,6 +1,6 @@
 module github.com/chanwit/ekz
 
-go 1.14
+go 1.16
 
 require (
 	github.com/chanwit/script v0.0.0-20201228155057-9bf4d3f2ec44

@@ -1,0 +1,22 @@
+name: pr-build-binaries
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Unshallow
+        run: git fetch --prune --unshallow
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+      - name: build
+        shell: bash
+        run: |
+          make
