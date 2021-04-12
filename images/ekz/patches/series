@@ -1,15 +1,4 @@
-# This series applies on GIT commit 5b0295c7d248fb102d80b6ddd50be82939d165ac
-01-patch-dockerfile-to-use-amazon.patch
-02-patch-makefile-to-fetch-eks-d.patch
-03-patch-constants-for-eks-d.patch
-04-fix-cves-for-amazon-linux.patch
-05-fix-cve-2020-1971-via-alas2.patch
-06-add-ip-command.patch
-07-add-ctr-binary-to-the-build.patch
-08-upgrade-eks-d-version-and-url.patch
-09-add-extract-script-for-crictl.patch
-10-manually-add-tini.patch
-11-revert-constants-back-to-k0s.patch
-12-update-kubectl-to-1.19.6.patch
-13-use-pause-image-from-eks-d.patch
-14-fix-cve-alas-2021-1615.patch
+# This series applies on GIT commit b18a14d32a062bc62316cf883f1796fa4b6e21b8
+01-use-amazone-linux-2-and-patch.patch
+02-change-component-versions-in.patch
+03-make-change-constants-to.patch
