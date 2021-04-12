@@ -144,11 +144,11 @@ func createClusterEKZ() error {
 
 	// TODO handle port clash
 	// TODO handle container name clash
-	err = getKubeconfigEKZ(containerName, kubeConfigFile)
+	err = getKubeconfigEKZ(containerName, expandKubeConfigFile())
 	if err != nil {
 		return err
 	}
-	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
+	logger.Successf("kubeconfig is written to: %s", expandKubeConfigFile())
 
 	logger.Waitingf("waiting for cluster to start ...")
 	waitForNodeStarted("controller", 30*time.Second)
@@ -167,5 +167,5 @@ func createClusterEKZ() error {
 }
 
 func installDefaultStorageClass() error {
-	return script.Echo(manifests.StorageClass).Exec("kubectl", "--kubeconfig="+kubeConfigFile, "apply", "-f", "-").Run()
+	return script.Echo(manifests.StorageClass).Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(), "apply", "-f", "-").Run()
 }

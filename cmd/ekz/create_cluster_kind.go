@@ -58,10 +58,10 @@ func createClusterKIND() error {
 		return errors.Wrapf(err, "failed to create cluster %v", clusterName)
 	}
 
-	if err := provider.ExportKubeConfig(clusterName, kubeConfigFile); err != nil {
+	if err := provider.ExportKubeConfig(clusterName, expandKubeConfigFile()); err != nil {
 		return err
 	}
-	logger.Successf("kubeconfig is written to: %s", kubeConfigFile)
+	logger.Successf("kubeconfig is written to: %s", expandKubeConfigFile())
 
 	logger.Waitingf("waiting for cluster to start ...")
 	waitForNodeStarted(fmt.Sprintf("%s-control-plane", clusterName), 30*time.Second)
