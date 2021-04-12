@@ -1,0 +1,76 @@
+change component versions in Makefile
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile           |   22 ++++++++++++++--------
+ embedded-bins/Makefile.variables |    6 ++++--
+ 2 files changed, 18 insertions(+), 10 deletions(-)
+
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 63ffe2c..0daf0ab 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -7,7 +7,7 @@ TARGET_OS ?= linux
+ export TARGET_OS
+ 
+ bindir = staging/${TARGET_OS}/bin
+-posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
++posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server crictl
+ windows_bins = kubelet.exe kube-proxy.exe
+ buildmode = docker
+ 
+@@ -82,17 +82,20 @@ else
+ curl = curl --silent -L
+ 
+ runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
+-kubelet_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
+-kube-apiserver_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
+-kube-scheduler_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
+-kube-controller-manager_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
++kubelet_url	= $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
++kube-apiserver_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
++kube-scheduler_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
++kube-controller-manager_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
+ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kine-amd64
+ 
+ containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
+-etcd_url = https://github.com/etcd-io/etcd/releases/download/v$(etcd_version)/etcd-v$(etcd_version)-linux-$(arch).tar.gz
++etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v$(etcd_version).tar.gz
+ 
+-containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2
+-etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
++containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
++etcd_extract = linux-$(arch)/etcd
++
++crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
++crictl_extract = crictl
+ 
+ tmpdir ?= .tmp
+ arch = amd64
+@@ -104,6 +107,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
+ $(addprefix $(bindir)/, containerd etcd): | $(bindir)
+ 	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv --strip-components=1 $($(notdir $@)_extract)
+ 
++$(addprefix $(bindir)/, crictl): | $(bindir)
++	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv $($(notdir $@)_extract)
++
+ # konnectivity does not ship precompiled binaries so lets build it from source
+ $(bindir)/konnectivity-server: | $(bindir)
+ 	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
+diff --git a/embedded-bins/Makefile.variables b/embedded-bins/Makefile.variables
+index a930944..a8218d6 100644
+--- a/embedded-bins/Makefile.variables
++++ b/embedded-bins/Makefile.variables
+@@ -1,6 +1,8 @@
+ runc_version = 1.0.0-rc93
+ containerd_version = 1.4.4
+-kubernetes_version = 1.20.5
++kubernetes_version = 1.19.6
+ kine_version = 0.6.0
+-etcd_version = 3.4.15
++etcd_version = 3.4.14
+ konnectivity_version = 0.0.14
++crictl_version = 1.19.0
++eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-19/releases/1
