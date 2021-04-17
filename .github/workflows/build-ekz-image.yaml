@@ -18,11 +18,30 @@ jobs:
           sudo apt-get install -y stgit
           git config --global user.name "Chanwit Kaewkasi"
           git config --global user.email "chanwit@gmail.com"
-      - name: build
+      - name: build 1.18
         shell: bash
         run: |
           cd images/ekz
-          TAG=$(cat VERSION)
+          TAG=$(cat VERSION_1_18)
+          K0S_VERSION=$(cat K0S_VERSION)
+
+          mkdir build/
+          cd build/
+          git clone https://github.com/k0sproject/k0s
+          cd k0s
+          git checkout -b build $K0S_VERSION
+          stg init
+          stg import -s ../../patches-backport-1-18/series
+
+          make EMBEDDED_BINS_BUILDMODE=fetch
+          docker build -t quay.io/ekz-io/ekz:$TAG .
+
+          rm -rf build/
+      - name: build 1.19
+        shell: bash
+        run: |
+          cd images/ekz
+          TAG=$(cat VERSION_1_19)
           K0S_VERSION=$(cat K0S_VERSION)
 
           mkdir build/
@@ -35,15 +54,18 @@ jobs:
 
           make EMBEDDED_BINS_BUILDMODE=fetch
           docker build -t quay.io/ekz-io/ekz:$TAG .
+
+          rm -rf build/
       - name: security scan
         shell: bash
         run: |
           cd images/ekz
-          TAG=$(cat VERSION)
 
           wget https://github.com/anchore/grype/releases/download/v0.6.1/grype_0.6.1_linux_amd64.deb
           sudo apt install -y ./grype_0.6.1_linux_amd64.deb
-          grype -f negligible quay.io/ekz-io/ekz:$TAG
+
+          grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_18)
+          grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_19)
       - name: push
         shell: bash
         env:
@@ -51,8 +73,10 @@ jobs:
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
           cd images/ekz
-          TAG=$(cat VERSION)
 
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
-          docker push quay.io/ekz-io/ekz:$TAG
+
+          docker push quay.io/ekz-io/ekz:$(cat VERSION_1_18)
+          docker push quay.io/ekz-io/ekz:$(cat VERSION_1_19)
+
           docker logout quay.io

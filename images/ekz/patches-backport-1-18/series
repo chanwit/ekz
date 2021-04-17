@@ -1,0 +1,4 @@
+# This series applies on GIT commit b18a14d32a062bc62316cf883f1796fa4b6e21b8
+01-use-amazone-linux-2-and-patch.patch
+02-change-component-versions-in.patch
+03-make-change-constants-to.patch
