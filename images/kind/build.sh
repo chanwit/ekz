@@ -25,4 +25,5 @@ docker build \
   --build-arg K8S_VERSION=v${VERSION} \
   --build-arg EKSD_CHANNEL=$CHANNEL \
   --build-arg EKSD_NUMBER=$NUMBER \
+  --build-arg EKSD_BASE_URL=https://distro.eks.amazonaws.com/kubernetes-${$CHANNEL}/releases/${NUMBER}/artifacts/kubernetes/v${VERSION}/bin/linux/amd64
   -t quay.io/ekz-io/kind:$TAG .
