@@ -15,8 +15,9 @@ jobs:
       - name: install yq
         shell: bash
         run: |
-          wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64 -O /usr/bin/yq
-          chmod +x /usr/bin/yq
+          wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64 -O ./yq
+          chmod +x ./yq
+          sudo mv ./yq /usr/local/bin/yq
       - name: build
         shell: bash
         env:
