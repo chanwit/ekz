@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v2
+      - name: install yq
+        shell: bash
+        run: |
+          wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64 -O /usr/bin/yq
+          chmod +x /usr/bin/yq
       - name: build
         shell: bash
         env:
@@ -19,8 +24,8 @@ jobs:
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
           cd images/kind
-          TAG=$(cat VERSION)
+          bash -x ./build.sh
 
-          docker build -t quay.io/ekz-io/kind:$TAG .
+          TAG=$(cat TAG)
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
           docker push quay.io/ekz-io/kind:$TAG

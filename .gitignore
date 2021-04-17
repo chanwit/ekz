@@ -2,3 +2,7 @@ build/
 .idea/
 cover.out
 bin/
+
+
+images/kind/eksd.yaml
+images/kind/kubernetes*.yaml
