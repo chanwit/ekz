@@ -18,14 +18,26 @@ jobs:
           wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64 -O ./yq
           chmod +x ./yq
           sudo mv ./yq /usr/local/bin/yq
-      - name: build
+      - name: build 1.18
         shell: bash
         env:
           QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
           cd images/kind
-          bash -x ./build.sh
+          bash -x ./build.sh 1.18
+
+          TAG=$(cat TAG)
+          docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
+          docker push quay.io/ekz-io/kind:$TAG
+      - name: build 1.19
+        shell: bash
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          cd images/kind
+          bash -x ./build.sh 1.19
 
           TAG=$(cat TAG)
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
