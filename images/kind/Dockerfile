@@ -7,7 +7,7 @@ ARG BASE_URL=https://distro.eks.amazonaws.com/kubernetes-${EKSD_CHANNEL}/release
 
 FROM $BASE_IMAGE
 
-RUN echo "Add: $BASE_URL/kubectl"
+RUN echo "Add: ${BASE_URL}/kubectl"
 ADD $BASE_URL/kubectl /usr/bin/kubectl
 ADD $BASE_URL/kubeadm /usr/bin/kubeadm
 ADD $BASE_URL/kubelet /usr/bin/kubelet
