@@ -24,6 +24,7 @@ jobs:
           cd images/ekz
           TAG=$(cat VERSION_1_18)
           K0S_VERSION=$(cat K0S_VERSION)
+          pushd .
 
           mkdir build/
           cd build/
@@ -36,6 +37,7 @@ jobs:
           make EMBEDDED_BINS_BUILDMODE=fetch
           docker build -t quay.io/ekz-io/ekz:$TAG .
 
+          popd
           rm -rf build/
       - name: build 1.19
         shell: bash
@@ -43,6 +45,7 @@ jobs:
           cd images/ekz
           TAG=$(cat VERSION_1_19)
           K0S_VERSION=$(cat K0S_VERSION)
+          pushd .
 
           mkdir build/
           cd build/
@@ -55,6 +58,7 @@ jobs:
           make EMBEDDED_BINS_BUILDMODE=fetch
           docker build -t quay.io/ekz-io/ekz:$TAG .
 
+          popd
           rm -rf build/
       - name: security scan
         shell: bash
