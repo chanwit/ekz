@@ -1,0 +1,22 @@
+add extra flags to metric server
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/controller/metricserver.go |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/pkg/component/controller/metricserver.go b/pkg/component/controller/metricserver.go
+index fe27a8e..08e6a50 100644
+--- a/pkg/component/controller/metricserver.go
++++ b/pkg/component/controller/metricserver.go
+@@ -161,6 +161,8 @@ spec:
+           - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+          # Until we have proper serving cert (signed by cluster CA & proper IP sans etc.) on kubelet, not much else we can do
+           - --kubelet-insecure-tls
++          - --kubelet-use-node-status-port
++          - --authorization-always-allow-paths=/livez,/readyz
+         ports:
+         - name: https
+           containerPort: 4443

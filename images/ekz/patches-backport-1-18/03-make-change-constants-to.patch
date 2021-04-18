@@ -23,7 +23,7 @@ index 689d62f..02637dc 100644
  		g.Go(func() error {
  			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)
 diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index 548b9b5..8b29c9b 100644
+index 548b9b5..8a37f60 100644
 --- a/pkg/constant/constant_posix.go
 +++ b/pkg/constant/constant_posix.go
 @@ -25,8 +25,8 @@ const (
@@ -38,7 +38,7 @@ index 548b9b5..8b29c9b 100644
  
  func formatPath(dir string, file string) string {
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index 7e96f29..26f6d8a 100644
+index 7e96f29..db85aee 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -12,7 +12,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
