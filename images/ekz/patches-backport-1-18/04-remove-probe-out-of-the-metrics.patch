@@ -1,0 +1,25 @@
+remove probe out of the metrics deployment
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/controller/metricserver.go |    5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/pkg/component/controller/metricserver.go b/pkg/component/controller/metricserver.go
+index fe27a8e..c598c65 100644
+--- a/pkg/component/controller/metricserver.go
++++ b/pkg/component/controller/metricserver.go
+@@ -169,11 +169,6 @@ spec:
+           requests:
+             memory: {{ .MEMRequest }}
+             cpu: {{ .CPURequest }}
+-        readinessProbe:
+-          httpGet:
+-            path: /healthz
+-            port: https
+-            scheme: HTTPS
+         securityContext:
+           readOnlyRootFilesystem: true
+           runAsNonRoot: true
