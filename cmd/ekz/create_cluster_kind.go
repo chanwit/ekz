@@ -13,11 +13,15 @@ import (
 
 func createClusterKIND() error {
 
-	buildNo := "1"
+	var buildNo string
 	switch eksdVersion {
 	case "v1.18.9-eks-1-18-1":
 		buildNo = "1"
+	case "v1.18.9-eks-1-18-3":
+		buildNo = "0"
 	case "v1.19.6-eks-1-19-1":
+		buildNo = "0"
+	case "v1.19.6-eks-1-19-3":
 		buildNo = "0"
 	}
 

@@ -5,8 +5,10 @@ import "fmt"
 func getKindConfig(eksdVersion string, suffix string) string {
 	switch eksdVersion {
 	case "v1.18.9-eks-1-18-1":
+	case "v1.18.9-eks-1-18-3":
 		return getKindConfig1_18(eksdVersion, suffix)
 	case "v1.19.6-eks-1-19-1":
+	case "v1.19.6-eks-1-19-3":
 		return getKindConfig1_19(eksdVersion, suffix)
 	}
 	// TODO return error

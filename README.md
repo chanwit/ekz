@@ -21,7 +21,9 @@ Here's EKS-D versions supported by EKZ.
 | EKS-D version       | EKZ provider  | KIND provider|
 | ------------------- | :-----------: | :----------: |
 | v1.18.9-eks-1-18-1  | ✓             | ✓            |
-| v1.19.6-eks-1-19-1  | ✓             | ✓            |
+| v1.18.9-eks-1-18-1  | ✓             | ✓            |
+| v1.19.6-eks-1-19-3  | ✓             | ✓            |
+| v1.19.6-eks-1-19-3  | ✓             | ✓            |
 
 ## Getting Started
 
@@ -87,8 +89,8 @@ Please wait for a couple of minutes and an EKS-D cluster will be ready on your l
 
 ```bash
 ❯ kubectl get nodes
-NAME         STATUS   ROLES    AGE   VERSION
-controller   Ready    <none>   30m   v1.19.6-eks-1-19-1
+NAME         STATUS   ROLES    AGE    VERSION
+controller   Ready    <none>   111s   v1.19.6-eks-1-19-3
 ```
 
 ### Without CLI

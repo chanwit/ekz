@@ -43,12 +43,16 @@ ekz create cluster [flags]
   # Create EKS-D cluster with a specific version of EKS-D
   ekz create --eksd-version=v1.18.9-eks-1-18-1 cluster
 
+  # Create EKS-D cluster with a short version format
+  # Please use v1.18 for v1.18.9-eks-1-18-3, and v1.19 for v1.19.6-eks-1-19-3.
+  ekz create --eksd-version=v1.18 cluster
+
 ```
 
 ### Options
 
 ```
-      --eksd-version string   specify a version of EKS-D (default "v1.19.6-eks-1-19-1")
+      --eksd-version string   specify a version of EKS-D (default "v1.19.6-eks-1-19-3")
   -h, --help                  help for cluster
       --host                  run in the host mode
       --map-to-host-volume    map /var/lib/k0s to the host directory
