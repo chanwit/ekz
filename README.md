@@ -35,9 +35,9 @@ You could install the CLI with one the following options.
 
 #### Homebrew \(macOS & Linux\)
 
-```bash
-brew install ekz-io/tap/ekz
-```
+| Install | Upgrade |
+|---------|---------|
+|`brew install ekz-io/tap/ekz` | `brew upgrade ekz-io/tap/ekz`
 
 #### CURL One-liner \(macOS & Linux\)
 
@@ -53,20 +53,20 @@ wget -qO- https://bit.ly/install-ekz | bash
 
 #### Scoop \(Windows\)
 
-```text
+```bash
 scoop bucket add ekz-io https://github.com/ekz-io/scoop-ekz.git
 scoop install ekz-io/ekz
 ```
 
 #### Chocolatey \(Windows\)
 
-```text
+```bash
 choco install -y ekz
 ```
 
 Then you can start your first EKS-D cluster using the following command:
 
-```text
+```bash
 ekz create cluster
 ```
 
@@ -74,13 +74,13 @@ You can also use the KIND provider, so that your EKS-D clusters will be KIND-com
 
 Here' the example of using the `--provider=kind` flag:
 
-```text
+```bash
 ekz create cluster --provider=kind
 ```
 
 In case you'd like to use KIND as the default provider, it's better to set the EKZ\_PROVIDER environment variable:
 
-```text
+```bash
 export EKZ_PROVIDER=kind
 ekz create cluster
 ```
