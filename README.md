@@ -102,7 +102,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 ### The EKZ provider
 
 1. EKS-D binaries from v1.18.9-eks-1-18-{1,3}, and v1.19.6-eks-1-19-{1,3}
-2. Packaged with k0s v0.11.0
+2. Packaged with k0s v0.13.0
 3. Amazon Linux 2 base image
 4. Enable network policy by default via the Calico CNI
 5. Bundled with a local storage class
@@ -110,7 +110,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 ### The KIND provider
 
 1. EKS-D binaries from v1.18.9-eks-1-18-{1,3}, and v1.19.6-eks-1-19-{1,3}
-2. Using KIND v0.13
+2. Using KIND v0.10
 3. Packaged using KIND v1.18.x and v1.19.x node images
 4. Enable network policy by default via the Calico CNI
 
