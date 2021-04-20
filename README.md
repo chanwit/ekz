@@ -4,17 +4,17 @@ description: An easy way to run EKS clusters on your desktop
 
 # The EKZ Project
 
-`ekz` is an opinionated Kubernetes distribution built using binaries from [the AWS EKS Distro](https://distro.eks.amazonaws.com/) \(EKS-D\). It aims to be the easiest way to run EKS clusters on desktop.
+`ekz` is an opinionated Kubernetes distribution built using binaries from [the AWS EKS Distro](https://distro.eks.amazonaws.com/) \(EKS-D\). It aims to be the easiest way to run EKS clusters on desktops (Linux, macOS and Windows).
 
 What is EKS-D?
 
 > _EKS-D provides the same software that has enabled tens of thousands of Kubernetes clusters on Amazon EKS._
 
-`ekz` aims at solving the EKS compatibility problem for developers as much as possible by implanting EKS-D binaries to KIND and the k0s project, so that we can easily spin EKS-compatible clusters up to test our Kubernetes applications.
+`ekz` aims at solving the EKS compatibility problems for developers as much as possible by implanting EKS-D binaries to KinD and the k0s projects, so that we can easily spin EKS-compatible clusters up to test our Kubernetes applications.
 
 ## Architecture
 
-The architecture of EKZ has been designed to support EKS-D in multiple implementations, called providers. Currently, we ship the [k0s](https://github.com/k0sproject/k0s)-based \(EKZ provider\), and [KIND](https://github.com/kubernetes-sigs/kind/)-based \(KIND provider\) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
+The architecture of EKZ has been designed to support EKS-D in multiple implementations, called providers. Currently, we ship the [k0s](https://github.com/k0sproject/k0s)-based \(EKZ provider\), and [KinD](https://github.com/kubernetes-sigs/kind/)-based \(KinD provider\) implementations. A provider can be specified when creating a cluster, or via the `EKZ_PROVIDER` variable.
 
 Here's EKS-D versions supported by EKZ.
 
@@ -35,9 +35,14 @@ You could install the CLI with one the following options.
 
 #### Homebrew \(macOS & Linux\)
 
-| Install | Upgrade |
-|---------|---------|
-|`brew install ekz-io/tap/ekz` | `brew upgrade ekz-io/tap/ekz`
+##### Install:
+```bash
+brew install ekz-io/tap/ekz
+```
+##### Upgrade:
+```bash
+brew upgrade ekz-io/tap/ekz
+```
 
 #### CURL One-liner \(macOS & Linux\)
 
