@@ -60,7 +60,7 @@ index 63ffe2c..0daf0ab 100644
  $(bindir)/konnectivity-server: | $(bindir)
  	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
 diff --git a/embedded-bins/Makefile.variables b/embedded-bins/Makefile.variables
-index a930944..a8218d6 100644
+index a930944..7b8c82b 100644
 --- a/embedded-bins/Makefile.variables
 +++ b/embedded-bins/Makefile.variables
 @@ -1,6 +1,8 @@
