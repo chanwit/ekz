@@ -60,13 +60,13 @@ index 63ffe2c..0daf0ab 100644
  $(bindir)/konnectivity-server: | $(bindir)
  	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
 diff --git a/embedded-bins/Makefile.variables b/embedded-bins/Makefile.variables
-index a930944..7b8c82b 100644
+index 168a126..7b8c82b 100644
 --- a/embedded-bins/Makefile.variables
 +++ b/embedded-bins/Makefile.variables
 @@ -1,6 +1,8 @@
  runc_version = 1.0.0-rc93
  containerd_version = 1.4.4
--kubernetes_version = 1.20.5
+-kubernetes_version = 1.20.6
 +kubernetes_version = 1.19.6
  kine_version = 0.6.0
 -etcd_version = 3.4.15
