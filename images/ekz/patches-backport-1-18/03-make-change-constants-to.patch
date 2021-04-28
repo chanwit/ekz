@@ -6,8 +6,8 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 ---
  pkg/component/worker/containerd.go |    2 +-
  pkg/constant/constant_posix.go     |    4 ++--
- pkg/constant/constant_shared.go    |   18 ++++++++++--------
- 3 files changed, 13 insertions(+), 11 deletions(-)
+ pkg/constant/constant_shared.go    |   20 +++++++++++---------
+ 3 files changed, 14 insertions(+), 12 deletions(-)
 
 diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
 index 689d62f..02637dc 100644
@@ -38,7 +38,7 @@ index 548b9b5..8a37f60 100644
  
  func formatPath(dir string, file string) string {
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index 7e96f29..db85aee 100644
+index 11ae12a..0d24fa1 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -12,7 +12,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
@@ -49,7 +49,7 @@ index 7e96f29..db85aee 100644
  	// DataDirMode is the expected directory permissions for DataDirDefault
  	DataDirMode = 0755
  	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
-@@ -50,18 +49,21 @@ const (
+@@ -50,19 +49,22 @@ const (
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
@@ -69,12 +69,14 @@ index 7e96f29..db85aee 100644
 -	KubeProxyImageVersion              = "v1.20.4"
 -	CoreDNSImage                       = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion                = "1.7.0"
+-	CalicoImage                        = "docker.io/calico/cni"
 +	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
 +	MetricsImageVersion                = "v0.4.0" + ImageSuffix
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
 +	KubeProxyImageVersion              = "v1.18.9" + ImageSuffix
 +	CoreDNSImage                       = "public.ecr.aws/eks-distro/coredns/coredns"
 +	CoreDNSImageVersion                = "v1.7.0" + ImageSuffix
- 	CalicoImage                        = "calico/cni"
++	CalicoImage                        = "calico/cni"
  	CalicoImageVersion                 = "v3.16.2"
- 	FlexVolumeImage                    = "calico/pod2daemon-flexvol"
+ 	FlexVolumeImage                    = "docker.io/calico/pod2daemon-flexvol"
+ 	FlexVolumeImageVersion             = "v3.16.2"

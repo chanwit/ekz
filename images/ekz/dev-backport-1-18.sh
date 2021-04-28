@@ -11,6 +11,11 @@ stg import -t -s ../../patches-backport-1-18/series
 
 # Workflow
 # ========
+
+# hack
+#   git commit
+#   stg repair
+# or
 # hack
 #   stg add
 #   stg refresh
