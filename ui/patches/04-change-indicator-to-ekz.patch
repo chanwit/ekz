@@ -1,0 +1,22 @@
+change indicator to ekz
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/ui/indicator.go |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/internal/ui/indicator.go b/internal/ui/indicator.go
+index 0b04b987..b700e43f 100644
+--- a/internal/ui/indicator.go
++++ b/internal/ui/indicator.go
+@@ -45,7 +45,7 @@ func (s *StatusIndicator) StylesChanged(styles *config.Styles) {
+ 	s.SetTextColor(styles.FgColor())
+ }
+ 
+-const statusIndicatorFmt = "[orange::b]K9s [aqua::]%s [white::]%s:%s:%s [lawngreen::]%s[white::]::[darkturquoise::]%s"
++const statusIndicatorFmt = "[orange::b]EKZ [aqua::]%s [white::]%s:%s:%s [lawngreen::]%s[white::]::[darkturquoise::]%s"
+ 
+ // ClusterInfoUpdated notifies the cluster meta was updated.
+ func (s *StatusIndicator) ClusterInfoUpdated(data model.ClusterMeta) {

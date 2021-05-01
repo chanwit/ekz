@@ -1,0 +1,6 @@
+# This series applies on GIT commit a07243dbb09ed8b7727e3229ac0314ed2e475d37
+01-change-to-ekz-logo.patch
+02-tweak-cluster-info.patch
+03-make-makefile-to-output-ekz-ui.patch
+04-change-indicator-to-ekz.patch
+05-tweak-makefile-to-build-static.patch

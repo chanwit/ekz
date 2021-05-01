@@ -1,0 +1,48 @@
+change to ekz logo
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/ui/splash.go |   24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/internal/ui/splash.go b/internal/ui/splash.go
+index ba44f209..3d9beb74 100644
+--- a/internal/ui/splash.go
++++ b/internal/ui/splash.go
+@@ -10,22 +10,22 @@ import (
+ 
+ // LogoSmall K9s small log.
+ var LogoSmall = []string{
+-	` ____  __.________       `,
+-	`|    |/ _/   __   \______`,
+-	`|      < \____    /  ___/`,
+-	`|    |  \   /    /\___ \ `,
+-	`|____|__ \ /____//____  >`,
+-	`        \/            \/ `,
++	`        __            `,
++	`  ____ |  | __________`,
++	`_/ __ \|  |/ /\___   /`,
++	`\  ___/|    <  /    / `,
++	` \___  >__|_ \/_____ \`,
++	`     \/     \/      \/`,
+ }
+ 
+ // LogoBig K9s big logo for splash page.
+ var LogoBig = []string{
+-	` ____  __.________      _________ .____    .___ `,
+-	`|    |/ _/   __   \_____\_   ___ \|    |   |   |`,
+-	`|      < \____    /  ___/    \  \/|    |   |   |`,
+-	`|    |  \   /    /\___ \\     \___|    |___|   |`,
+-	`|____|__ \ /____//____  >\______  /_______ \___|`,
+-	`        \/            \/        \/        \/    `,
++	`_____________    __________       ____ ___.___ `,
++	`\_   _____/  | __\____    /      |    |   \   |`,
++	` |    __)_|  |/ /  /     /   ___ |    |   /   |`,
++	` |        \    <  /     /_  /__/ |    |  /|   |`,
++	`/_______  /__|_ \/_______ \      |______/ |___|`,
++	`        \/     \/        \/                    `,
+ }
+ 
+ // Splash represents a splash screen.

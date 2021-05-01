@@ -1,0 +1,22 @@
+tweak cluster info
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/view/cluster_info.go |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/internal/view/cluster_info.go b/internal/view/cluster_info.go
+index 0d586ba4..47300e62 100644
+--- a/internal/view/cluster_info.go
++++ b/internal/view/cluster_info.go
+@@ -61,7 +61,7 @@ func (c *ClusterInfo) hasMetrics() bool {
+ }
+ 
+ func (c *ClusterInfo) layout() {
+-	for row, section := range []string{"Context", "Cluster", "User", "K9s Rev", "K8s Rev", "CPU", "MEM"} {
++	for row, section := range []string{"Context", "Cluster", "User", "EKZ Ver", "K8s Rev", "CPU", "MEM"} {
+ 		if (section == "CPU" || section == "MEM") && !c.hasMetrics() {
+ 			continue
+ 		}

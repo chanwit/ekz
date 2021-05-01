@@ -1,0 +1,22 @@
+tweak makefile to build static go binary
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index a2a334e9..768c0951 100644
+--- a/Makefile
++++ b/Makefile
+@@ -19,7 +19,7 @@ cover:  ## Run test coverage suite
+ 	@go tool cover --html=cov.out
+ 
+ build:  ## Builds the CLI
+-	@go build \
++	@CGO_ENABLED=0 go build \
+ 	-ldflags "-w -s -X ${PACKAGE}/cmd.version=${VERSION} -X ${PACKAGE}/cmd.commit=${GIT} -X ${PACKAGE}/cmd.date=${DATE}" \
+ 	-a -tags netgo -o execs/${PROG_NAME} main.go
+ 

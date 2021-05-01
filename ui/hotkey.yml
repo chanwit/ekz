@@ -1,0 +1,11 @@
+hotKey:
+
+  f1:
+    shortCut:    F1
+    description: View Git Repositories
+    command:     gitrepositories
+  f2:
+    shortCut:    F2
+    description: View Kustomization
+    command:     kustomizations
+
