@@ -22,6 +22,7 @@ jobs:
         shell: bash
         run: |
           cd ui
+          K9S_VERSION=$(cat K9S_VERSION)
 
           pushd .
           mkdir build/
