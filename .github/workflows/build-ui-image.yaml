@@ -34,9 +34,10 @@ jobs:
           stg import -t -s ../../patches/series
 
           make build
-          docker build -t quay.io/ekz-io/ekz-webui:latest -f Dockerfile.webui .
 
           popd
+          # at UI dir
+          docker build -t quay.io/ekz-io/ekz-webui:latest -f Dockerfile.webui .
           rm -rf build/
       - name: security scan
         shell: bash
