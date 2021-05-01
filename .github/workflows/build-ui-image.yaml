@@ -1,0 +1,57 @@
+name: build-ekz-image
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '.github/workflows/build-ui-image.yaml'
+      - 'ui/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out
+        uses: actions/checkout@v2
+      - name: install stgit
+        shell: bash
+        run: |
+          sudo apt-get install -y stgit
+          git config --global user.name "Chanwit Kaewkasi"
+          git config --global user.email "chanwit@gmail.com"
+      - name: build ui image
+        shell: bash
+        run: |
+          cd ui
+
+          pushd .
+          mkdir build/
+          cd build/
+          git clone https://github.com/derailed/k9s
+          cd k9s
+          git checkout -b build $K9S_VERSION
+          stg init
+          stg import -t -s ../../patches/series
+
+          make build
+          docker build -t quay.io/ekz-io/ekz-webui:latest -f Dockerfile.webui .
+
+          popd
+          rm -rf build/
+      - name: security scan
+        shell: bash
+        run: |
+          wget https://github.com/anchore/grype/releases/download/v0.6.1/grype_0.6.1_linux_amd64.deb
+          sudo apt install -y ./grype_0.6.1_linux_amd64.deb
+
+          grype -f negligible quay.io/ekz-io/ekz-webui:latest
+      - name: push
+        shell: bash
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
+
+          docker push quay.io/ekz-io/ekz-webui:latest
+
+          docker logout quay.io
