@@ -12,6 +12,7 @@ RUN apk update && apk add tmux musl-locales
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8
+ENV COLORTERM truecolor
 
 WORKDIR /root
 ENTRYPOINT ["/bin/ttyd"]
