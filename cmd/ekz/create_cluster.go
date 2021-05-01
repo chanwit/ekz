@@ -90,15 +90,21 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 
 	switch provider {
 	case "ekz":
-		return createClusterEKZ()
+		if err := createClusterEKZ(); err != nil {
+			return err
+		}
 	case "kind":
 		if hostMode == true {
 			return errors.New("the host mode is not supported by the KIND provider")
 		}
-		return createClusterKIND()
+		if err := createClusterKIND(); err != nil {
+			return err
+		}
 	default:
 		return fmt.Errorf("NYI provider: %s", provider)
 	}
+
+	return nil
 }
 
 func waitForNodeStarted(nodeName string, timeout time.Duration) {

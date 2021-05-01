@@ -148,8 +148,8 @@ func createClusterEKZ() error {
 
 	// TODO handle port clash
 	// TODO handle container name clash
-	err = getKubeconfigEKZ(containerName, expandKubeConfigFile())
-	if err != nil {
+
+	if err := getKubeconfigEKZ(containerName, expandKubeConfigFile()); err != nil {
 		return err
 	}
 	logger.Successf("kubeconfig is written to: %s", expandKubeConfigFile())
@@ -157,10 +157,27 @@ func createClusterEKZ() error {
 	logger.Waitingf("waiting for cluster to start ...")
 	waitForNodeStarted("controller", 30*time.Second)
 
-	logger.Actionf("installing the default storageclass ...")
-	err = installDefaultStorageClass()
-	if err != nil {
+	logger.Actionf("installing the default storage class ...")
+	if err := installDefaultStorageClass(); err != nil {
 		return err
+	}
+
+	if hostMode == false {
+		bridgeName := fmt.Sprintf("ekz-%s-bridge", clusterName)
+		ipRangeVar := script.Var()
+		script.Exec("docker", "inspect", "-f", `{{range .IPAM.Config}}{{.Subnet}}{{end}}`, bridgeName).To(ipRangeVar)
+		parts := strings.SplitN(ipRangeVar.String(), ".", 4)
+		if len(parts) != 4 {
+			return errors.Errorf("error parsing subnet: %s", ipRangeVar.String())
+		}
+
+		// not vert safe range but ok to be .200-220 for a bridge subnet
+		ipRange := strings.Join(parts[0:3], ".") + ".200-" + strings.Join(parts[0:3], ".") + ".220"
+
+		logger.Actionf("installing the default load balancer using IP range: %s ...", ipRange)
+		if err := installLoadBalancer(ipRange); err != nil {
+			return err
+		}
 	}
 
 	logger.Waitingf("waiting for cluster to be ready ...")
@@ -172,4 +189,22 @@ func createClusterEKZ() error {
 
 func installDefaultStorageClass() error {
 	return script.Echo(manifests.StorageClass).Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(), "apply", "-f", "-").Run()
+}
+
+func installLoadBalancer(ipRange string) error {
+	err := script.Echo(manifests.MetalLB).
+		Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(), "apply", "-f", "-").
+		Run()
+	if err != nil {
+		return err
+	}
+
+	err = script.Echo(fmt.Sprintf(manifests.MetalLBConfig, ipRange)).
+		Exec("kubectl", "--kubeconfig="+expandKubeConfigFile(), "apply", "-f", "-").
+		Run()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

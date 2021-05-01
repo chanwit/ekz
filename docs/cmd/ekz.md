@@ -54,4 +54,5 @@ All EKS-D cluster is single-node and run inside Docker.
 * [ekz get](ekz_get.md)	 - Get properties of an EKS-D cluster
 * [ekz list](ekz_list.md)	 - List clusters
 * [ekz load](ekz_load.md)	 - Load artifacts into the cluster
+* [ekz ui](ekz_ui.md)	 - Start the UI
 

@@ -14,6 +14,10 @@ vet:
 test: tidy fmt vet docs
 	go test ./... -coverprofile cover.out
 
+build-ui:
+	( cd ui && bash -x ./dev.sh )
+	( cd ui && bash -x ./build.sh )
+
 build:
 	CGO_ENABLED=0 go build -o ./bin/ekz ./cmd/ekz
 
