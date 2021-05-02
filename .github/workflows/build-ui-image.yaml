@@ -1,6 +1,8 @@
 name: build-ekz-image
 on:
   push:
+    tags:
+      - "v*"
     branches:
       - 'main'
     paths:
@@ -33,7 +35,8 @@ jobs:
           stg init
           stg import -t -s ../../patches/series
 
-          make build
+          # retrieve tag from GITHUB_REF
+          make build VERSION="${GITHUB_REF#refs/*/}"
 
           popd
           # at UI dir
