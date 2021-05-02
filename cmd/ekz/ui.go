@@ -66,16 +66,22 @@ func waitForServices(services []string, timeOut time.Duration) error {
 }
 
 func uiCmdRun(cmd *cobra.Command, args []string) error {
+	uiImage := "quay.io/ekz-io/ekz-webui:latest"
+	logger.Waitingf("pulling the UI image: %s ...", uiImage)
+	if err := script.Exec("docker", "pull", uiImage).Run(); err != nil {
+		return err
+	}
+
 	go func() {
 		waitForServices([]string{"localhost:8080"}, 20*time.Second)
 		openBrowser("http://localhost:8080")
 	}()
 	logger.Successf("EKZ UI started at http://localhost:8080 ...")
-	logger.Waitingf("Press Ctrl + C to stop the UI.")
+	logger.Waitingf("press Ctrl + C to stop the UI.")
 	err := script.Exec("docker", "run",
 		"--rm", "--network=host",
 		"-v", expandKubeConfigFile()+":/root/.kube/config",
-		"quay.io/ekz-io/ekz-webui:latest",
+		uiImage,
 	).Run()
 
 	return err
