@@ -9,3 +9,5 @@
 08-implement-double-click-to.patch
 09-fix-mouse-capture-for-guage.patch
 10-make-treeview-selection-looks.patch
+11-add-mouse-support-for-spark-1.patch
+12-improve-nav-tree-behaviour.patch

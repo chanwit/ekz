@@ -1,0 +1,51 @@
+add mouse support for spark line
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/tchart/sparkline.go |   13 +++++++++++++
+ internal/view/pulse.go       |    6 ++++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/internal/tchart/sparkline.go b/internal/tchart/sparkline.go
+index 3874ab4f..05c17cc0 100644
+--- a/internal/tchart/sparkline.go
++++ b/internal/tchart/sparkline.go
+@@ -117,6 +117,19 @@ func (s *SparkLine) Draw(screen tcell.Screen) {
+ 	}
+ }
+ 
++func (s *SparkLine) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
++	return s.WrapMouseHandler(func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
++		if action == tview.MouseLeftClick && s.InRect(event.Position()) {
++			setFocus(s)
++			consumed = true
++		} else if action == tview.MouseLeftDoubleClick && s.InRect(event.Position()) {
++			setFocus(s)
++			consumed = true
++		}
++		return
++	})
++}
++
+ func (s *SparkLine) drawBlock(r image.Rectangle, screen tcell.Screen, x, y int, b block, c tcell.Color) {
+ 	style := tcell.StyleDefault.Foreground(c).Background(s.bgColor)
+ 
+diff --git a/internal/view/pulse.go b/internal/view/pulse.go
+index 663f7ba2..7b47d4a2 100644
+--- a/internal/view/pulse.go
++++ b/internal/view/pulse.go
+@@ -340,6 +340,12 @@ func (p *Pulse) makeSP(loc image.Point, span image.Point, gvr string) *tchart.Sp
+ 	}
+ 	s.SetLegend(fmt.Sprintf(" %s ", strings.Title(client.NewGVR(gvr).R())))
+ 	s.SetInputCapture(p.keyboard)
++	s.SetMouseCapture(func(action tview.MouseAction, event *tcell.EventMouse) (tview.MouseAction, *tcell.EventMouse) {
++		if action == tview.MouseLeftDoubleClick {
++			p.enterCmd(&tcell.EventKey{})
++		}
++		return action, event
++	})
+ 	s.SetMultiSeries(true)
+ 	p.AddItem(s, loc.X, loc.Y, span.X, span.Y, 0, 0, true)
+ 
