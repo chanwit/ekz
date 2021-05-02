@@ -1,0 +1,76 @@
+make treeview selection looks better
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/view/app.go |   48 +++++++++++++++++++++++++++---------------------
+ 1 file changed, 27 insertions(+), 21 deletions(-)
+
+diff --git a/internal/view/app.go b/internal/view/app.go
+index 4ab9788e..7fba6b7c 100644
+--- a/internal/view/app.go
++++ b/internal/view/app.go
+@@ -137,35 +137,41 @@ func (a *App) layout(ctx context.Context) {
+ 	main.AddItem(flash, 1, 1, false)
+ 
+ 	dashboardResources := tview.NewTreeView()
++	commonResources := tview.NewTreeView()
++
+ 	dashboardResources.SetRoot(tview.NewTreeNode("Dashboards").SetColor(a.Styles.Title().FgColor.Color()).
+ 		AddChild(tview.NewTreeNode("Pulse").SetSelectedFunc(func() {
+-		a.gotoResource("pulse", "", true)
+-	})).
++			commonResources.SetCurrentNode(nil)
++			a.gotoResource("pulse", "", true)
++		})).
+ 		AddChild(tview.NewTreeNode("Popeye View").SetSelectedFunc(func() {
+-		a.gotoResource("popeye", "", true)
+-	})).
++			commonResources.SetCurrentNode(nil)
++			a.gotoResource("popeye", "", true)
++		})).
+ 		AddChild(tview.NewTreeNode("GitOps").SetSelectedFunc(func() {
+-		a.gotoResource("gitops", "", true)
+-	})))
+-
+-	commonResources := tview.NewTreeView()
+-	root := tview.NewTreeNode("Common").SetColor(a.Styles.Title().FgColor.Color())
+-	root.AddChild(tview.NewTreeNode("Namespaces").SetSelectedFunc(func() {
+-		a.gotoResource("ns", "", true)
+-	}))
+-	root.AddChild(tview.NewTreeNode("Pods").SetSelectedFunc(func() {
+-		a.gotoResource("pods all", "", true)
+-	}))
+-	root.AddChild(tview.NewTreeNode("Deployments").SetSelectedFunc(func() {
+-		a.gotoResource("deployment all", "", true)
+-	}))
+-	commonResources.SetRoot(root)
++			commonResources.SetCurrentNode(nil)
++			a.gotoResource("gitops", "", true)
++		})))
++
++	commonResources.SetRoot(tview.NewTreeNode("Common").SetColor(a.Styles.Title().FgColor.Color()).
++		AddChild(tview.NewTreeNode("Namespaces").SetSelectedFunc(func() {
++			dashboardResources.SetCurrentNode(nil)
++			a.gotoResource("ns", "", true)
++		})).
++		AddChild(tview.NewTreeNode("Pods").SetSelectedFunc(func() {
++			dashboardResources.SetCurrentNode(nil)
++			a.gotoResource("pods all", "", true)
++		})).
++		AddChild(tview.NewTreeNode("Deployments").SetSelectedFunc(func() {
++			dashboardResources.SetCurrentNode(nil)
++			a.gotoResource("deployment all", "", true)
++		})))
+ 
+ 	nav := tview.NewFlex().SetDirection(tview.FlexRow).
+ 		AddItem(dashboardResources, 4, 0, false).
+ 		AddItem(commonResources, 4, 0, false)
+-    nav.SetBorder(true).
+-		SetBorderPadding(0,0,1,1).
++	nav.SetBorder(true).
++		SetBorderPadding(0, 0, 1, 1).
+ 		SetTitleAlign(tview.AlignLeft).
+ 		SetTitleColor(a.Styles.Title().FgColor.Color()).
+ 		SetTitle("Resources")
