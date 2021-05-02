@@ -1,0 +1,64 @@
+fix mouse capture for guage
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/tchart/gauge.go |   13 +++++++++++++
+ internal/view/pulse.go   |   12 ++++++------
+ 2 files changed, 19 insertions(+), 6 deletions(-)
+
+diff --git a/internal/tchart/gauge.go b/internal/tchart/gauge.go
+index e8f4eb6b..bfd7904a 100644
+--- a/internal/tchart/gauge.go
++++ b/internal/tchart/gauge.go
+@@ -143,6 +143,19 @@ func (g *Gauge) drawDial(sc tcell.Screen, m Matrix, o image.Point, style tcell.S
+ 	}
+ }
+ 
++func (g *Gauge) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
++	return g.WrapMouseHandler(func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
++		if action == tview.MouseLeftClick && g.InRect(event.Position()) {
++			setFocus(g)
++			consumed = true
++		} else if action == tview.MouseLeftDoubleClick && g.InRect(event.Position()) {
++			setFocus(g)
++			consumed = true
++		}
++		return
++	})
++}
++
+ // ----------------------------------------------------------------------------
+ // Helpers...
+ 
+diff --git a/internal/view/pulse.go b/internal/view/pulse.go
+index a56f8462..663f7ba2 100644
+--- a/internal/view/pulse.go
++++ b/internal/view/pulse.go
+@@ -100,12 +100,6 @@ func (p *Pulse) Init(ctx context.Context) error {
+ 		)
+ 	}
+ 	p.bindKeys()
+-	p.SetMouseCapture(func(action tview.MouseAction, event *tcell.EventMouse) (tview.MouseAction, *tcell.EventMouse) {
+-		if action == tview.MouseLeftDoubleClick {
+-			p.enterCmd(&tcell.EventKey{})
+-		}
+-		return action, event
+-	})
+ 
+ 	p.model.AddListener(p)
+ 	p.app.SetFocus(p.charts[0])
+@@ -364,6 +358,12 @@ func (p *Pulse) makeGA(loc image.Point, span image.Point, gvr string) *tchart.Ga
+ 	}
+ 	g.SetLegend(fmt.Sprintf(" %s ", strings.Title(client.NewGVR(gvr).R())))
+ 	g.SetInputCapture(p.keyboard)
++	g.SetMouseCapture(func(action tview.MouseAction, event *tcell.EventMouse) (tview.MouseAction, *tcell.EventMouse) {
++		if action == tview.MouseLeftDoubleClick {
++			p.enterCmd(&tcell.EventKey{})
++		}
++		return action, event
++	})
+ 	p.AddItem(g, loc.X, loc.Y, span.X, span.Y, 0, 0, true)
+ 
+ 	return g

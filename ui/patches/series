@@ -4,3 +4,7 @@
 03-make-makefile-to-output-ekz-ui.patch
 04-change-indicator-to-ekz.patch
 05-tweak-makefile-to-build-static.patch
+06-implement-nav-bar.patch
+07-improve-nav-bar.patch
+08-implement-double-click-to.patch
+09-fix-mouse-capture-for-guage.patch

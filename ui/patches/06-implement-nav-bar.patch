@@ -1,0 +1,118 @@
+implement nav bar
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/ui/app.go   |   15 ++++++++++-----
+ internal/view/app.go |   47 ++++++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 52 insertions(+), 10 deletions(-)
+
+diff --git a/internal/ui/app.go b/internal/ui/app.go
+index b17eaa4f..108760c6 100644
+--- a/internal/ui/app.go
++++ b/internal/ui/app.go
+@@ -94,15 +94,20 @@ func (a *App) BufferChanged(s string) {}
+ 
+ // BufferActive indicates the buff activity changed.
+ func (a *App) BufferActive(state bool, kind model.BufferKind) {
+-	flex, ok := a.Main.GetPrimitive("main").(*tview.Flex)
++	mainHolder, ok := a.Views()["main_holder"].(*tview.Flex)
+ 	if !ok {
+ 		return
+ 	}
+ 
+-	if state && flex.ItemAt(1) != a.Prompt() {
+-		flex.AddItemAtIndex(1, a.Prompt(), 3, 1, false)
+-	} else if !state && flex.ItemAt(1) == a.Prompt() {
+-		flex.RemoveItemAtIndex(1)
++	flex, ok := mainHolder.ItemAt(1).(*tview.Flex)
++	if !ok {
++		return
++	}
++
++	if state && flex.ItemAt(0) != a.Prompt() {
++		flex.AddItemAtIndex(0, a.Prompt(), 3, 1, false)
++	} else if !state && flex.ItemAt(0) == a.Prompt() {
++		flex.RemoveItemAtIndex(0)
+ 		a.SetFocus(flex)
+ 	}
+ }
+diff --git a/internal/view/app.go b/internal/view/app.go
+index b988aa40..da012376 100644
+--- a/internal/view/app.go
++++ b/internal/view/app.go
+@@ -127,14 +127,47 @@ func (a *App) layout(ctx context.Context) {
+ 	go flash.Watch(ctx, a.Flash().Channel())
+ 
+ 	main := tview.NewFlex().SetDirection(tview.FlexRow)
+-	main.AddItem(a.statusIndicator(), 1, 1, false)
++	// 0
++	// main.AddItem(nil, 1, 1, false)
++	// 1
+ 	main.AddItem(a.Content, 0, 10, true)
+ 	if !a.Config.K9s.IsCrumbsless() {
+ 		main.AddItem(a.Crumbs(), 1, 1, false)
+ 	}
+ 	main.AddItem(flash, 1, 1, false)
+ 
+-	a.Main.AddPage("main", main, true, false)
++	tree := tview.NewTreeView()
++	root := tview.NewTreeNode("Common").SetColor(a.Styles.Title().FgColor.Color())
++	root.AddChild(tview.NewTreeNode("Namespaces").SetSelectedFunc(func() {
++		a.gotoResource("ns", "", true)
++	}))
++	root.AddChild(tview.NewTreeNode("Pods").SetSelectedFunc(func() {
++		a.gotoResource("pods all", "", true)
++	}))
++	root.AddChild(tview.NewTreeNode("Deployments").SetSelectedFunc(func() {
++		a.gotoResource("deployment all", "", true)
++	}))
++	tree.SetRoot(root)
++
++	nav := tview.NewFlex().SetDirection(tview.FlexRow).
++		AddItem(tree, 0, 1, false)
++    nav.SetBorder(true).
++		SetBorderPadding(0,0,1,1).
++		SetTitleAlign(tview.AlignLeft).
++		SetTitleColor(a.Styles.Title().FgColor.Color()).
++		SetTitle("Resources")
++
++	mainHolder := tview.NewFlex().SetDirection(tview.FlexRow)
++	a.Views()["main_holder"] = mainHolder
++	a.Views()["top"] = tview.NewFlex().SetDirection(tview.FlexRow)
++
++	flex := tview.NewFlex().
++		AddItem(nav, 25, 1, false).
++		AddItem(mainHolder.
++			AddItem(a.Views()["top"], 0, 1, false).
++			AddItem(main, 0, 4, false), 0, 2, false)
++
++	a.Main.AddPage("main", flex, true, false)
+ 	a.Main.AddPage("splash", ui.NewSplash(a.Styles, a.version), true, true)
+ 	a.toggleHeader(!a.Config.K9s.IsHeadless(), !a.Config.K9s.IsLogoless())
+ }
+@@ -201,16 +234,20 @@ func (a *App) ActiveView() model.Component {
+ func (a *App) toggleHeader(header, logo bool) {
+ 	a.showHeader = header
+ 	a.showLogo = logo
+-	flex, ok := a.Main.GetPrimitive("main").(*tview.Flex)
++
++	mainHolder, _ := a.Views()["main_holder"].(*tview.Flex)
++	flex, ok := a.Views()["top"].(*tview.Flex) // a.Main.GetPrimitive("main").(*tview.Flex)
+ 	if !ok {
+ 		log.Fatal().Msg("Expecting valid flex view")
+ 	}
+ 	if a.showHeader {
+-		flex.RemoveItemAtIndex(0)
++		flex.Clear()
+ 		flex.AddItemAtIndex(0, a.buildHeader(), 7, 1, false)
++		mainHolder.ResizeItem(flex, 0, 1)
+ 	} else {
+-		flex.RemoveItemAtIndex(0)
++		flex.Clear()
+ 		flex.AddItemAtIndex(0, a.statusIndicator(), 1, 1, false)
++		mainHolder.ResizeItem(flex, 1, 0)
+ 	}
+ }
+ 

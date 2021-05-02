@@ -1,0 +1,54 @@
+implement double click to enter
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/view/browser.go |    8 ++++++++
+ internal/view/pulse.go   |    7 +++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/internal/view/browser.go b/internal/view/browser.go
+index daeeebda..737ec55f 100644
+--- a/internal/view/browser.go
++++ b/internal/view/browser.go
+@@ -4,6 +4,7 @@ import (
+ 	"context"
+ 	"errors"
+ 	"fmt"
++	"github.com/derailed/tview"
+ 	"sort"
+ 	"strconv"
+ 	"strings"
+@@ -70,6 +71,13 @@ func (b *Browser) Init(ctx context.Context) error {
+ 		return err
+ 	}
+ 
++	b.SetMouseCapture(func(action tview.MouseAction, event *tcell.EventMouse) (tview.MouseAction, *tcell.EventMouse) {
++		if action == tview.MouseLeftDoubleClick {
++			b.enterCmd(&tcell.EventKey{})
++		}
++		return action, event
++	})
++
+ 	b.setNamespace(ns)
+ 	row, _ := b.GetSelection()
+ 	if row == 0 && b.GetRowCount() > 0 {
+diff --git a/internal/view/pulse.go b/internal/view/pulse.go
+index d0e2540a..a56f8462 100644
+--- a/internal/view/pulse.go
++++ b/internal/view/pulse.go
+@@ -100,6 +100,13 @@ func (p *Pulse) Init(ctx context.Context) error {
+ 		)
+ 	}
+ 	p.bindKeys()
++	p.SetMouseCapture(func(action tview.MouseAction, event *tcell.EventMouse) (tview.MouseAction, *tcell.EventMouse) {
++		if action == tview.MouseLeftDoubleClick {
++			p.enterCmd(&tcell.EventKey{})
++		}
++		return action, event
++	})
++
+ 	p.model.AddListener(p)
+ 	p.app.SetFocus(p.charts[0])
+ 	p.app.Styles.AddListener(p)
