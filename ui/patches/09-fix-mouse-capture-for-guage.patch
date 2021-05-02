@@ -9,7 +9,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  2 files changed, 19 insertions(+), 6 deletions(-)
 
 diff --git a/internal/tchart/gauge.go b/internal/tchart/gauge.go
-index e8f4eb6b..bfd7904a 100644
+index eef478a6..1b3f4262 100644
 --- a/internal/tchart/gauge.go
 +++ b/internal/tchart/gauge.go
 @@ -143,6 +143,19 @@ func (g *Gauge) drawDial(sc tcell.Screen, m Matrix, o image.Point, style tcell.S

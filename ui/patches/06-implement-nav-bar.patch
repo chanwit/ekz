@@ -39,7 +39,7 @@ index b17eaa4f..108760c6 100644
  	}
  }
 diff --git a/internal/view/app.go b/internal/view/app.go
-index b988aa40..da012376 100644
+index d1803aab..16671b52 100644
 --- a/internal/view/app.go
 +++ b/internal/view/app.go
 @@ -127,14 +127,47 @@ func (a *App) layout(ctx context.Context) {

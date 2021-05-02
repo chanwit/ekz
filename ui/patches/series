@@ -1,4 +1,4 @@
-# This series applies on GIT commit a07243dbb09ed8b7727e3229ac0314ed2e475d37
+# This series applies on GIT commit 8b19bfe537d932ce08571eb8a63be448ab38f7f4
 01-change-to-ekz-logo.patch
 02-tweak-cluster-info.patch
 03-make-makefile-to-output-ekz-ui.patch

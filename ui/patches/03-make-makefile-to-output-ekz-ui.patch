@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 10 insertions(+), 8 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 0a828c7b..a2a334e9 100644
+index 5ca13d78..c18c53b5 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,11 +1,13 @@
@@ -21,12 +21,12 @@ index 0a828c7b..a2a334e9 100644
 +GIT          := $(shell git rev-parse --short HEAD)
  SOURCE_DATE_EPOCH ?= $(shell date +%s)
 -DATE    := $(shell date -u -d @${SOURCE_DATE_EPOCH} +"%Y-%m-%dT%H:%M:%SZ")
--VERSION  ?= v0.24.7
+-VERSION  ?= v0.24.8
 -IMG_NAME := derailed/k9s
 -IMAGE    := ${IMG_NAME}:${VERSION}
 +DATE         := $(shell date -u -d @${SOURCE_DATE_EPOCH} +"%Y-%m-%dT%H:%M:%SZ")
 +VERSION      ?= v0.3.3
-+K9S_VERSION  ?= v0.24.7
++K9S_VERSION  ?= v0.24.8
 +IMG_NAME     := quay.io/ekz-io/${PROG_NAME}
 +IMAGE        := ${IMG_NAME}:${VERSION}
  

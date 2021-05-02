@@ -8,7 +8,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 16 insertions(+), 3 deletions(-)
 
 diff --git a/internal/view/app.go b/internal/view/app.go
-index da012376..4ab9788e 100644
+index 16671b52..d06b0566 100644
 --- a/internal/view/app.go
 +++ b/internal/view/app.go
 @@ -136,7 +136,19 @@ func (a *App) layout(ctx context.Context) {
