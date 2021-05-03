@@ -78,13 +78,23 @@ func uiCmdRun(cmd *cobra.Command, args []string) error {
 	}()
 	logger.Successf("EKZ UI started at http://localhost:8080 ...")
 	logger.Waitingf("press Ctrl + C to stop the UI.")
-	err := script.Exec("docker", "run",
-		"--rm", "--network=host",
-		"-v", expandKubeConfigFile()+":/root/.kube/config",
-		uiImage,
-	).Run()
 
-	return err
+	if verbose {
+		out, err := script.Exec("docker", "run", "--network=host",
+			"-v", expandKubeConfigFile()+":/root/.kube/config",
+			uiImage,
+		).CombinedOutput()
+		fmt.Print(string(out))
+		return err
+	} else {
+		err := script.Exec("docker", "run",
+			"--rm", "--network=host",
+			"-v", expandKubeConfigFile()+":/root/.kube/config",
+			uiImage,
+		).Run()
+		return err
+	}
+
 }
 
 func init() {
