@@ -17,7 +17,7 @@ index 79f46a4..ef5d1c8 100644
  	dirMode := dirInfo.Mode().Perm()
 -	if dirMode != perm {
 +	// TODO a small hack when running inside OpenShift
-+	if dirMode != perm && dirMode != 0775 && dirMode != 0777 {
++	if dirMode != perm || dirMode != 0775 || dirMode != 0777 {
  		if runtime.GOOS != "windows" {
  			return fmt.Errorf("directory %q exist, but the permission is %#o. The expected permission is %o", path, dirMode, perm)
  		}
