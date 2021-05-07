@@ -1,4 +1,4 @@
-make change constants to support 1.19
+make change constants to support 1.18
 
 From: Chanwit Kaewkasi <chanwit@gmail.com>
 
@@ -33,7 +33,7 @@ index 548b9b5..8a37f60 100644
 -	KubePauseContainerImage        = "k8s.gcr.io/pause"
 -	KubePauseContainerImageVersion = "3.2"
 +	KubePauseContainerImage        = "public.ecr.aws/eks-distro/kubernetes/pause"
-+	KubePauseContainerImageVersion = "v1.18.9" + ImageSuffix
++	KubePauseContainerImageVersion = "v1.18.16" + ImageSuffix
  )
  
  func formatPath(dir string, file string) string {
@@ -58,7 +58,7 @@ index 11ae12a..0d24fa1 100644
  	// DefaultPSP defines the system level default PSP to apply
  	DefaultPSP = "00-k0s-privileged"
 +	// Image suffix for EKS-D
-+	ImageSuffix = "-eks-1-18-3"
++	ImageSuffix = "-eks-1-18-4"
 +
  	// Image Constants
  	KonnectivityImage                  = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
@@ -73,7 +73,7 @@ index 11ae12a..0d24fa1 100644
 +	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
 +	MetricsImageVersion                = "v0.4.0" + ImageSuffix
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
-+	KubeProxyImageVersion              = "v1.18.9" + ImageSuffix
++	KubeProxyImageVersion              = "v1.18.16" + ImageSuffix
 +	CoreDNSImage                       = "public.ecr.aws/eks-distro/coredns/coredns"
 +	CoreDNSImageVersion                = "v1.7.0" + ImageSuffix
 +	CalicoImage                        = "calico/cni"

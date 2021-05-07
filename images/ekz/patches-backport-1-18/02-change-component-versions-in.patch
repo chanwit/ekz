@@ -67,10 +67,10 @@ index 168a126..1c36e7e 100644
  runc_version = 1.0.0-rc93
  containerd_version = 1.4.4
 -kubernetes_version = 1.20.6
-+kubernetes_version = 1.18.9
++kubernetes_version = 1.18.16
  kine_version = 0.6.0
 -etcd_version = 3.4.15
 +etcd_version = 3.4.14
  konnectivity_version = 0.0.14
 +crictl_version = 1.18.0
-+eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/3
++eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-18/releases/4
