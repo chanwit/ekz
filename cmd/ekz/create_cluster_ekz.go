@@ -33,10 +33,14 @@ func createClusterEKZ() error {
 		ekzImageBuild = "8"
 	case "v1.18.9-eks-1-18-3":
 		ekzImageBuild = "4"
+	case "v1.18.16-eks-1-18-4":
+		ekzImageBuild = "0"
 	case "v1.19.6-eks-1-19-1":
 		ekzImageBuild = "6"
 	case "v1.19.6-eks-1-19-3":
 		ekzImageBuild = "2"
+	case "v1.19.8-eks-1-19-4":
+		ekzImageBuild = "0"
 	}
 
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
@@ -171,10 +175,15 @@ func createClusterEKZ() error {
 			return errors.Errorf("error parsing subnet: %s", ipRangeVar.String())
 		}
 
-		// not vert safe range but ok to be .200-220 for a bridge subnet
+		// TODO: not very a safe range but ok to be .200-220 of a bridge subnet for now
 		ipRange := strings.Join(parts[0:3], ".") + ".200-" + strings.Join(parts[0:3], ".") + ".220"
 
-		logger.Actionf("installing the default load balancer using IP range: %s ...", ipRange)
+		if verbose {
+			logger.Actionf("installing the default load balancer using IP range: %s ...", ipRange)
+		} else {
+			logger.Actionf("installing the default load balancer ...")
+		}
+
 		if err := installLoadBalancer(ipRange); err != nil {
 			return err
 		}

@@ -72,7 +72,7 @@ func init() {
 		os.Exit(1)
 	}
 
-	rootCmd.PersistentFlags().StringVar(&provider, "provider", defaultProvider, "cluster provider possible values: \"ekz\", \"kind\". env: EKZ_PROVIDER")
+	rootCmd.PersistentFlags().StringVarP(&provider, "provider", "p", defaultProvider, "cluster provider possible values: \"ekz\", \"kind\". env: EKZ_PROVIDER")
 	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "run verbosely")
 }
 
