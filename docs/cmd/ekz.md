@@ -43,7 +43,7 @@ All EKS-D cluster is single-node and run inside Docker.
 
 ```
   -h, --help              help for ekz
-      --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
+  -p, --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 

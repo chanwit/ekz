@@ -15,7 +15,7 @@ The delete sub-commands delete EKS-D clusters.
 ### Options inherited from parent commands
 
 ```
-      --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
+  -p, --provider string   cluster provider possible values: "ekz", "kind". env: EKZ_PROVIDER (default "ekz")
       --verbose           run verbosely
 ```
 
