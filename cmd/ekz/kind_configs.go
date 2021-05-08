@@ -2,17 +2,19 @@ package main
 
 import "fmt"
 
-func getKindConfig(eksdVersion string, suffix string) string {
+func getKindConfig(eksdVersion string, suffix string) (string, error) {
 	switch eksdVersion {
 	case "v1.18.9-eks-1-18-1":
 	case "v1.18.9-eks-1-18-3":
-		return getKindConfig1_18(eksdVersion, suffix)
+	case "v1.18.16-eks-1-18-4":
+		return getKindConfig1_18(eksdVersion, suffix), nil
 	case "v1.19.6-eks-1-19-1":
 	case "v1.19.6-eks-1-19-3":
-		return getKindConfig1_19(eksdVersion, suffix)
+	case "v1.19.8-eks-1-19-4":
+		return getKindConfig1_19(eksdVersion, suffix), nil
 	}
 	// TODO return error
-	return ""
+	return "", fmt.Errorf("getKindConfig: does not support eksVersion: %s", eksdVersion)
 }
 
 func getKindConfig1_18(eksdVersion string, suffix string) string {

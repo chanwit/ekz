@@ -46,7 +46,10 @@ func createClusterKIND() error {
 	}
 	suffix := parts[1]
 
-	config := getKindConfig(eksdVersion, suffix)
+	config, err := getKindConfig(eksdVersion, suffix)
+	if err != nil {
+		return err
+	}
 
 	logger.Actionf("creating cluster: %s ...", clusterName)
 
