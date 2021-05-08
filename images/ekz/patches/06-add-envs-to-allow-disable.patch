@@ -1,0 +1,45 @@
+add envs to allow disable sched and controller manager
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ cmd/controller/controller.go |   25 +++++++++++++++----------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
+
+diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
+index de5bef4..0632797 100644
+--- a/cmd/controller/controller.go
++++ b/cmd/controller/controller.go
+@@ -204,16 +204,21 @@ func (c *CmdOpts) startController() error {
+ 			KubeClientFactory: adminClientFactory,
+ 		})
+ 	}
+-	componentManager.Add(&controller.Scheduler{
+-		ClusterConfig: c.ClusterConfig,
+-		LogLevel:      c.Logging["kube-scheduler"],
+-		K0sVars:       c.K0sVars,
+-	})
+-	componentManager.Add(&controller.Manager{
+-		ClusterConfig: c.ClusterConfig,
+-		LogLevel:      c.Logging["kube-controller-manager"],
+-		K0sVars:       c.K0sVars,
+-	})
++	if os.Getenv("EKZ_DISABLE_SCHEDULER") != "1" {
++		componentManager.Add(&controller.Scheduler{
++			ClusterConfig: c.ClusterConfig,
++			LogLevel:      c.Logging["kube-scheduler"],
++			K0sVars:       c.K0sVars,
++		})
++	}
++
++	if os.Getenv("EKZ_DISABLE_CONTROLLER_MANAGER") != "1" {
++		componentManager.Add(&controller.Manager{
++			ClusterConfig: c.ClusterConfig,
++			LogLevel:      c.Logging["kube-controller-manager"],
++			K0sVars:       c.K0sVars,
++		})
++	}
+ 
+ 	// One leader elector per controller
+ 	var leaderElector controller.LeaderElector

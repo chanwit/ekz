@@ -4,3 +4,4 @@
 03-make-change-constants-to.patch
 04-hack-to-make-it-pass.patch
 05-add-flux-v0.13.2-manifests.patch
+06-add-envs-to-allow-disable.patch
