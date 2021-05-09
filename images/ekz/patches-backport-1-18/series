@@ -6,3 +6,4 @@
 05-add-flux-v0.13.2-manifests.patch
 06-add-envs-to-allow-disable.patch
 07-add-envs-to-toggle-kubeproxy.patch
+08-add-env-for-external-address.patch
