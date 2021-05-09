@@ -1,0 +1,46 @@
+add envs to toggle kubeproxy and coredns
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ cmd/controller/controller.go |   24 ++++++++++++++----------
+ 1 file changed, 14 insertions(+), 10 deletions(-)
+
+diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
+index 0632797..8c169f0 100644
+--- a/cmd/controller/controller.go
++++ b/cmd/controller/controller.go
+@@ -356,18 +356,22 @@ func (c *CmdOpts) createClusterReconcilers(cf kubernetes.ClientFactory, leaderEl
+ 		reconcilers["default-psp"] = defaultPSP
+ 	}
+ 
+-	proxy, err := controller.NewKubeProxy(c.ClusterConfig, c.K0sVars)
+-	if err != nil {
+-		logrus.Warnf("failed to initialize kube-proxy reconciler: %s", err.Error())
+-	} else {
+-		reconcilers["kube-proxy"] = proxy
++	if os.Getenv("EKZ_DISABLE_KUBEPROXY") != "1" {
++		proxy, err := controller.NewKubeProxy(c.ClusterConfig, c.K0sVars)
++		if err != nil {
++			logrus.Warnf("failed to initialize kube-proxy reconciler: %s", err.Error())
++		} else {
++			reconcilers["kube-proxy"] = proxy
++		}
+ 	}
+ 
+-	coreDNS, err := controller.NewCoreDNS(c.ClusterConfig, c.K0sVars, cf)
+-	if err != nil {
+-		logrus.Warnf("failed to initialize CoreDNS reconciler: %s", err.Error())
+-	} else {
+-		reconcilers["coredns"] = coreDNS
++	if os.Getenv("EKZ_DISABLE_COREDNS") != "1" {
++		coreDNS, err := controller.NewCoreDNS(c.ClusterConfig, c.K0sVars, cf)
++		if err != nil {
++			logrus.Warnf("failed to initialize CoreDNS reconciler: %s", err.Error())
++		} else {
++			reconcilers["coredns"] = coreDNS
++		}
+ 	}
+ 
+ 	logrus.Infof("initializing network reconciler for provider %s", c.ClusterConfig.Spec.Network.Provider)
