@@ -31,16 +31,18 @@ func createClusterEKZ() error {
 	switch eksdVersion {
 	case "v1.18.9-eks-1-18-1":
 		ekzImageBuild = "8"
-	case "v1.18.9-eks-1-18-3":
-		ekzImageBuild = "4"
-	case "v1.18.16-eks-1-18-4":
-		ekzImageBuild = "0"
 	case "v1.19.6-eks-1-19-1":
 		ekzImageBuild = "6"
+
+	case "v1.18.9-eks-1-18-3":
+		ekzImageBuild = "4"
 	case "v1.19.6-eks-1-19-3":
 		ekzImageBuild = "2"
+
+	case "v1.18.16-eks-1-18-4":
+		ekzImageBuild = "4"
 	case "v1.19.8-eks-1-19-4":
-		ekzImageBuild = "0"
+		ekzImageBuild = "4"
 	}
 
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
