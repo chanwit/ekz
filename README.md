@@ -20,9 +20,9 @@ Here's EKS-D versions supported by EKZ.
 
 | EKS-D version       | EKZ provider  | KIND provider|
 | ------------------- | :-----------: | :----------: |
-| v1.18.9-eks-1-18-1  | ✓             | ✓            |
+| v1.18.16-eks-1-18-4  | ✓             | ✓            |
+| v1.19.8-eks-1-19-4  | ✓             | ✓            |
 | v1.18.9-eks-1-18-3  | ✓             | ✓            |
-| v1.19.6-eks-1-19-1  | ✓             | ✓            |
 | v1.19.6-eks-1-19-3  | ✓             | ✓            |
 
 ## Getting Started
