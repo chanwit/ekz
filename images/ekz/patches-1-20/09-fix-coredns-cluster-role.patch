@@ -1,0 +1,27 @@
+fix coredns cluster role
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/controller/coredns.go |    7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/pkg/component/controller/coredns.go b/pkg/component/controller/coredns.go
+index c6d1d21..6b5fc6d 100644
+--- a/pkg/component/controller/coredns.go
++++ b/pkg/component/controller/coredns.go
+@@ -59,6 +59,13 @@ rules:
+   - nodes
+   verbs:
+   - get
++- apiGroups:
++  - discovery.k8s.io
++  resources:
++  - endpointslices
++  verbs:
++  - list
++  - watch  
+ ---
+ apiVersion: rbac.authorization.k8s.io/v1beta1
+ kind: ClusterRoleBinding
