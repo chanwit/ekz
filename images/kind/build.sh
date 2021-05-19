@@ -10,6 +10,12 @@ case $1 in
     BASE_IMAGE="kindest/node:v1.19.7@sha256:a70639454e97a4b733f9d9b67e12c01f6b0297449d5b9cbbef87473458e26dca"
     URL="https://distro.eks.amazonaws.com/kubernetes-1-19/kubernetes-1-19-eks-4.yaml"
     ;;
+
+  1.20)
+    BUILD="0"
+    BASE_IMAGE="kindest/node:v1.20.2@sha256:8f7ea6e7642c0da54f04a7ee10431549c0257315b3a634f6ef2fecaaedb19bab"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-20/kubernetes-1-20-eks-1.yaml"
+    ;;
 esac
 
 EKSD_YAML="eksd.yaml"
