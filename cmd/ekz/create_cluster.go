@@ -61,7 +61,7 @@ var (
 )
 
 func init() {
-	createClusterCmd.Flags().StringVarP(&eksdVersion, "eksd-version", "d", "v1.19.8-eks-1-19-4", "specify a distro version of EKS-D")
+	createClusterCmd.Flags().StringVarP(&eksdVersion, "eksd-version", "d", "v1.20.4-eks-1-20-1", "specify a distro version of EKS-D")
 	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 	createClusterCmd.Flags().BoolVar(&hostMode, "host", false, "run in the host mode")
@@ -82,6 +82,8 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 		eksdVersion = "v1.18.16-eks-1-18-4"
 	} else if eksdVersion == "v1.19" {
 		eksdVersion = "v1.19.8-eks-1-19-4"
+	} else if eksdVersion == "v1.20" {
+		eksdVersion = "v1.20.4-eks-1-20-1"
 	}
 
 	// TODO validate eksdVersion
