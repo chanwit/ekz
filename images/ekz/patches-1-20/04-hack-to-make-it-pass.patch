@@ -1,0 +1,23 @@
+hack to make it pass permission check in openshift
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ internal/util/file.go |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/internal/util/file.go b/internal/util/file.go
+index 79f46a4..ef5d1c8 100644
+--- a/internal/util/file.go
++++ b/internal/util/file.go
+@@ -41,7 +41,8 @@ func CheckPathPermissions(path string, perm os.FileMode) error {
+ 		return err
+ 	}
+ 	dirMode := dirInfo.Mode().Perm()
+-	if dirMode != perm {
++	// TODO a small hack when running inside OpenShift, now skip
++	if dirMode != perm && false {
+ 		if runtime.GOOS != "windows" {
+ 			return fmt.Errorf("directory %q exist, but the permission is %#o. The expected permission is %o", path, dirMode, perm)
+ 		}

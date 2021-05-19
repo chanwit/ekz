@@ -1,0 +1,9 @@
+# This series applies on GIT commit ae28b1d7fe4d942d7570c192d84f75a758774695
+01-use-amazone-linux-2-and-patch.patch
+02-change-component-versions-in.patch
+03-make-change-constants-to.patch
+04-hack-to-make-it-pass.patch
+05-add-flux-v0.13.2-manifests-and.patch
+06-add-envs-to-allow-disable.patch
+07-add-envs-to-toggle-kubeproxy.patch
+08-add-env-for-external-address.patch

@@ -1,0 +1,82 @@
+make change constants to support 1.20
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ pkg/component/worker/containerd.go |    2 +-
+ pkg/constant/constant_posix.go     |    4 ++--
+ pkg/constant/constant_shared.go    |   20 +++++++++++---------
+ 3 files changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
+index 689d62f..02637dc 100644
+--- a/pkg/component/worker/containerd.go
++++ b/pkg/component/worker/containerd.go
+@@ -39,7 +39,7 @@ type ContainerD struct {
+ // Init extracts the needed binaries
+ func (c *ContainerD) Init() error {
+ 	g := new(errgroup.Group)
+-	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "runc"} {
++	for _, bin := range []string{"containerd", "containerd-shim", "containerd-shim-runc-v1", "containerd-shim-runc-v2", "ctr", "runc", "crictl"} {
+ 		b := bin
+ 		g.Go(func() error {
+ 			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)
+diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
+index 548b9b5..8b29c9b 100644
+--- a/pkg/constant/constant_posix.go
++++ b/pkg/constant/constant_posix.go
+@@ -25,8 +25,8 @@ const (
+ 	DataDirDefault                 = "/var/lib/k0s"
+ 	KubeletVolumePluginDir         = "/usr/libexec/k0s/kubelet-plugins/volume/exec"
+ 	KineSocket                     = "kine/kine.sock:2379"
+-	KubePauseContainerImage        = "k8s.gcr.io/pause"
+-	KubePauseContainerImageVersion = "3.2"
++	KubePauseContainerImage        = "public.ecr.aws/eks-distro/kubernetes/pause"
++	KubePauseContainerImageVersion = "v1.20.4" + ImageSuffix
+ )
+ 
+ func formatPath(dir string, file string) string {
+diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
+index 11ae12a..bb84d5d 100644
+--- a/pkg/constant/constant_shared.go
++++ b/pkg/constant/constant_shared.go
+@@ -12,7 +12,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
+ const WinDataDirDefault = "C:\\var\\lib\\k0s"
+ 
+ const (
+-
+ 	// DataDirMode is the expected directory permissions for DataDirDefault
+ 	DataDirMode = 0755
+ 	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
+@@ -50,19 +49,22 @@ const (
+ 	// KonnectivityServerUser deinfes the user to use for konnectivity-server
+ 	KonnectivityServerUser = "konnectivity-server"
+ 	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
+-	KubernetesMajorMinorVersion = "1.20"
++	KubernetesMajorMinorVersion = "1.20"
+ 	// DefaultPSP defines the system level default PSP to apply
+ 	DefaultPSP = "00-k0s-privileged"
++	// Image suffix for EKS-D
++	ImageSuffix = "-eks-1-20-1"
++
+ 	// Image Constants
+ 	KonnectivityImage                  = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
+ 	KonnectivityImageVersion           = "v0.0.13"
+-	MetricsImage                       = "gcr.io/k8s-staging-metrics-server/metrics-server"
+-	MetricsImageVersion                = "v0.3.7"
+-	KubeProxyImage                     = "k8s.gcr.io/kube-proxy"
+-	KubeProxyImageVersion              = "v1.20.4"
+-	CoreDNSImage                       = "docker.io/coredns/coredns"
+-	CoreDNSImageVersion                = "1.7.0"
+-	CalicoImage                        = "docker.io/calico/cni"
++	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
++	MetricsImageVersion                = "v0.4.3" + ImageSuffix
++	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
++	KubeProxyImageVersion              = "v1.20.4" + ImageSuffix
++	CoreDNSImage                       = "public.ecr.aws/eks-distro/coredns/coredns"
++	CoreDNSImageVersion                = "v1.8.3" + ImageSuffix
++	CalicoImage                        = "calico/cni"
+ 	CalicoImageVersion                 = "v3.16.2"
+ 	FlexVolumeImage                    = "docker.io/calico/pod2daemon-flexvol"
+ 	FlexVolumeImageVersion             = "v3.16.2"
