@@ -22,8 +22,7 @@ Here's EKS-D versions supported by EKZ.
 | ------------------- | :-----------: | :----------: |
 | v1.18.16-eks-1-18-4  | ✓             | ✓            |
 | v1.19.8-eks-1-19-4  | ✓             | ✓            |
-| v1.18.9-eks-1-18-3  | ✓             | ✓            |
-| v1.19.6-eks-1-19-3  | ✓             | ✓            |
+| v1.20.4-eks-1-20-1  | ✓             | ✓            |
 
 ## Getting Started
 
@@ -95,7 +94,7 @@ Please wait for a couple of minutes and an EKS-D cluster will be ready on your l
 ```bash
 ❯ kubectl get nodes
 NAME         STATUS   ROLES    AGE    VERSION
-controller   Ready    <none>   111s   v1.19.6-eks-1-19-3
+controller   Ready    <none>   111s   v1.20.4-eks-1-20-1
 ```
 
 ### Without CLI
@@ -106,16 +105,16 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 
 ### The EKZ provider
 
-1. EKS-D binaries from v1.18.9-eks-1-18-{1,3}, and v1.19.6-eks-1-19-{1,3}
-2. Packaged with k0s v0.13.0
-3. Amazon Linux 2 base image
-4. Enable network policy by default via the Calico CNI
-5. Bundled with a local storage class
+1. EKS-D binaries
+2. Packaged with the k0s skeleton 
+3. Base image: Amazon Linux 2 
+4. Enable network policy by default via Kube-Router (Calico is optional)
+5. Bundled with a local storage class, and a load balancer
 
 ### The KIND provider
 
-1. EKS-D binaries from v1.18.9-eks-1-18-{1,3}, and v1.19.6-eks-1-19-{1,3}
-2. Using KIND v0.10
-3. Packaged using KIND v1.18.x and v1.19.x node images
+1. EKS-D binaries
+2. Using KIND v0.10 as the skeleton
+3. Packaged using KIND v1.18, v1.19, v1.20 node images
 4. Enable network policy by default via the Calico CNI
-
+5. Bundled with a local storage class (from KinD), and a load balancer
