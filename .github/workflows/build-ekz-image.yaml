@@ -36,7 +36,7 @@ jobs:
           cd k0s
           git checkout -b build $K0S_VERSION
           stg init
-          stg import -s ../../patches-backport-1-18/series
+          stg import -s ../../patches-1-18/series
 
           make EMBEDDED_BINS_BUILDMODE=fetch
           docker build -t quay.io/ekz-io/ekz:$TAG .
