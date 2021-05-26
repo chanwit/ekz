@@ -3,6 +3,8 @@ build/
 cover.out
 bin/
 
+.sandbox/
+images/ekz/build*/
 
 images/kind/eksd.yaml
 images/kind/kubernetes*.yaml
