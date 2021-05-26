@@ -7,4 +7,5 @@
 06-add-envs-to-allow-disable.patch
 07-add-envs-to-toggle-kubeproxy.patch
 08-add-env-for-external-address.patch
-09-fix-coredns-cluster-role.patch
+09-add-env-for-default-storage.patch
+10-fix-coredns-cluster-role.patch
