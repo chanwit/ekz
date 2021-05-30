@@ -15,7 +15,7 @@ func createClusterKIND() error {
 
 	var buildNo string
 	switch eksdVersion {
-	case "v1.18.16-eks-1-18-4":
+	case "v1.18.16-eks-1-18-5":
 		buildNo = "0"
 	case "v1.19.8-eks-1-19-4":
 		buildNo = "0"
