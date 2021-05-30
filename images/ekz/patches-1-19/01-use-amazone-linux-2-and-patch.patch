@@ -36,7 +36,7 @@ index df7dad5..52bfe45 100644
 +	nss-sysinit-3.53.1-3.amzn2	\
 +	nss-tools-3.53.1-3.amzn2 \
 +	nss-util-3.53.1-1.amzn2	\
-+	openldap-2.4.44-22.amzn2 \
++	openldap-2.4.44-23.amzn2 \
 +	python-2.7.18-1.amzn2.0.2 \
 +	python-libs-2.7.18-1.amzn2.0.2 \
 +	openssl-libs-1.0.2k-19.amzn2.0.4
