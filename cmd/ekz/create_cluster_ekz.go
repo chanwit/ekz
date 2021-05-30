@@ -29,8 +29,8 @@ func createClusterEKZ() error {
 	// build "4" is the latest stable provided by EKZ 1.19
 	var ekzImageBuild string
 	switch eksdVersion {
-	case "v1.18.16-eks-1-18-4":
-		ekzImageBuild = "5"
+	case "v1.18.16-eks-1-18-5":
+		ekzImageBuild = "0"
 	case "v1.19.8-eks-1-19-4":
 		ekzImageBuild = "5"
 	case "v1.20.4-eks-1-20-1":
