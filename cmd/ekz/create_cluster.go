@@ -79,7 +79,7 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 	}
 
 	if eksdVersion == "v1.18" {
-		eksdVersion = "v1.18.16-eks-1-18-4"
+		eksdVersion = "v1.18.16-eks-1-18-5"
 	} else if eksdVersion == "v1.19" {
 		eksdVersion = "v1.19.8-eks-1-19-4"
 	} else if eksdVersion == "v1.20" {
