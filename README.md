@@ -18,11 +18,11 @@ The architecture of EKZ has been designed to support EKS-D in multiple implement
 
 Here's EKS-D versions supported by EKZ.
 
-| Kubernetes | EKS-D Release | EKZ Image     | EKZ provider  | KIND provider|
-|------------|:-------------:| ------------------- | :-----------: | :----------: |
-| 1-18       | 5       | v1.18.16-eks-1-18-5 | ✓             | ✓            |
-| 1-19       | 4       | v1.19.8-eks-1-19-4  | ✓             | ✓            |
-| 1-20       | 1       | v1.20.4-eks-1-20-1  | ✓             | ✓            |
+| Kubernetes | EKS-D Release | EKZ provider  | KIND provider|
+|------------|:-------------:| :-----------: | :----------: |
+| 1-18       | 5             | ✓             | ✓            |
+| 1-19       | 4             | ✓             | ✓            |
+| 1-20       | 1             | ✓             | ✓            |
 
 ## Getting Started
 
