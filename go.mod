@@ -8,9 +8,9 @@ require (
 	github.com/imdario/mergo v0.3.9
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.1.1
-	github.com/stretchr/testify v1.5.1
-	k8s.io/apimachinery v0.19.4
+	github.com/stretchr/testify v1.6.1
+	k8s.io/apimachinery v0.20.2
 	k8s.io/client-go v0.19.4
-	sigs.k8s.io/kind v0.10.0
-	sigs.k8s.io/kustomize/kyaml v0.10.5
+	sigs.k8s.io/kind v0.11.1
+	sigs.k8s.io/kustomize/kyaml v0.10.21
 )
