@@ -80,7 +80,8 @@ func uiCmdRun(cmd *cobra.Command, args []string) error {
 	logger.Waitingf("press Ctrl + C to stop the UI.")
 
 	if verbose {
-		out, err := script.Exec("docker", "run", "--network=host",
+		out, err := script.Exec("docker", "run",
+			"--rm", "--network=host",
 			"-v", expandKubeConfigFile()+":/root/.kube/config",
 			uiImage,
 		).CombinedOutput()
