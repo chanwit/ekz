@@ -1,20 +1,20 @@
 case $1 in
   1.18)
     BUILD="0"
-    BASE_IMAGE="kindest/node:v1.18.15@sha256:5c1b980c4d0e0e8e7eb9f36f7df525d079a96169c8a8f20d8bd108c0d0889cc4"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-18/kubernetes-1-18-eks-5.yaml"
+    BASE_IMAGE="kindest/node:v1.18.19@sha256:7af1492e19b3192a79f606e43c35fb741e520d195f96399284515f077b3b622c"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-18/kubernetes-1-18-eks-6.yaml"
     ;;
 
   1.19)
     BUILD="0"
-    BASE_IMAGE="kindest/node:v1.19.7@sha256:a70639454e97a4b733f9d9b67e12c01f6b0297449d5b9cbbef87473458e26dca"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-19/kubernetes-1-19-eks-4.yaml"
+    BASE_IMAGE="kindest/node:v1.19.11@sha256:07db187ae84b4b7de440a73886f008cf903fcf5764ba8106a9fd5243d6f32729"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-19/kubernetes-1-19-eks-5.yaml"
     ;;
 
   1.20)
     BUILD="0"
-    BASE_IMAGE="kindest/node:v1.20.2@sha256:8f7ea6e7642c0da54f04a7ee10431549c0257315b3a634f6ef2fecaaedb19bab"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-20/kubernetes-1-20-eks-1.yaml"
+    BASE_IMAGE="kindest/node:v1.20.7@sha256:cbeaf907fc78ac97ce7b625e4bf0de16e3ea725daf6b04f930bd14c67c671ff9"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-20/kubernetes-1-20-eks-2.yaml"
     ;;
 esac
 
