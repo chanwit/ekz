@@ -94,7 +94,7 @@ Please wait for a couple of minutes and an EKS-D cluster will be ready on your l
 ```bash
 ❯ kubectl get nodes
 NAME         STATUS   ROLES    AGE    VERSION
-controller   Ready    <none>   111s   v1.20.4-eks-1-20-1
+controller   Ready    <none>   111s   v1.20.7-eks-1-20-2
 ```
 
 ### Without CLI
