@@ -20,9 +20,9 @@ Here's EKS-D versions supported by EKZ.
 
 | Kubernetes | EKS-D Release | EKZ provider  | KIND provider|
 |------------|:-------------:| :-----------: | :----------: |
-| 1-18       | 5             | ✓             | ✓            |
-| 1-19       | 4             | ✓             | ✓            |
-| 1-20       | 1             | ✓             | ✓            |
+| 1-18       | 6             | ✓             | ✓            |
+| 1-19       | 5             | ✓             | ✓            |
+| 1-20       | 2             | ✓             | ✓            |
 
 ## Getting Started
 
