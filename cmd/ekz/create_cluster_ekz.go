@@ -27,12 +27,12 @@ func getEKZNetworkName(containerId string) (string, error) {
 func createClusterEKZ() error {
 	var ekzImageBuild string
 	switch eksdVersion {
-	case "v1.18.16-eks-1-18-5":
+	case "v1.18.16-eks-1-18-6":
 		ekzImageBuild = "0"
-	case "v1.19.8-eks-1-19-4":
-		ekzImageBuild = "6"
-	case "v1.20.4-eks-1-20-1":
-		ekzImageBuild = "3"
+	case "v1.19.12-eks-1-19-5":
+		ekzImageBuild = "0"
+	case "v1.20.7-eks-1-20-2":
+		ekzImageBuild = "0"
 	}
 
 	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
