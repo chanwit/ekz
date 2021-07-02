@@ -27,11 +27,11 @@ func getEKZNetworkName(containerId string) (string, error) {
 func createClusterEKZ() error {
 	var ekzImageBuild string
 	switch eksdVersion {
-	case "v1.18.16-eks-1-18-6":
+	case V1_18_Image:
 		ekzImageBuild = "0"
-	case "v1.19.12-eks-1-19-5":
+	case V1_19_Image:
 		ekzImageBuild = "0"
-	case "v1.20.7-eks-1-20-2":
+	case V1_20_Image:
 		ekzImageBuild = "0"
 	}
 

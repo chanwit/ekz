@@ -4,11 +4,11 @@ import "fmt"
 
 func getKindConfig(eksdVersion string, suffix string) (string, error) {
 	switch eksdVersion {
-	case "v1.18.16-eks-1-18-5":
+	case V1_18_Image:
 		return getKindConfig1_18(eksdVersion, suffix), nil
-	case "v1.19.8-eks-1-19-4":
+	case V1_19_Image:
 		return getKindConfig1_19(eksdVersion, suffix), nil
-	case "v1.20.4-eks-1-20-1":
+	case V1_20_Image:
 		return getKindConfig1_20(eksdVersion, suffix), nil
 	}
 	// TODO return error

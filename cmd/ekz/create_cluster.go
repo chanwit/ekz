@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/chanwit/ekz/pkg/constants"
@@ -61,7 +62,7 @@ var (
 )
 
 func init() {
-	createClusterCmd.Flags().StringVarP(&eksdVersion, "eksd-version", "d", "v1.20.7-eks-1-20-2", "specify a distro version of EKS-D")
+	createClusterCmd.Flags().StringVarP(&eksdVersion, "eksd-version", "d", LastestImage, "specify a distro version of EKS-D")
 	createClusterCmd.Flags().StringVarP(&kubeConfigFile, "output", "o", constants.BackTickHomeFile, "specify output file to write kubeconfig to")
 	createClusterCmd.Flags().StringVar(&clusterName, "name", "ekz", "cluster name")
 	createClusterCmd.Flags().BoolVar(&hostMode, "host", false, "run in the host mode")
@@ -78,17 +79,13 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 		clusterName = args[0]
 	}
 
-	if eksdVersion == "v1.18" {
-		eksdVersion = "v1.18.16-eks-1-18-6"
-	} else if eksdVersion == "v1.19" {
-		eksdVersion = "v1.19.12-eks-1-19-5"
-	} else if eksdVersion == "v1.20" {
-		eksdVersion = "v1.20.7-eks-1-20-2"
+	if strings.HasPrefix(V1_18_Image, eksdVersion) {
+		eksdVersion = V1_18_Image
+	} else if strings.HasPrefix(V1_19_Image, eksdVersion) {
+		eksdVersion = V1_19_Image
+	} else if strings.HasPrefix(V1_20_Image, eksdVersion) {
+		eksdVersion = V1_20_Image
 	}
-
-	// TODO validate eksdVersion
-	// v1.18.9-eks-1-18-1
-	// v1.19.6-eks-1-19-1
 
 	switch provider {
 	case "ekz":
