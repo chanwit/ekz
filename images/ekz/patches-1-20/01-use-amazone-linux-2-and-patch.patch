@@ -46,7 +46,7 @@ index df7dad5..4afcc2a 100644
 +ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 +RUN chmod +x /sbin/tini
 +
-+RUN curl -LO https://distro.eks.amazonaws.com/kubernetes-1-20/releases/1/artifacts/kubernetes/v1.20.4/bin/linux/amd64/kubectl \
++RUN curl -LO https://distro.eks.amazonaws.com/kubernetes-1-20/releases/2/artifacts/kubernetes/v1.20.7/bin/linux/amd64/kubectl \
         && chmod +x ./kubectl \
         && mv ./kubectl /usr/local/bin/kubectl
  ENV KUBECONFIG=/var/lib/k0s/pki/admin.conf
