@@ -103,7 +103,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 
 ## Features
 
-### The EKZ provider
+### EKZ provider
 
 1. EKS-D binaries
 2. Packaged with the k0s skeleton 
@@ -111,10 +111,10 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 4. Enable network policy by default via Kube-Router (Calico is optional)
 5. Bundled with a local storage class, and a load balancer
 
-### The KIND provider
+### KinD provider
 
 1. EKS-D binaries
-2. Using KIND v0.10 as the skeleton
+2. Using KIND v0.11 as the skeleton
 3. Packaged using KIND v1.18, v1.19, v1.20 node images
 4. Enable network policy by default via the Calico CNI
 5. Bundled with a local storage class (from KinD), and a load balancer
