@@ -54,7 +54,7 @@ index 11ae12a..dce5e98 100644
  	// DefaultPSP defines the system level default PSP to apply
  	DefaultPSP = "00-k0s-privileged"
 +	// Image suffix for EKS-D
-+	ImageSuffix = "-eks-1-20-2"
++	ImageSuffix = "-eks-1-20-3"
 +
  	// Image Constants
  	KonnectivityImage                  = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
