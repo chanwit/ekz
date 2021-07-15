@@ -16,11 +16,11 @@ func createClusterKIND() error {
 	var buildNo string
 	switch eksdVersion {
 	case V1_18_Image:
-		buildNo = "0"
+		buildNo = KIND_V1_18_ImageBuild
 	case V1_19_Image:
-		buildNo = "0"
+		buildNo = KIND_V1_19_ImageBuild
 	case V1_20_Image:
-		buildNo = "0"
+		buildNo = KIND_V1_20_ImageBuild
 	}
 
 	image := fmt.Sprintf("quay.io/ekz-io/kind:%s.%s", eksdVersion, buildNo)
