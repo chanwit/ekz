@@ -2,19 +2,19 @@ case $1 in
   1.18)
     BUILD="0"
     BASE_IMAGE="kindest/node:v1.18.19@sha256:7af1492e19b3192a79f606e43c35fb741e520d195f96399284515f077b3b622c"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-18/kubernetes-1-18-eks-6.yaml"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-18/kubernetes-1-18-eks-7.yaml"
     ;;
 
   1.19)
     BUILD="0"
     BASE_IMAGE="kindest/node:v1.19.11@sha256:07db187ae84b4b7de440a73886f008cf903fcf5764ba8106a9fd5243d6f32729"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-19/kubernetes-1-19-eks-5.yaml"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-19/kubernetes-1-19-eks-6.yaml"
     ;;
 
   1.20)
     BUILD="0"
     BASE_IMAGE="kindest/node:v1.20.7@sha256:cbeaf907fc78ac97ce7b625e4bf0de16e3ea725daf6b04f930bd14c67c671ff9"
-    URL="https://distro.eks.amazonaws.com/kubernetes-1-20/kubernetes-1-20-eks-2.yaml"
+    URL="https://distro.eks.amazonaws.com/kubernetes-1-20/kubernetes-1-20-eks-3.yaml"
     ;;
 esac
 
