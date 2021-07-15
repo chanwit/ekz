@@ -28,7 +28,7 @@ index df7dad5..52bfe45 100644
 +	libcrypt-2.26-42.amzn2 \
 +	libcom_err-1.42.9-19.amzn2 \
 +	libssh2-1.4.3-12.amzn2.2.3 \
-+	libxml2-2.9.1-6.amzn2.5.1 \
++	libxml2-2.9.1-6.amzn2.5.4 \
 +	nspr-4.25.0-2.amzn2	\
 +	nss-3.53.1-3.amzn2 \
 +	nss-softokn-3.53.1-6.amzn2 \
