@@ -20,9 +20,9 @@ Here's EKS-D versions supported by EKZ.
 
 | Kubernetes | EKS-D Release | EKZ provider  | KIND provider|
 |------------|:-------------:| :-----------: | :----------: |
-| 1-18       | 6             | ✓             | ✓            |
-| 1-19       | 5             | ✓             | ✓            |
-| 1-20       | 2             | ✓             | ✓            |
+| 1-18       | 7             | ✓             | ✓            |
+| 1-19       | 6             | ✓             | ✓            |
+| 1-20       | 3             | ✓             | ✓            |
 
 ## Getting Started
 
@@ -94,7 +94,7 @@ Please wait for a couple of minutes and an EKS-D cluster will be ready on your l
 ```bash
 ❯ kubectl get nodes
 NAME         STATUS   ROLES    AGE    VERSION
-controller   Ready    <none>   111s   v1.20.7-eks-1-20-2
+controller   Ready    <none>   87s   v1.20.7-eks-1-20-3
 ```
 
 ### Without CLI
@@ -114,7 +114,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 ### KinD provider
 
 1. EKS-D binaries
-2. Using KIND v0.11 as the skeleton
-3. Packaged using KIND v1.18, v1.19, v1.20 node images
+2. Using KinD v0.11 as the skeleton
+3. Packaged using KinD v1.18, v1.19, v1.20 node images
 4. Enable network policy by default via the Calico CNI
 5. Bundled with a local storage class (from KinD), and a load balancer
