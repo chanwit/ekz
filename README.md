@@ -18,7 +18,7 @@ The architecture of EKZ has been designed to support EKS-D in multiple implement
 
 Here's EKS-D versions supported by EKZ.
 
-| Kubernetes | EKS-D Release | EKZ provider  | KIND provider|
+| Kubernetes | EKS-D Release | EKZ provider  | KinD provider|
 |------------|:-------------:| :-----------: | :----------: |
 | 1-18       | 7             | ✓             | ✓            |
 | 1-19       | 6             | ✓             | ✓            |
@@ -74,7 +74,7 @@ Then you can start your first EKS-D cluster using the following command:
 ekz create cluster
 ```
 
-You can also use the KIND provider, so that your EKS-D clusters will be KIND-compatible. To use the KIND provider, you can use either flag `--provider=kind` or `export EKZ_PROVIDER=kind`.
+You can also use the KinD provider, so that your EKS-D clusters will be KinD-compatible. To use the KinD provider, you can use either flag `--provider=kind` or `export EKZ_PROVIDER=kind`.
 
 Here' the example of using the `--provider=kind` flag:
 
@@ -82,7 +82,7 @@ Here' the example of using the `--provider=kind` flag:
 ekz create cluster --provider=kind
 ```
 
-In case you'd like to use KIND as the default provider, it's better to set the EKZ\_PROVIDER environment variable:
+In case you'd like to use KinD as the default provider, it's better to set the EKZ\_PROVIDER environment variable:
 
 ```bash
 export EKZ_PROVIDER=kind
@@ -106,7 +106,7 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 ### EKZ provider
 
 1. EKS-D binaries
-2. Packaged with the k0s skeleton 
+2. Packaged with the `k0s` skeleton 
 3. Base image: Amazon Linux 2 
 4. Enable network policy by default via Kube-Router (Calico is optional)
 5. Bundled with a local storage class, and a load balancer
