@@ -8,10 +8,10 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 15 insertions(+), 10 deletions(-)
 
 diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
-index de5bef4..0632797 100644
+index 5d8246ca..27c72f33 100644
 --- a/cmd/controller/controller.go
 +++ b/cmd/controller/controller.go
-@@ -204,16 +204,21 @@ func (c *CmdOpts) startController() error {
+@@ -236,16 +236,21 @@ func (c *CmdOpts) startController() error {
  			KubeClientFactory: adminClientFactory,
  		})
  	}
