@@ -8,10 +8,10 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 14 insertions(+), 10 deletions(-)
 
 diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
-index 0632797..8c169f0 100644
+index 27c72f33..39cddff6 100644
 --- a/cmd/controller/controller.go
 +++ b/cmd/controller/controller.go
-@@ -356,18 +356,22 @@ func (c *CmdOpts) createClusterReconcilers(cf kubernetes.ClientFactory, leaderEl
+@@ -399,18 +399,22 @@ func (c *CmdOpts) createClusterReconcilers(cf kubernetes.ClientFactory, leaderEl
  		reconcilers["default-psp"] = defaultPSP
  	}
  

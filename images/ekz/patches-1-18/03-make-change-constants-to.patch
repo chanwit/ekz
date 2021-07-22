@@ -10,7 +10,7 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  3 files changed, 14 insertions(+), 12 deletions(-)
 
 diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
-index 689d62f..02637dc 100644
+index 689d62f7..02637dc0 100644
 --- a/pkg/component/worker/containerd.go
 +++ b/pkg/component/worker/containerd.go
 @@ -39,7 +39,7 @@ type ContainerD struct {
@@ -23,7 +23,7 @@ index 689d62f..02637dc 100644
  		g.Go(func() error {
  			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)
 diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index 548b9b5..8a37f60 100644
+index 548b9b5a..2237ce41 100644
 --- a/pkg/constant/constant_posix.go
 +++ b/pkg/constant/constant_posix.go
 @@ -25,8 +25,8 @@ const (
@@ -38,10 +38,10 @@ index 548b9b5..8a37f60 100644
  
  func formatPath(dir string, file string) string {
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index 11ae12a..0d24fa1 100644
+index 93f1b99e..76855679 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
-@@ -12,7 +12,6 @@ const WinCertCA = "C:\\var\\lib\\k0s\\pki\\ca.crt"
+@@ -11,7 +11,6 @@ import (
  const WinDataDirDefault = "C:\\var\\lib\\k0s"
  
  const (
@@ -49,11 +49,11 @@ index 11ae12a..0d24fa1 100644
  	// DataDirMode is the expected directory permissions for DataDirDefault
  	DataDirMode = 0755
  	// EtcdDataDirMode is the expected directory permissions for EtcdDataDir. see https://docs.datadoghq.com/security_monitoring/default_rules/cis-kubernetes-1.5.1-1.1.11/
-@@ -50,19 +49,22 @@ const (
+@@ -50,18 +49,21 @@ const (
  	// KonnectivityServerUser deinfes the user to use for konnectivity-server
  	KonnectivityServerUser = "konnectivity-server"
  	// KubernetesMajorMinorVersion defines the current embedded major.minor version info
--	KubernetesMajorMinorVersion = "1.20"
+-	KubernetesMajorMinorVersion = "1.21"
 +	KubernetesMajorMinorVersion = "1.18"
  	// DefaultPSP defines the system level default PSP to apply
  	DefaultPSP = "00-k0s-privileged"
@@ -62,21 +62,20 @@ index 11ae12a..0d24fa1 100644
 +
  	// Image Constants
  	KonnectivityImage                  = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
- 	KonnectivityImageVersion           = "v0.0.13"
+-	KonnectivityImageVersion           = "v0.0.21"
 -	MetricsImage                       = "gcr.io/k8s-staging-metrics-server/metrics-server"
 -	MetricsImageVersion                = "v0.3.7"
 -	KubeProxyImage                     = "k8s.gcr.io/kube-proxy"
--	KubeProxyImageVersion              = "v1.20.4"
+-	KubeProxyImageVersion              = "v1.21.2"
 -	CoreDNSImage                       = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion                = "1.7.0"
--	CalicoImage                        = "docker.io/calico/cni"
++	KonnectivityImageVersion           = "v0.0.13"
 +	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
 +	MetricsImageVersion                = "v0.4.0" + ImageSuffix
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
 +	KubeProxyImageVersion              = "v1.18.16" + ImageSuffix
 +	CoreDNSImage                       = "public.ecr.aws/eks-distro/coredns/coredns"
 +	CoreDNSImageVersion                = "v1.7.0" + ImageSuffix
-+	CalicoImage                        = "calico/cni"
- 	CalicoImageVersion                 = "v3.16.2"
- 	FlexVolumeImage                    = "docker.io/calico/pod2daemon-flexvol"
- 	FlexVolumeImageVersion             = "v3.16.2"
+ 	CalicoImage                        = "docker.io/calico/cni"
+ 	CalicoComponentImagesVersion       = "v3.18.1"
+ 	CalicoNodeImage                    = "docker.io/calico/node"
