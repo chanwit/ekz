@@ -4,17 +4,17 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 
 ---
- Dockerfile |   35 +++++++++++++++++++++++++++++++----
- 1 file changed, 31 insertions(+), 4 deletions(-)
+ Dockerfile |   39 +++++++++++++++++++++++++++++++++++----
+ 1 file changed, 35 insertions(+), 4 deletions(-)
 
 diff --git a/Dockerfile b/Dockerfile
-index df7dad57..f652764a 100644
+index df7dad57..b5a54a65 100644
 --- a/Dockerfile
 +++ b/Dockerfile
-@@ -1,14 +1,41 @@
+@@ -1,14 +1,45 @@
 -FROM alpine:3.13
 +FROM amazonlinux:2
- 
+
 -RUN apk add --no-cache bash coreutils findutils iptables curl tini
 +RUN yum install -y bash util-linux coreutils findutils iptables curl iproute
 +RUN yum install -y \
@@ -40,11 +40,11 @@ index df7dad57..f652764a 100644
 +	python-2.7.18-1.amzn2.0.2 \
 +	python-libs-2.7.18-1.amzn2.0.2 \
 +	openssl-libs-1.0.2k-19.amzn2.0.7 \
-+   python2-rpm-4.11.3-40.amzn2.0.6 \
-+   rpm-4.11.3-40.amzn2.0.6 \
-+   rpm-build-libs-4.11.3-40.amzn2.0.6 \
-+   rpm-libs-4.11.3-40.amzn2.0.6
- 
++	python2-rpm-4.11.3-40.amzn2.0.6 \
++	rpm-4.11.3-40.amzn2.0.6 \
++	rpm-build-libs-4.11.3-40.amzn2.0.6 \
++	rpm-libs-4.11.3-40.amzn2.0.6
+
 -RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.1/bin/linux/amd64/kubectl \
 +ENV TINI_VERSION v0.19.0
 +ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
