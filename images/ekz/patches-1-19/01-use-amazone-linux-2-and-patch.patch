@@ -39,7 +39,11 @@ index df7dad57..f652764a 100644
 +	openldap-2.4.44-23.amzn2 \
 +	python-2.7.18-1.amzn2.0.2 \
 +	python-libs-2.7.18-1.amzn2.0.2 \
-+	openssl-libs-1.0.2k-19.amzn2.0.4
++	openssl-libs-1.0.2k-19.amzn2.0.7 \
++   python2-rpm-4.11.3-40.amzn2.0.6 \
++   rpm-4.11.3-40.amzn2.0.6 \
++   rpm-build-libs-4.11.3-40.amzn2.0.6 \
++   rpm-libs-4.11.3-40.amzn2.0.6
  
 -RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.1/bin/linux/amd64/kubectl \
 +ENV TINI_VERSION v0.19.0
