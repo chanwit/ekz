@@ -8,10 +8,10 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 6 insertions(+)
 
 diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
-index 8c169f0..9a062e7 100644
+index 39cddff6..4012b812 100644
 --- a/cmd/controller/controller.go
 +++ b/cmd/controller/controller.go
-@@ -79,6 +79,12 @@ func NewControllerCmd() *cobra.Command {
+@@ -80,6 +80,12 @@ func NewControllerCmd() *cobra.Command {
  				c.EnableWorker = true
  				c.K0sVars.DefaultStorageType = "kine"
  			}

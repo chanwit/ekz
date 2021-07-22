@@ -8,10 +8,10 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/internal/util/file.go b/internal/util/file.go
-index 79f46a4..7a2ed2c 100644
+index 60cfa3f1..2cc65624 100644
 --- a/internal/util/file.go
 +++ b/internal/util/file.go
-@@ -41,7 +41,8 @@ func CheckPathPermissions(path string, perm os.FileMode) error {
+@@ -51,7 +51,8 @@ func CheckPathPermissions(path string, perm os.FileMode) error {
  		return err
  	}
  	dirMode := dirInfo.Mode().Perm()

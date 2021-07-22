@@ -5,11 +5,11 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 
 ---
  embedded-bins/Makefile           |   22 ++++++++++++++--------
- embedded-bins/Makefile.variables |    6 ++++--
- 2 files changed, 18 insertions(+), 10 deletions(-)
+ embedded-bins/Makefile.variables |   11 +++++++----
+ 2 files changed, 21 insertions(+), 12 deletions(-)
 
 diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
-index 63ffe2c..0daf0ab 100644
+index 60ac1ca2..1db774d9 100644
 --- a/embedded-bins/Makefile
 +++ b/embedded-bins/Makefile
 @@ -7,7 +7,7 @@ TARGET_OS ?= linux
@@ -21,7 +21,7 @@ index 63ffe2c..0daf0ab 100644
  windows_bins = kubelet.exe kube-proxy.exe
  buildmode = docker
  
-@@ -82,17 +82,20 @@ else
+@@ -93,17 +93,20 @@ else
  curl = curl --silent -L
  
  runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
@@ -49,7 +49,7 @@ index 63ffe2c..0daf0ab 100644
  
  tmpdir ?= .tmp
  arch = amd64
-@@ -104,6 +107,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
+@@ -115,6 +118,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
  $(addprefix $(bindir)/, containerd etcd): | $(bindir)
  	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv --strip-components=1 $($(notdir $@)_extract)
  
@@ -60,17 +60,46 @@ index 63ffe2c..0daf0ab 100644
  $(bindir)/konnectivity-server: | $(bindir)
  	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
 diff --git a/embedded-bins/Makefile.variables b/embedded-bins/Makefile.variables
-index 168a126..7b8c82b 100644
+index b904ea53..5d5eb639 100644
 --- a/embedded-bins/Makefile.variables
 +++ b/embedded-bins/Makefile.variables
-@@ -1,6 +1,8 @@
- runc_version = 1.0.0-rc93
- containerd_version = 1.4.4
--kubernetes_version = 1.20.6
+@@ -1,4 +1,4 @@
+-runc_version = 1.0.0
++runc_version = 1.0.0-rc93
+ runc_buildimage = golang:1.16-alpine
+ runc_build_go_tags = "seccomp"
+ #runc_build_go_cgo_enabled =
+@@ -6,7 +6,7 @@ runc_build_go_tags = "seccomp"
+ #runc_build_go_ldflags =
+ runc_build_go_ldflags_extra = "-w -s -extldflags=-static"
+ 
+-containerd_version = 1.4.6
++containerd_version = 1.4.4
+ containerd_buildimage = golang:1.15-alpine
+ containerd_build_go_tags = "apparmor,selinux"
+ containerd_build_shim_go_cgo_enabled = 0
+@@ -15,7 +15,7 @@ containerd_build_shim_go_cgo_enabled = 0
+ #containerd_build_go_ldflags =
+ containerd_build_go_ldflags_extra = "-w -s -extldflags=-static"
+ 
+-kubernetes_version = 1.21.2
 +kubernetes_version = 1.20.7
- kine_version = 0.6.0
--etcd_version = 3.4.15
+ kubernetes_buildimage = golang:1.16-alpine
+ kubernetes_build_go_tags = "providerless"
+ #kubernetes_build_go_cgo_enabled =
+@@ -31,7 +31,7 @@ kine_buildimage = golang:1.16-alpine
+ kine_build_go_ldflags = "-w -s"
+ kine_build_go_ldflags_extra = "-extldflags=-static"
+ 
+-etcd_version = 3.4.16
 +etcd_version = 3.4.15
- konnectivity_version = 0.0.14
+ etcd_buildimage = golang:1.16-alpine
+ #etcd_build_go_tags =
+ etcd_build_go_cgo_enabled = 0
+@@ -46,3 +46,6 @@ konnectivity_build_go_cgo_enabled = 0
+ konnectivity_build_go_flags = "-a"
+ konnectivity_build_go_ldflags = "-w -s"
+ konnectivity_build_go_ldflags_extra = "-extldflags=-static"
++
 +crictl_version = 1.20.0
 +eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-20/releases/3
