@@ -4,14 +4,17 @@ const (
 	V1_18_Image = "v1.18.16-eks-1-18-7"
 	V1_19_Image = "v1.19.12-eks-1-19-6"
 	V1_20_Image = "v1.20.7-eks-1-20-3"
+	V1_21_Image = "v1.21.2-eks-1-21-1"
 
-	EKZ_V1_18_ImageBuild = "0"
-	EKZ_V1_19_ImageBuild = "0"
-	EKZ_V1_20_ImageBuild = "0"
+	EKZ_V1_18_ImageBuild = "1"
+	EKZ_V1_19_ImageBuild = "1"
+	EKZ_V1_20_ImageBuild = "1"
+	EKZ_V1_21_ImageBuild = "1"
 
 	KIND_V1_18_ImageBuild = "0"
 	KIND_V1_19_ImageBuild = "0"
 	KIND_V1_20_ImageBuild = "0"
+	KIND_V1_21_ImageBuild = "0"
 
-	LastestImage = V1_20_Image
+	LastestImage = V1_21_Image
 )

@@ -21,6 +21,8 @@ func createClusterKIND() error {
 		buildNo = KIND_V1_19_ImageBuild
 	case V1_20_Image:
 		buildNo = KIND_V1_20_ImageBuild
+	case V1_21_Image:
+		buildNo = KIND_V1_21_ImageBuild
 	}
 
 	image := fmt.Sprintf("quay.io/ekz-io/kind:%s.%s", eksdVersion, buildNo)
