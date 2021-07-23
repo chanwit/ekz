@@ -69,7 +69,7 @@ index 93f1b99e..76855679 100644
 -	KubeProxyImageVersion              = "v1.21.2"
 -	CoreDNSImage                       = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion                = "1.7.0"
-+	KonnectivityImageVersion           = "v0.0.13"
++	KonnectivityImageVersion           = "v0.0.21"
 +	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
 +	MetricsImageVersion                = "v0.4.0" + ImageSuffix
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
