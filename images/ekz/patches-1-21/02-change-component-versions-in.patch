@@ -1,0 +1,105 @@
+change component versions in Makefile
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ embedded-bins/Makefile           |   22 ++++++++++++++--------
+ embedded-bins/Makefile.variables |   11 +++++++----
+ 2 files changed, 21 insertions(+), 12 deletions(-)
+
+diff --git a/embedded-bins/Makefile b/embedded-bins/Makefile
+index 60ac1ca2..1db774d9 100644
+--- a/embedded-bins/Makefile
++++ b/embedded-bins/Makefile
+@@ -7,7 +7,7 @@ TARGET_OS ?= linux
+ export TARGET_OS
+ 
+ bindir = staging/${TARGET_OS}/bin
+-posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server
++posix_bins = runc kubelet containerd containerd-shim containerd-shim-runc-v1 containerd-shim-runc-v2 ctr kube-apiserver kube-scheduler kube-controller-manager etcd kine konnectivity-server crictl
+ windows_bins = kubelet.exe kube-proxy.exe
+ buildmode = docker
+ 
+@@ -93,17 +93,20 @@ else
+ curl = curl --silent -L
+ 
+ runc_url = https://github.com/opencontainers/runc/releases/download/v$(runc_version)/runc.$(arch)
+-kubelet_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
+-kube-apiserver_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
+-kube-scheduler_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
+-kube-controller-manager_url = https://storage.googleapis.com/kubernetes-release/release/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
++kubelet_url	= $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kubelet
++kube-apiserver_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-apiserver
++kube-scheduler_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-scheduler
++kube-controller-manager_url = $(eksd_base_url)/artifacts/kubernetes/v$(kubernetes_version)/bin/linux/$(arch)/kube-controller-manager
+ kine_url = https://github.com/k3s-io/kine/releases/download/v$(kine_version)/kine-amd64
+ 
+ containerd_url = https://github.com/containerd/containerd/releases/download/v$(containerd_version)/containerd-$(containerd_version)-linux-$(arch).tar.gz
+-etcd_url = https://github.com/etcd-io/etcd/releases/download/v$(etcd_version)/etcd-v$(etcd_version)-linux-$(arch).tar.gz
++etcd_url = $(eksd_base_url)/artifacts/etcd/v$(etcd_version)/etcd-linux-$(arch)-v$(etcd_version).tar.gz
+ 
+-containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2
+-etcd_extract = etcd-v$(etcd_version)-linux-$(arch)/etcd
++containerd_extract = bin/containerd bin/containerd-shim bin/containerd-shim-runc-v1 bin/containerd-shim-runc-v2 bin/ctr
++etcd_extract = linux-$(arch)/etcd
++
++crictl_url = https://github.com/kubernetes-sigs/cri-tools/releases/download/v$(crictl_version)/crictl-v$(crictl_version)-linux-amd64.tar.gz
++crictl_extract = crictl
+ 
+ tmpdir ?= .tmp
+ arch = amd64
+@@ -115,6 +118,9 @@ $(addprefix $(bindir)/, runc kubelet kube-apiserver kube-scheduler kube-controll
+ $(addprefix $(bindir)/, containerd etcd): | $(bindir)
+ 	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv --strip-components=1 $($(notdir $@)_extract)
+ 
++$(addprefix $(bindir)/, crictl): | $(bindir)
++	$(curl) $($(notdir $@)_url) | tar -C $(bindir)/ -zxv $($(notdir $@)_extract)
++
+ # konnectivity does not ship precompiled binaries so lets build it from source
+ $(bindir)/konnectivity-server: | $(bindir)
+ 	if ! [ -d $(tmpdir)/apiserver-network-proxy ]; then \
+diff --git a/embedded-bins/Makefile.variables b/embedded-bins/Makefile.variables
+index b904ea53..5d5eb639 100644
+--- a/embedded-bins/Makefile.variables
++++ b/embedded-bins/Makefile.variables
+@@ -1,4 +1,4 @@
+-runc_version = 1.0.0
++runc_version = 1.0.0
+ runc_buildimage = golang:1.16-alpine
+ runc_build_go_tags = "seccomp"
+ #runc_build_go_cgo_enabled =
+@@ -6,7 +6,7 @@ runc_build_go_tags = "seccomp"
+ #runc_build_go_ldflags =
+ runc_build_go_ldflags_extra = "-w -s -extldflags=-static"
+ 
+-containerd_version = 1.4.6
++containerd_version = 1.4.6
+ containerd_buildimage = golang:1.15-alpine
+ containerd_build_go_tags = "apparmor,selinux"
+ containerd_build_shim_go_cgo_enabled = 0
+@@ -15,7 +15,7 @@ containerd_build_shim_go_cgo_enabled = 0
+ #containerd_build_go_ldflags =
+ containerd_build_go_ldflags_extra = "-w -s -extldflags=-static"
+ 
+-kubernetes_version = 1.21.2
++kubernetes_version = 1.21.2
+ kubernetes_buildimage = golang:1.16-alpine
+ kubernetes_build_go_tags = "providerless"
+ #kubernetes_build_go_cgo_enabled =
+@@ -31,7 +31,7 @@ kine_buildimage = golang:1.16-alpine
+ kine_build_go_ldflags = "-w -s"
+ kine_build_go_ldflags_extra = "-extldflags=-static"
+ 
+-etcd_version = 3.4.16
++etcd_version = 3.4.16
+ etcd_buildimage = golang:1.16-alpine
+ #etcd_build_go_tags =
+ etcd_build_go_cgo_enabled = 0
+@@ -46,3 +46,6 @@ konnectivity_build_go_cgo_enabled = 0
+ konnectivity_build_go_flags = "-a"
+ konnectivity_build_go_ldflags = "-w -s"
+ konnectivity_build_go_ldflags_extra = "-extldflags=-static"
++
++crictl_version = 1.21.0
++eksd_base_url = https://distro.eks.amazonaws.com/kubernetes-1-21/releases/1

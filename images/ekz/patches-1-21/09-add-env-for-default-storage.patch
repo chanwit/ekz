@@ -1,0 +1,26 @@
+add env for default storage type
+
+From: Chanwit Kaewkasi <chanwit@gmail.com>
+
+
+---
+ cmd/controller/controller.go |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/cmd/controller/controller.go b/cmd/controller/controller.go
+index 39cddff6..4012b812 100644
+--- a/cmd/controller/controller.go
++++ b/cmd/controller/controller.go
+@@ -80,6 +80,12 @@ func NewControllerCmd() *cobra.Command {
+ 				c.EnableWorker = true
+ 				c.K0sVars.DefaultStorageType = "kine"
+ 			}
++
++			// override by EKZ_DEFAULT_STORAGE_TYPE
++			if os.Getenv("EKZ_DEFAULT_STORAGE_TYPE") != "" {
++				c.K0sVars.DefaultStorageType = os.Getenv("EKZ_DEFAULT_STORAGE_TYPE")
++			}
++
+ 			c.Logging = util.MapMerge(c.CmdLogLevels, c.DefaultLogLevels)
+ 			cfg, err := config.GetYamlFromFile(c.CfgFile, c.K0sVars)
+ 			if err != nil {

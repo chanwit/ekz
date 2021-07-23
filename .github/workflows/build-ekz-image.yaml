@@ -85,6 +85,27 @@ jobs:
 
           popd
           rm -rf build/
+      - name: build 1.21
+        shell: bash
+        run: |
+          cd images/ekz
+          TAG=$(cat VERSION_1_21)
+          K0S_VERSION=$(cat K0S_VERSION)
+          pushd .
+
+          mkdir build/
+          cd build/
+          git clone https://github.com/k0sproject/k0s
+          cd k0s
+          git checkout -b build $K0S_VERSION
+          stg init
+          stg import -s ../../patches-1-21/series
+
+          make EMBEDDED_BINS_BUILDMODE=fetch
+          docker build -t quay.io/ekz-io/ekz:$TAG .
+
+          popd
+          rm -rf build/
       - name: security scan
         shell: bash
         run: |
@@ -96,6 +117,7 @@ jobs:
           grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_18)
           grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_19)
           grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_20)
+          grype -f negligible quay.io/ekz-io/ekz:$(cat VERSION_1_21)
       - name: push
         shell: bash
         env:
@@ -109,5 +131,6 @@ jobs:
           docker push quay.io/ekz-io/ekz:$(cat VERSION_1_18)
           docker push quay.io/ekz-io/ekz:$(cat VERSION_1_19)
           docker push quay.io/ekz-io/ekz:$(cat VERSION_1_20)
+          docker push quay.io/ekz-io/ekz:$(cat VERSION_1_21)
 
           docker logout quay.io
