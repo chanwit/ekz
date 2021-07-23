@@ -54,3 +54,15 @@ jobs:
           TAG=$(cat TAG)
           docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
           docker push quay.io/ekz-io/kind:$TAG
+      - name: build 1.21
+        shell: bash
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          cd images/kind
+          bash -x ./build.sh 1.21
+
+          TAG=$(cat TAG)
+          docker login quay.io -u $QUAY_USERNAME -p $QUAY_PASSWORD
+          docker push quay.io/ekz-io/kind:$TAG
