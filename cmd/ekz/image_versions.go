@@ -9,7 +9,7 @@ const (
 	EKZ_V1_18_ImageBuild = "1"
 	EKZ_V1_19_ImageBuild = "1"
 	EKZ_V1_20_ImageBuild = "1"
-	EKZ_V1_21_ImageBuild = "1"
+	EKZ_V1_21_ImageBuild = "0"
 
 	KIND_V1_18_ImageBuild = "0"
 	KIND_V1_19_ImageBuild = "0"

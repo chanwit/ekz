@@ -85,6 +85,8 @@ func createClusterCmdRun(cmd *cobra.Command, args []string) error {
 		eksdVersion = V1_19_Image
 	} else if strings.HasPrefix(V1_20_Image, eksdVersion) {
 		eksdVersion = V1_20_Image
+	} else if strings.HasPrefix(V1_21_Image, eksdVersion) {
+		eksdVersion = V1_21_Image
 	}
 
 	switch provider {
