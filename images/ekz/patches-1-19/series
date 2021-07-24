@@ -8,3 +8,4 @@
 07-add-envs-to-toggle-kubeproxy.patch
 08-add-env-for-external-address.patch
 09-add-env-for-default-storage.patch
+10-enable-feature-gate-service.patch

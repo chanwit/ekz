@@ -6,8 +6,8 @@ From: Chanwit Kaewkasi <chanwit@gmail.com>
 ---
  pkg/component/worker/containerd.go |    2 +-
  pkg/constant/constant_posix.go     |    4 ++--
- pkg/constant/constant_shared.go    |   20 +++++++++++---------
- 3 files changed, 14 insertions(+), 12 deletions(-)
+ pkg/constant/constant_shared.go    |   18 ++++++++++--------
+ 3 files changed, 13 insertions(+), 11 deletions(-)
 
 diff --git a/pkg/component/worker/containerd.go b/pkg/component/worker/containerd.go
 index 689d62f7..02637dc0 100644
@@ -23,7 +23,7 @@ index 689d62f7..02637dc0 100644
  		g.Go(func() error {
  			return assets.Stage(c.K0sVars.BinDir, b, constant.BinDirMode)
 diff --git a/pkg/constant/constant_posix.go b/pkg/constant/constant_posix.go
-index 548b9b5a..2237ce41 100644
+index 548b9b5a..0daae7a9 100644
 --- a/pkg/constant/constant_posix.go
 +++ b/pkg/constant/constant_posix.go
 @@ -25,8 +25,8 @@ const (
@@ -38,7 +38,7 @@ index 548b9b5a..2237ce41 100644
  
  func formatPath(dir string, file string) string {
 diff --git a/pkg/constant/constant_shared.go b/pkg/constant/constant_shared.go
-index 93f1b99e..76855679 100644
+index 93f1b99e..75e8732e 100644
 --- a/pkg/constant/constant_shared.go
 +++ b/pkg/constant/constant_shared.go
 @@ -11,7 +11,6 @@ import (
@@ -62,14 +62,13 @@ index 93f1b99e..76855679 100644
 +
  	// Image Constants
  	KonnectivityImage                  = "us.gcr.io/k8s-artifacts-prod/kas-network-proxy/proxy-agent"
--	KonnectivityImageVersion           = "v0.0.21"
+ 	KonnectivityImageVersion           = "v0.0.21"
 -	MetricsImage                       = "gcr.io/k8s-staging-metrics-server/metrics-server"
 -	MetricsImageVersion                = "v0.3.7"
 -	KubeProxyImage                     = "k8s.gcr.io/kube-proxy"
 -	KubeProxyImageVersion              = "v1.21.2"
 -	CoreDNSImage                       = "docker.io/coredns/coredns"
 -	CoreDNSImageVersion                = "1.7.0"
-+	KonnectivityImageVersion           = "v0.0.21"
 +	MetricsImage                       = "public.ecr.aws/eks-distro/kubernetes-sigs/metrics-server"
 +	MetricsImageVersion                = "v0.4.0" + ImageSuffix
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
