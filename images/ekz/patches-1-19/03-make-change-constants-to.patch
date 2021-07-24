@@ -74,7 +74,7 @@ index 93f1b99e..75e8732e 100644
 +	KubeProxyImage                     = "public.ecr.aws/eks-distro/kubernetes/kube-proxy"
 +	KubeProxyImageVersion              = "v1.19.12" + ImageSuffix
 +	CoreDNSImage                       = "public.ecr.aws/eks-distro/coredns/coredns"
-+	CoreDNSImageVersion                = "v1.7.0" + ImageSuffix
++	CoreDNSImageVersion                = "v1.8.0" + ImageSuffix
  	CalicoImage                        = "docker.io/calico/cni"
  	CalicoComponentImagesVersion       = "v3.18.1"
  	CalicoNodeImage                    = "docker.io/calico/node"
