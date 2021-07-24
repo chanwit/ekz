@@ -28,16 +28,16 @@ func createClusterEKZ() error {
 	var ekzImageBuild string
 	switch eksdVersion {
 	case V1_18_Image:
-		ekzImageBuild = EKZ_V1_18_ImageBuild
+		ekzImageBuild = "." + EKZ_V1_18_ImageBuild
 	case V1_19_Image:
-		ekzImageBuild = EKZ_V1_19_ImageBuild
+		ekzImageBuild = "." + EKZ_V1_19_ImageBuild
 	case V1_20_Image:
-		ekzImageBuild = EKZ_V1_20_ImageBuild
+		ekzImageBuild = "." + EKZ_V1_20_ImageBuild
 	case V1_21_Image:
-		ekzImageBuild = EKZ_V1_21_ImageBuild
+		ekzImageBuild = "." + EKZ_V1_21_ImageBuild
 	}
 
-	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s.%s", eksdVersion, ekzImageBuild)
+	imageName := fmt.Sprintf("quay.io/ekz-io/ekz:%s%s", eksdVersion, ekzImageBuild)
 	containerName := fmt.Sprintf("%s-controller-0", clusterName)
 
 	logger.Actionf("pulling image: %s ...", imageName)

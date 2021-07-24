@@ -52,7 +52,7 @@ ekz create cluster [flags]
 ### Options
 
 ```
-  -d, --eksd-version string   specify a distro version of EKS-D (default "v1.20.7-eks-1-20-3")
+  -d, --eksd-version string   specify a distro version of EKS-D (default "v1.21.2-eks-1-21-1")
   -h, --help                  help for cluster
       --host                  run in the host mode
       --map-to-host-volume    map /var/lib/k0s to the host directory
