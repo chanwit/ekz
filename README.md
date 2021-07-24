@@ -116,6 +116,6 @@ To use EKZ without using the CLI, please refer to this [document](without_cli.md
 
 1. EKS-D binaries
 2. Using KinD v0.11 as the skeleton
-3. Packaged using KinD v1.18, v1.19, v1.20 node images
+3. Packaged using KinD v1.18, v1.19, v1.20, v1.21 node images
 4. Enable network policy by default via the Calico CNI
 5. Bundled with a local storage class (from KinD), and a load balancer
